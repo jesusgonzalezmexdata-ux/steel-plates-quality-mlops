@@ -1,0 +1,75 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "a9527e94aa26c9e7590f",
+  "position": {
+    "x": 842.03921568627447,
+    "y": 160.62745098039215,
+    "z": 1,
+    "height": 559.68627450980387,
+    "width": 165.64705882352942,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Acero"
+                    }
+                  },
+                  "Property": "espesor"
+                }
+              },
+              "queryRef": "Dim_Acero.espesor",
+              "nativeQueryRef": "espesor"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "n Grupo"
+                }
+              },
+              "queryRef": "_Medidas.n Grupo",
+              "nativeQueryRef": "n Grupo"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "93.3921568627451D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Dim_Acero.espesor"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

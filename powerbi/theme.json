@@ -1,0 +1,11 @@
+{
+  "name": "Manufactura · Azul industrial",
+  "dataColors": ["#0B5394", "#8A94A3", "#C62828", "#2E7D32", "#F9A825", "#5B7FA6"],
+  "background": "#FFFFFF", "foreground": "#1B2430", "tableAccent": "#0B5394",
+  "good": "#2E7D32", "neutral": "#F9A825", "bad": "#C62828",
+  "textClasses": {
+    "title": {"fontFace": "Segoe UI Semibold", "fontSize": 14, "color": "#1B2430"},
+    "label": {"fontFace": "Segoe UI", "fontSize": 10, "color": "#59636E"},
+    "callout": {"fontFace": "Segoe UI Semibold", "fontSize": 28, "color": "#1B2430"}
+  }
+}

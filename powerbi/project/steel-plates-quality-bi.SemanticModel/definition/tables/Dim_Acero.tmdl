@@ -1,0 +1,49 @@
+table Dim_Acero
+	lineageTag: fbef2370-9ebf-43ed-afab-15c645308e28
+
+	column id_acero
+		dataType: int64
+		formatString: 0
+		lineageTag: 7cf6dcb0-92e1-4487-a39f-736c0c439942
+		summarizeBy: none
+		sourceColumn: id_acero
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_acero
+		dataType: string
+		lineageTag: 7f97d053-09f1-4e7d-af97-b0c7a1107b6c
+		summarizeBy: none
+		sourceColumn: tipo_acero
+
+		annotation SummarizationSetBy = Automatic
+
+	column espesor
+		dataType: double
+		lineageTag: 5793b6f2-7831-4ae6-a3af-7581dddde3c2
+		summarizeBy: none
+		sourceColumn: espesor
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Dim_Acero = m
+		mode: import
+		source =
+				let
+				    Fuente   = Raw_SteelPlates,
+				    Tipo     = Table.AddColumn(Fuente, "tipo_acero", each if [TypeOfSteel_A300] = 1 then "A300" else "A400", type text),
+				    Reducida = Table.SelectColumns(Tipo, {"tipo_acero", "Steel_Plate_Thickness"}),
+				    Unicos   = Table.Distinct(Reducida),
+				    Renombra = Table.RenameColumns(Unicos, {{"Steel_Plate_Thickness", "espesor"}}),
+				    Orden    = Table.Sort(Renombra, {{"tipo_acero", Order.Ascending}, {"espesor", Order.Ascending}}),
+				    Id       = Table.AddIndexColumn(Orden, "id_acero", 1, 1, Int64.Type),
+				    Final    = Table.ReorderColumns(Id, {"id_acero", "tipo_acero", "espesor"})
+				in
+				    Final
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

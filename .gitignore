@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Power BI: configuracion local y cache, conservadas en disco
+**/.pbi/localSettings.json
+**/.pbi/cache.abf

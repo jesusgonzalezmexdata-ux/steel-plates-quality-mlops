@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "6f9c8bbfd53c549e021f",
+  "position": {
+    "x": 458.03921568627453,
+    "y": 164.39215686274517,
+    "z": 4,
+    "height": 252,
+    "width": 156,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "listSlicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_BandaTamano"
+                    }
+                  },
+                  "Property": "banda_tamano"
+                }
+              },
+              "queryRef": "Dim_BandaTamano.banda_tamano",
+              "nativeQueryRef": "banda_tamano",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

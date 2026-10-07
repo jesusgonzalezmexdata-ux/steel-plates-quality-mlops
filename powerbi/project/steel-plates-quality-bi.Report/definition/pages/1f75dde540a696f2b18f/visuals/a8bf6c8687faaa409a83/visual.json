@@ -1,0 +1,46 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "a8bf6c8687faaa409a83",
+  "position": {
+    "x": 23.843137254901958,
+    "y": 165.64705882352951,
+    "z": 1,
+    "height": 261.01960784313724,
+    "width": 198.27450980392157,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "listSlicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_TipoDefecto"
+                    }
+                  },
+                  "Property": "tipo_defecto"
+                }
+              },
+              "queryRef": "Dim_TipoDefecto.tipo_defecto",
+              "nativeQueryRef": "tipo_defecto",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "data": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "3af756b17b6be98a9cb3",
+  "position": {
+    "x": 13.803921568627452,
+    "y": 13.803921568627452,
+    "z": 7,
+    "height": 86.588235294117652,
+    "width": 791.843137254902,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Control y capacidad: esta página muestra si el tamaño del defecto (en escala log) se mantiene estable por espesor de acero frente a límites ±3σ (carta de medias: media, línea central, UCL y LCL) y si el proceso es capaz de cumplir el USL de 500 px² (Cpk y semáforo). Los puntos con Fuera de límites = 1 y un Cpk bajo indican dónde priorizar contención o análisis de causa raíz (ISO 9001:2015 · 8.7 / 10.2).",
+                    "textStyle": {
+                      "fontFamily": "Verdana",
+                      "color": "#d8d8d8"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0.2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

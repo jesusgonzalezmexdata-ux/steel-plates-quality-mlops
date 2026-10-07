@@ -1,0 +1,50 @@
+table Dim_BandaTamano
+	lineageTag: bece7c3f-f31e-49ab-9dba-0ed0908e0d43
+
+	column id_banda_tamano
+		dataType: int64
+		formatString: 0
+		lineageTag: cf1284f0-b2b1-46cf-b602-10eef7c3c7b6
+		summarizeBy: none
+		sourceColumn: id_banda_tamano
+
+		annotation SummarizationSetBy = Automatic
+
+	column banda_tamano
+		dataType: string
+		lineageTag: 21495ed5-0a66-450c-a8d4-a55906c0bd78
+		summarizeBy: none
+		sourceColumn: banda_tamano
+
+		annotation SummarizationSetBy = Automatic
+
+	column limite_inferior_px2
+		dataType: double
+		lineageTag: a82088b4-e751-476c-879d-77580ef4b08a
+		summarizeBy: none
+		sourceColumn: limite_inferior_px2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Dim_BandaTamano = m
+		mode: import
+		source =
+				let
+				    Origen = #table(
+				        type table [id_banda_tamano = Int64.Type, banda_tamano = text, limite_inferior_px2 = number],
+				        {
+				            {1, "1 · < 50 px²",           0},
+				            {2, "2 · 50–199 px²",        50},
+				            {3, "3 · 200–999 px²",      200},
+				            {4, "4 · 1,000–4,999 px²", 1000},
+				            {5, "5 · ≥ 5,000 px²",     5000}
+				        })
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "10dded7886b093c43cd7",
+  "position": {
+    "x": 613.64705882352939,
+    "y": 130.50980392156862,
+    "z": 8,
+    "height": 489.41176470588238,
+    "width": 342.58823529411762,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_BandaTamano"
+                    }
+                  },
+                  "Property": "banda_tamano"
+                }
+              },
+              "queryRef": "Dim_BandaTamano.banda_tamano",
+              "nativeQueryRef": "banda_tamano",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Defectos"
+                }
+              },
+              "queryRef": "_Medidas.Defectos",
+              "nativeQueryRef": "Defectos"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "COPQ MXN"
+                }
+              },
+              "queryRef": "_Medidas.COPQ MXN",
+              "nativeQueryRef": "COPQ MXN"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Defectos"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

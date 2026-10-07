@@ -1,0 +1,68 @@
+table Dim_TipoDefecto
+	lineageTag: 3f1b844f-812a-44f5-abce-ce1354d1426e
+
+	column id_tipo_defecto
+		dataType: int64
+		formatString: 0
+		lineageTag: 6f543295-f3d6-44d3-962d-7d5f8d5b51c5
+		summarizeBy: none
+		sourceColumn: id_tipo_defecto
+
+		annotation SummarizationSetBy = Automatic
+
+	column columna_origen
+		dataType: string
+		lineageTag: c52fb3eb-a140-430f-be64-ae50cb94ac91
+		summarizeBy: none
+		sourceColumn: columna_origen
+
+		annotation SummarizationSetBy = Automatic
+
+	column tipo_defecto
+		dataType: string
+		lineageTag: b959e49c-b3c2-41f0-ad51-9ef46756b507
+		summarizeBy: none
+		sourceColumn: tipo_defecto
+
+		annotation SummarizationSetBy = Automatic
+
+	column familia
+		dataType: string
+		lineageTag: 6c5b4970-109c-41fe-ab18-d5475bc74755
+		summarizeBy: none
+		sourceColumn: familia
+
+		annotation SummarizationSetBy = Automatic
+
+	column costo_unitario_mxn
+		dataType: double
+		lineageTag: fea3ad21-7865-44cc-8b32-27da8a0a4350
+		summarizeBy: none
+		sourceColumn: costo_unitario_mxn
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Dim_TipoDefecto = m
+		mode: import
+		source =
+				let
+				    Origen = #table(
+				        type table [id_tipo_defecto = Int64.Type, columna_origen = text, tipo_defecto = text, familia = text, costo_unitario_mxn = number],
+				        {
+				            {1, "Pastry",       "Pastelado (Pastry)",     "Superficie", 1800},
+				            {2, "Z_Scratch",    "Rayón en Z",             "Superficie",  900},
+				            {3, "K_Scatch",     "Rayón en K (K_Scatch)",  "Superficie", 1500},
+				            {4, "Stains",       "Manchas",                "Superficie",  400},
+				            {5, "Dirtiness",    "Suciedad",               "Superficie",  300},
+				            {6, "Bumps",        "Abolladuras (Bumps)",    "Forma",      1200},
+				            {7, "Other_Faults", "Otros defectos",         "Otros",      1000}
+				        })
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

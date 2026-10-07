@@ -1,0 +1,8 @@
+id_tipo_defecto,columna_origen,tipo_defecto,familia,costo_unitario_mxn
+1,Pastry,Pastelado (Pastry),Superficie,1800
+2,Z_Scratch,Rayón en Z,Superficie,900
+3,K_Scatch,Rayón en K (K_Scatch),Superficie,1500
+4,Stains,Manchas,Superficie,400
+5,Dirtiness,Suciedad,Superficie,300
+6,Bumps,Abolladuras (Bumps),Forma,1200
+7,Other_Faults,Otros defectos,Otros,1000

@@ -1,0 +1,213 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "336a29971f332e9d13b5",
+  "position": {
+    "x": 453.23420074349445,
+    "y": 10.706319702602231,
+    "z": 8,
+    "height": 199.85130111524165,
+    "width": 816.05947955390343,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_TipoDefecto"
+                    }
+                  },
+                  "Property": "tipo_defecto"
+                }
+              },
+              "queryRef": "Dim_TipoDefecto.tipo_defecto",
+              "nativeQueryRef": "tipo_defecto"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Defectos"
+                }
+              },
+              "queryRef": "_Medidas.Defectos",
+              "nativeQueryRef": "Defectos"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "COPQ % del Total"
+                }
+              },
+              "queryRef": "_Medidas.COPQ % del Total",
+              "nativeQueryRef": "COPQ % del Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "% Fuera de USL"
+                }
+              },
+              "queryRef": "_Medidas.% Fuera de USL",
+              "nativeQueryRef": "% Fuera de USL"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Cpk"
+                }
+              },
+              "queryRef": "_Medidas.Cpk",
+              "nativeQueryRef": "Cpk"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Accion Recomendada"
+                }
+              },
+              "queryRef": "_Medidas.Accion Recomendada",
+              "nativeQueryRef": "Accion Recomendada"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "% Fuera de USL"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "ccf69143a20fd39a6919",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Dim_TipoDefecto"
+              }
+            },
+            "Property": "tipo_defecto"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "1377e14eb487ff65932f",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Defectos"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "07a8c8255216faf5c1fc",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "COPQ % del Total"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "37b4eced70d2ffdb7282",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "% Fuera de USL"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "77d3ebad74c34dcd485b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Cpk"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "407df5a10e722ab39da6",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Accion Recomendada"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

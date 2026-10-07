@@ -1,0 +1,117 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "0da48ade3c8f1735058c",
+  "position": {
+    "x": 23.843137254901961,
+    "y": 100.3921568627451,
+    "z": 0,
+    "height": 619.92156862745094,
+    "width": 781.8039215686274,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Acero"
+                    }
+                  },
+                  "Property": "espesor"
+                }
+              },
+              "queryRef": "Dim_Acero.espesor",
+              "nativeQueryRef": "espesor",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Media Log Area"
+                }
+              },
+              "queryRef": "_Medidas.Media Log Area",
+              "nativeQueryRef": "Media Log Area"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Linea Central"
+                }
+              },
+              "queryRef": "_Medidas.Linea Central",
+              "nativeQueryRef": "Linea Central"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "UCL"
+                }
+              },
+              "queryRef": "_Medidas.UCL",
+              "nativeQueryRef": "UCL"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "LCL"
+                }
+              },
+              "queryRef": "_Medidas.LCL",
+              "nativeQueryRef": "LCL"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Media Log Area"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

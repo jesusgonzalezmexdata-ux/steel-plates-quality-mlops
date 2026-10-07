@@ -1,0 +1,127 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "ef62acc79fd7ff5b4300",
+  "position": {
+    "x": 987.60784313725492,
+    "y": 120.47058823529412,
+    "z": 10,
+    "height": 239.68627450980392,
+    "width": 274.8235294117647,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_TipoDefecto"
+                    }
+                  },
+                  "Property": "tipo_defecto"
+                }
+              },
+              "queryRef": "Dim_TipoDefecto.tipo_defecto",
+              "nativeQueryRef": "tipo_defecto"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Acero"
+                    }
+                  },
+                  "Property": "tipo_acero"
+                }
+              },
+              "queryRef": "Dim_Acero.tipo_acero",
+              "nativeQueryRef": "tipo_acero"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Acero"
+                    }
+                  },
+                  "Property": "espesor"
+                }
+              },
+              "queryRef": "Dim_Acero.espesor",
+              "nativeQueryRef": "espesor"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_BandaTamano"
+                    }
+                  },
+                  "Property": "banda_tamano"
+                }
+              },
+              "queryRef": "Dim_BandaTamano.banda_tamano",
+              "nativeQueryRef": "banda_tamano"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Defectos"
+                }
+              },
+              "queryRef": "_Medidas.Defectos",
+              "nativeQueryRef": "Defectos"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "COPQ MXN"
+                }
+              },
+              "queryRef": "_Medidas.COPQ MXN",
+              "nativeQueryRef": "COPQ MXN"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Fact_Defecto"
+                        }
+                      },
+                      "Property": "area_px2"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(Fact_Defecto.area_px2)",
+              "nativeQueryRef": "Suma de area_px2"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

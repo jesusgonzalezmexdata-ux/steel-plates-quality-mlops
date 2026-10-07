@@ -1,0 +1,12 @@
+relationship AutoDetected_2c7f5146-4f55-4d51-a3c8-95cb36b8557e
+	fromColumn: Fact_Defecto.id_tipo_defecto
+	toColumn: Dim_TipoDefecto.id_tipo_defecto
+
+relationship AutoDetected_d3e16334-6ef2-431e-835d-3ada8e33d48c
+	fromColumn: Fact_Defecto.id_acero
+	toColumn: Dim_Acero.id_acero
+
+relationship AutoDetected_ad8b0b3a-2378-4516-87b9-aec009678b95
+	fromColumn: Fact_Defecto.id_banda_tamano
+	toColumn: Dim_BandaTamano.id_banda_tamano
+

@@ -1,0 +1,24 @@
+expression Raw_SteelPlates =
+		let
+		    Ruta     = Text.Trim(RutaCSV),
+		    Binario  = if Text.StartsWith(Text.Lower(Ruta), "http://") or Text.StartsWith(Text.Lower(Ruta), "https://")
+		               then Web.Contents(Ruta)
+		               else File.Contents(Ruta),
+		    Origen   = Csv.Document(Binario, [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+		    Cabecera = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+		    Tipos    = Table.TransformColumnTypes(Cabecera, List.Transform(Table.ColumnNames(Cabecera), each {_, type number}))
+		in
+		    Tipos
+	lineageTag: de9347fc-d0b6-43ff-acdc-816b8f635e70
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+
+expression RutaCSV = "C:\\Users\\Lowo\\Downloads\\steel-plates-quality-bi-main\\data\\raw\\steel_plates_faults.csv"
+	lineageTag: 27ced829-7a4e-4eb9-8aa3-17d0f7a5a453
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Text
+

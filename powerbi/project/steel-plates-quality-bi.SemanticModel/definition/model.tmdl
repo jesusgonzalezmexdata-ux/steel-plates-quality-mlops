@@ -1,0 +1,24 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["RutaCSV","Raw_SteelPlates","Dim_TipoDefecto","Dim_Acero","Dim_BandaTamano","Fact_Defecto","Param_Especificacion"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Dim_TipoDefecto
+ref table Dim_Acero
+ref table Dim_BandaTamano
+ref table Fact_Defecto
+ref table Param_Especificacion
+ref table _Medidas
+
+ref cultureInfo es-ES
+

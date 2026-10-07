@@ -1,0 +1,100 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 618.06819863375711,
+            "y": 556.12074770176912
+          },
+          "nodeIndex": "Dim_Acero",
+          "nodeLineageTag": "fbef2370-9ebf-43ed-afab-15c645308e28",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 144.804740656324
+          },
+          "nodeIndex": "Dim_BandaTamano",
+          "nodeLineageTag": "bece7c3f-f31e-49ab-9dba-0ed0908e0d43",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 635.25463193108283,
+            "y": 0
+          },
+          "nodeIndex": "Dim_TipoDefecto",
+          "nodeLineageTag": "3f1b844f-812a-44f5-abce-ce1354d1426e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 335.5952005433054,
+            "y": 203.20874830162313
+          },
+          "nodeIndex": "Fact_Defecto",
+          "nodeLineageTag": "8a440ce5-e927-46d4-9f64-27dba35f1e7e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1039.0681986337572,
+            "y": 391.06037385088456
+          },
+          "nodeIndex": "Param_Especificacion",
+          "nodeLineageTag": "066c375f-8d4e-49dd-84d6-59c3a06ddefc",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1061.0681986337572,
+            "y": 112.06037385088456
+          },
+          "nodeIndex": "_Medidas",
+          "nodeLineageTag": "804b23aa-49d9-4769-8b1a-b36988822441",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas las tablas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas las tablas",
+  "defaultDiagram": "Todas las tablas"
+}

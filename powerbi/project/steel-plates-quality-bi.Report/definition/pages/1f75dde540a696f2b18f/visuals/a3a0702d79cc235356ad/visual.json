@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "a3a0702d79cc235356ad",
+  "position": {
+    "x": 222.11764705882354,
+    "y": 165.64705882352933,
+    "z": 2,
+    "height": 252.23529411764707,
+    "width": 96.627450980392155,
+    "tabOrder": 2
+  },
+  "visual": {
+    "visualType": "listSlicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Dim_Acero"
+                    }
+                  },
+                  "Property": "tipo_acero"
+                }
+              },
+              "queryRef": "Dim_Acero.tipo_acero",
+              "nativeQueryRef": "tipo_acero",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

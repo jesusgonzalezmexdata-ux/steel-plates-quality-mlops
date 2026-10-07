@@ -1,0 +1,184 @@
+table Fact_Defecto
+	lineageTag: 8a440ce5-e927-46d4-9f64-27dba35f1e7e
+
+	column id_defecto
+		dataType: double
+		lineageTag: 7cf51773-214a-4056-bf04-66730138dcea
+		summarizeBy: sum
+		sourceColumn: id_defecto
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column id_tipo_defecto
+		dataType: int64
+		formatString: 0
+		lineageTag: 55850ae9-325f-4ca7-99fb-3bfa5c1de52a
+		summarizeBy: none
+		sourceColumn: id_tipo_defecto
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_acero
+		dataType: int64
+		formatString: 0
+		lineageTag: 62bd49a5-cc5b-4d91-8cd3-0adaf548b232
+		summarizeBy: none
+		sourceColumn: id_acero
+
+		annotation SummarizationSetBy = Automatic
+
+	column id_banda_tamano
+		dataType: int64
+		formatString: 0
+		lineageTag: 97f5fb0e-ac56-485c-ac20-dc66f4941fd4
+		summarizeBy: none
+		sourceColumn: id_banda_tamano
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_px2
+		dataType: double
+		lineageTag: 883b4b87-89bf-416f-8993-f80ea093179e
+		summarizeBy: sum
+		sourceColumn: area_px2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column perimetro_x
+		dataType: double
+		lineageTag: edbfad78-312e-45b4-a9a9-f7bfaad46a2b
+		summarizeBy: sum
+		sourceColumn: perimetro_x
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column perimetro_y
+		dataType: double
+		lineageTag: cb4abbac-41e4-41a8-a15d-1c908e67547d
+		summarizeBy: sum
+		sourceColumn: perimetro_y
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column luminosidad_suma
+		dataType: double
+		lineageTag: 7ae064c7-043f-498e-b124-73131c8a9dc7
+		summarizeBy: sum
+		sourceColumn: luminosidad_suma
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column luminosidad_min
+		dataType: double
+		lineageTag: 0025f2d7-bfd7-4921-a02d-4e518684301c
+		summarizeBy: sum
+		sourceColumn: luminosidad_min
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column luminosidad_max
+		dataType: double
+		lineageTag: db8973be-759e-491f-9ccb-d31a3d60caee
+		summarizeBy: sum
+		sourceColumn: luminosidad_max
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitud_transportador
+		dataType: double
+		lineageTag: 05d27950-4acd-4952-bd13-79c3e8dd3243
+		summarizeBy: sum
+		sourceColumn: longitud_transportador
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column indice_bordes
+		dataType: double
+		lineageTag: 1a379102-fb6b-4e31-8685-35a22a0c40a1
+		summarizeBy: sum
+		sourceColumn: indice_bordes
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column indice_vacio
+		dataType: double
+		lineageTag: b19e2b84-4e93-4123-8dfa-da53fb72c5e0
+		summarizeBy: sum
+		sourceColumn: indice_vacio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column indice_luminosidad
+		dataType: double
+		lineageTag: 1c0d87fa-7817-4892-84da-71b94420d50e
+		summarizeBy: sum
+		sourceColumn: indice_luminosidad
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column log_area
+		dataType: double
+		lineageTag: 6736a7ca-f395-43e4-9c4a-e44fd8f88525
+		summarizeBy: sum
+		sourceColumn: log_area
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Fact_Defecto = m
+		mode: import
+		source =
+				let
+				    Fuente    = Raw_SteelPlates,
+				    Tipo      = Table.AddColumn(Fuente, "tipo_acero", each if [TypeOfSteel_A300] = 1 then "A300" else "A400", type text),
+				    Unpivot   = Table.UnpivotOtherColumns(Tipo, List.RemoveItems(Table.ColumnNames(Tipo),
+				                    {"Pastry","Z_Scratch","K_Scatch","Stains","Dirtiness","Bumps","Other_Faults"}), "columna_origen", "marca"),
+				    SoloUno   = Table.SelectRows(Unpivot, each [marca] = 1),
+				    ConTipo   = Table.NestedJoin(SoloUno, {"columna_origen"}, Dim_TipoDefecto, {"columna_origen"}, "t", JoinKind.Inner),
+				    IdTipo    = Table.ExpandTableColumn(ConTipo, "t", {"id_tipo_defecto"}),
+				    ConAcero  = Table.NestedJoin(IdTipo, {"tipo_acero", "Steel_Plate_Thickness"}, Dim_Acero, {"tipo_acero", "espesor"}, "a", JoinKind.Inner),
+				    IdAcero   = Table.ExpandTableColumn(ConAcero, "a", {"id_acero"}),
+				    Banda     = Table.AddColumn(IdAcero, "id_banda_tamano", each
+				                    if [Pixels_Areas] < 50 then 1 else if [Pixels_Areas] < 200 then 2
+				                    else if [Pixels_Areas] < 1000 then 3 else if [Pixels_Areas] < 5000 then 4 else 5, Int64.Type),
+				    Renombra  = Table.RenameColumns(Banda, {
+				                    {"id","id_defecto"}, {"Pixels_Areas","area_px2"},
+				                    {"X_Perimeter","perimetro_x"}, {"Y_Perimeter","perimetro_y"}, {"Sum_of_Luminosity","luminosidad_suma"},
+				                    {"Minimum_of_Luminosity","luminosidad_min"}, {"Maximum_of_Luminosity","luminosidad_max"},
+				                    {"Length_of_Conveyer","longitud_transportador"}, {"Edges_Index","indice_bordes"},
+				                    {"Empty_Index","indice_vacio"}, {"Luminosity_Index","indice_luminosidad"}}),
+				    ConLog    = Table.AddColumn(Renombra, "log_area", each Number.Log10([area_px2]), type number),
+				    Columnas  = Table.SelectColumns(ConLog, {"id_defecto","id_tipo_defecto","id_acero","id_banda_tamano","area_px2","log_area",
+				                    "perimetro_x","perimetro_y","luminosidad_suma","luminosidad_min","luminosidad_max",
+				                    "longitud_transportador","indice_bordes","indice_vacio","indice_luminosidad"}),
+				    Orden     = Table.Sort(Columnas, {{"id_defecto", Order.Ascending}})
+				in
+				    Orden
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

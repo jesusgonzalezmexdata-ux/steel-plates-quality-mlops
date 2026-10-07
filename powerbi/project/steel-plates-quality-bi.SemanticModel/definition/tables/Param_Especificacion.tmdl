@@ -1,0 +1,25 @@
+table Param_Especificacion
+	lineageTag: 066c375f-8d4e-49dd-84d6-59c3a06ddefc
+
+	column USL_px2
+		dataType: double
+		lineageTag: e1d97dd1-0c74-427b-a570-4635e1166ac5
+		summarizeBy: sum
+		sourceColumn: USL_px2
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Param_Especificacion = m
+		mode: import
+		source =
+				let
+				    Origen = #table(type table [USL_px2 = number], {{500}})
+				in
+				    Origen
+
+	annotation PBI_NavigationStepName = Navegación
+
+	annotation PBI_ResultType = Table
+

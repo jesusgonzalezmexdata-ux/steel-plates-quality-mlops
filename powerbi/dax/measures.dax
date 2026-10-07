@@ -1,0 +1,127 @@
+// =====================================================================
+// Medidas DAX · Inteligencia de Manufactura (UCI Steel Plates Faults)
+// Tabla de medidas sugerida: _Medidas.  Réplica en Python: qbi/measures.py
+// Supuestos editables: Dim_TipoDefecto[costo_unitario_mxn], Param_Especificacion[USL_px2]
+// =====================================================================
+
+// ---------- 1. Volumen ----------
+Defectos = COUNTROWS ( Fact_Defecto )
+
+Defectos % del Total =
+DIVIDE ( [Defectos], CALCULATE ( [Defectos], ALLSELECTED () ) )
+
+// ---------- 2. Costo de la no calidad (COPQ) ----------
+// Costo por placa afectada según el tipo de defecto (supuesto en la dimensión).
+COPQ MXN =
+SUMX ( Fact_Defecto, RELATED ( Dim_TipoDefecto[costo_unitario_mxn] ) )
+
+COPQ por Placa MXN = DIVIDE ( [COPQ MXN], [Defectos] )
+
+COPQ % del Total =
+DIVIDE ( [COPQ MXN], CALCULATE ( [COPQ MXN], ALLSELECTED () ) )
+
+// Pareto por costo: porcentaje acumulado según el orden descendente del COPQ.
+COPQ Acumulado % =
+VAR _Actual = [COPQ MXN]
+VAR _Total  = CALCULATE ( [COPQ MXN], ALLSELECTED ( Dim_TipoDefecto ) )
+VAR _Mayores =
+    FILTER ( ALLSELECTED ( Dim_TipoDefecto ), [COPQ MXN] >= _Actual )
+RETURN
+    DIVIDE ( SUMX ( _Mayores, [COPQ MXN] ), _Total )
+
+// ---------- 3. Carta de medias por grupo (±3 sigmas) ----------
+// Variable: log10 del área del defecto. Sigma global muestral, sobre la selección actual
+// salvo el grupo del eje (ALLSELECTED quita el cruce con Dim_Acero).
+Media Log Area = AVERAGE ( Fact_Defecto[log_area] )
+
+Linea Central =
+CALCULATE ( AVERAGE ( Fact_Defecto[log_area] ), ALLSELECTED ( Dim_Acero ) )
+
+Sigma Global =
+CALCULATE ( STDEV.S ( Fact_Defecto[log_area] ), ALLSELECTED ( Dim_Acero ) )
+
+n Grupo = COUNTROWS ( Fact_Defecto )
+
+UCL =
+VAR _n = [n Grupo]
+RETURN IF ( _n > 1, [Linea Central] + 3 * DIVIDE ( [Sigma Global], SQRT ( _n ) ) )
+
+LCL =
+VAR _n = [n Grupo]
+RETURN IF ( _n > 1, [Linea Central] - 3 * DIVIDE ( [Sigma Global], SQRT ( _n ) ) )
+
+Fuera de Limites =
+IF ( [n Grupo] >= 5 && ( [Media Log Area] > [UCL] || [Media Log Area] < [LCL] ), 1, 0 )
+
+Grupos Fuera de Limites =
+SUMX ( VALUES ( Dim_Acero[espesor] ), [Fuera de Limites] )
+
+// ---------- 4. Capacidad (unilateral superior) ----------
+// El defecto debe quedar por debajo de USL px². Se trabaja en log10 porque el área es muy asimétrica.
+// Param_Especificacion es una tabla desconectada de una fila.
+USL px2 = SELECTEDVALUE ( Param_Especificacion[USL_px2], 500 )
+
+Cpk =
+VAR _Sigma = STDEV.S ( Fact_Defecto[log_area] )
+RETURN
+    IF ( [n Grupo] > 1 && _Sigma > 0,
+        DIVIDE ( LOG10 ( [USL px2] ) - AVERAGE ( Fact_Defecto[log_area] ), 3 * _Sigma ) )
+
+// Semáforo: verde >= 1.33, amarillo >= 1.00, rojo < 1.00.
+Semaforo Cpk Color =
+SWITCH ( TRUE (),
+    ISBLANK ( [Cpk] ), "#9AA0A6",
+    [Cpk] >= 1.33,     "#2E7D32",
+    [Cpk] >= 1,        "#F9A825",
+    "#C62828" )
+
+Semaforo Cpk Texto =
+SWITCH ( TRUE (),
+    ISBLANK ( [Cpk] ), "Sin datos",
+    [Cpk] >= 1.33,     "Capaz",
+    [Cpk] >= 1,        "Condicional",
+    "No capaz" )
+
+// ---------- 4b. Decisión (no paramétrica y sin supuesto de normalidad) ----------
+// La variable local evita usar una medida directamente dentro de una expresión booleana de CALCULATE.
+% Fuera de USL =
+VAR _USL = [USL px2]
+VAR _Fuera =
+    CALCULATE (
+        [Defectos],
+        FILTER ( Fact_Defecto, Fact_Defecto[area_px2] > _USL )
+    )
+RETURN
+    DIVIDE ( _Fuera, [Defectos] )
+
+// Umbrales de gestión (supuestos): COPQ >= 20 %, fuera de USL >= 10 %
+Accion Recomendada =
+VAR _Contener = [% Fuera de USL] >= 0.10
+VAR _CausaRaiz = [COPQ % del Total] >= 0.20
+RETURN
+    SWITCH ( TRUE (),
+        _Contener && _CausaRaiz, "Contención (ISO 8.7) + causa raíz (ISO 10.2)",
+        _Contener,               "Contención: segregar e inspeccionar al 100 % (ISO 8.7)",
+        _CausaRaiz,              "Análisis de causa raíz y acción correctiva (ISO 10.2)",
+        "Sin acción: dentro de umbrales" )
+
+// ---------- 5. Defectos grandes (>= 5,000 px²) ----------
+Defectos Grandes =
+CALCULATE ( [Defectos], Fact_Defecto[area_px2] >= 5000 )
+
+// ---------- 6. ISO 9001:2015 · 10.2 No conformidad y acción correctiva ----------
+// Texto para una tarjeta: vincula el tipo de defecto con mayor COPQ a la cláusula 10.2.
+Texto ISO 10.2 =
+VAR _Top =
+    TOPN ( 1, ALLSELECTED ( Dim_TipoDefecto ), [COPQ MXN], DESC )
+VAR _Nombre = MAXX ( _Top, Dim_TipoDefecto[tipo_defecto] )
+RETURN
+    "ISO 9001:2015 · 10.2 No conformidad y acción correctiva. Prioridad de análisis de causa raíz: "
+        & _Nombre & " (" & FORMAT ( DIVIDE ( MAXX ( _Top, [COPQ MXN] ), CALCULATE ( [COPQ MXN], ALLSELECTED ( Dim_TipoDefecto ) ) ), "0%" ) & " del COPQ)."
+
+// ---------- 7. Patrón listo para cuando existan fechas (NO se usa con este dataset) ----------
+// Rango móvil de una serie ordenada en el tiempo; requiere una Dim_Fecha real.
+// MR =
+// VAR _f = MAX ( Dim_Fecha[Fecha] )
+// VAR _ant = CALCULATE ( MAX ( Dim_Fecha[Fecha] ), FILTER ( ALL ( Dim_Fecha ), Dim_Fecha[Fecha] < _f ) )
+// RETURN ABS ( [Valor] - CALCULATE ( [Valor], Dim_Fecha[Fecha] = _ant ) )

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "1f75dde540a696f2b18f",
+  "displayName": "Exploracion",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "fbf70a2dc1b3ec548e28",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fact_Defecto"
+              }
+            },
+            "Property": "id_defecto"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "f860a503f25c6a068bb7",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "59d68a155dee1fa561df",
+        "boundFilter": "fbf70a2dc1b3ec548e28",
+        "asAggregation": true,
+        "qnaSingleSelectRequired": false,
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Fact_Defecto"
+              }
+            },
+            "Property": "id_defecto"
+          }
+        }
+      }
+    ]
+  }
+}

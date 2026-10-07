@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "a70b62aae9005134f140",
+  "position": {
+    "x": 0,
+    "y": 609.88235294117646,
+    "z": 9,
+    "height": 101.64705882352941,
+    "width": 889.72549019607845,
+    "tabOrder": 9
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Accion Recomendada"
+                }
+              },
+              "queryRef": "_Medidas.Accion Recomendada",
+              "nativeQueryRef": "Accion Recomendada"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

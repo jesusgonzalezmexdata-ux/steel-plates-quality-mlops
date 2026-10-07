@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "9813f84370458c85f853",
+  "position": {
+    "x": 1042.8235294117646,
+    "y": 291.13725490196077,
+    "z": 4,
+    "height": 104.15686274509804,
+    "width": 237.1764705882353,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Semaforo Cpk Texto"
+                }
+              },
+              "queryRef": "_Medidas.Semaforo Cpk Texto",
+              "nativeQueryRef": "Semaforo Cpk Texto"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

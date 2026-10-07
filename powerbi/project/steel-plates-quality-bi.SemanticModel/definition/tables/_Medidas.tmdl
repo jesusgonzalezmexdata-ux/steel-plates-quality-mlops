@@ -1,0 +1,186 @@
+table _Medidas
+	lineageTag: 804b23aa-49d9-4769-8b1a-b36988822441
+
+	measure Defectos = COUNTROWS ( Fact_Defecto )
+		formatString: 0
+		lineageTag: 7b3bc386-c71b-4161-8a9e-40df28ac878f
+
+	measure 'COPQ MXN' =
+			
+			SUMX ( Fact_Defecto, RELATED ( Dim_TipoDefecto[costo_unitario_mxn] ) )
+		lineageTag: 1fabcb84-ab2c-4276-aeb6-068bb9bf6e10
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'COPQ % del Total' =
+			
+			DIVIDE ( [COPQ MXN], CALCULATE ( [COPQ MXN], ALLSELECTED () ) )
+		lineageTag: 622cea40-a199-4270-9b1e-ae5a09551eb1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'COPQ por Placa MXN' = DIVIDE ( [COPQ MXN], [Defectos] )
+		lineageTag: 0992683e-39ba-419b-a18c-bd57f62f7e50
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Defectos % del Total' =
+			
+			DIVIDE ( [Defectos], CALCULATE ( [Defectos], ALLSELECTED () ) )
+		lineageTag: 5775993d-b4a7-44c4-a876-986fafd49530
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'COPQ Acumulado %' =
+			
+			VAR _Actual = [COPQ MXN]
+			VAR _Total  = CALCULATE ( [COPQ MXN], ALLSELECTED ( Dim_TipoDefecto ) )
+			VAR _Mayores =
+			    FILTER ( ALLSELECTED ( Dim_TipoDefecto ), [COPQ MXN] >= _Actual )
+			RETURN
+			    DIVIDE ( SUMX ( _Mayores, [COPQ MXN] ), _Total )
+		lineageTag: 3fe7064e-052c-4a55-accd-48e1f1b6a0dc
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Media Log Area' = AVERAGE ( Fact_Defecto[log_area] )
+		lineageTag: f2d0b1dc-bb8c-4db8-9819-3d795c3b0fa8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Linea Central' =
+			
+			CALCULATE ( AVERAGE ( Fact_Defecto[log_area] ), ALLSELECTED ( Dim_Acero ) )
+		lineageTag: 7caf2998-c84e-458a-9ad2-884b70354a70
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sigma Global' =
+			
+			CALCULATE ( STDEV.S ( Fact_Defecto[log_area] ), ALLSELECTED ( Dim_Acero ) )
+		lineageTag: 85c7ceaa-4324-47c4-9989-5be7516e308c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'n Grupo' = COUNTROWS ( Fact_Defecto )
+		formatString: 0
+		lineageTag: 55ca7c17-df1d-4c6d-a771-074082550724
+
+	measure UCL =
+			
+			VAR _n = [n Grupo]
+			RETURN IF ( _n > 1, [Linea Central] + 3 * DIVIDE ( [Sigma Global], SQRT ( _n ) ) )
+		lineageTag: c707f80f-5db2-4bdb-a8a4-7bd2aac6969e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure LCL =
+			
+			VAR _n = [n Grupo]
+			RETURN IF ( _n > 1, [Linea Central] - 3 * DIVIDE ( [Sigma Global], SQRT ( _n ) ) )
+		lineageTag: c8a0e925-c937-4445-9936-9e10d7abc941
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Fuera de Limites' =
+			
+			IF ( [n Grupo] >= 5 && ( [Media Log Area] > [UCL] || [Media Log Area] < [LCL] ), 1, 0 )
+		formatString: 0
+		lineageTag: 9315a437-f582-4737-a053-66689a67b2b9
+
+	measure 'Grupos Fuera de Limites' =
+			
+			SUMX ( VALUES ( Dim_Acero[espesor] ), [Fuera de Limites] )
+		formatString: 0
+		lineageTag: 39f97355-64e6-4343-acf4-31d6c4c5fd14
+
+	measure 'USL px2' = SELECTEDVALUE ( Param_Especificacion[USL_px2], 500 )
+		lineageTag: e46265e4-4e8d-46e0-94af-33f6de91e55e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Cpk =
+			
+			VAR _Sigma = STDEV.S ( Fact_Defecto[log_area] )
+			RETURN
+			    IF ( [n Grupo] > 1 && _Sigma > 0,
+			        DIVIDE ( LOG10 ( [USL px2] ) - AVERAGE ( Fact_Defecto[log_area] ), 3 * _Sigma ) )
+		lineageTag: 8fe67fe2-bc2c-4483-af36-8d437e7606f9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Semaforo Cpk Color' =
+			
+			SWITCH ( TRUE (),
+			    ISBLANK ( [Cpk] ), "#9AA0A6",
+			    [Cpk] >= 1.33,     "#2E7D32",
+			    [Cpk] >= 1,        "#F9A825",
+			    "#C62828" )
+		lineageTag: f20fb8b4-e6bb-4788-8f89-62ceac958840
+
+	measure 'Semaforo Cpk Texto' =
+			
+			SWITCH ( TRUE (),
+			    ISBLANK ( [Cpk] ), "Sin datos",
+			    [Cpk] >= 1.33,     "Capaz",
+			    [Cpk] >= 1,        "Condicional",
+			    "No capaz" )
+		lineageTag: 608df6b5-2c5a-41d6-8065-6192d0de5765
+
+	measure '% Fuera de USL' =
+			
+			VAR _USL = [USL px2]
+			VAR _Fuera =
+			    CALCULATE (
+			        [Defectos],
+			        FILTER ( Fact_Defecto, Fact_Defecto[area_px2] > _USL )
+			    )
+			RETURN
+			    DIVIDE ( _Fuera, [Defectos] )
+		lineageTag: d2521430-8314-4db0-b418-805cd814d44c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Accion Recomendada' =
+			
+			VAR _Contener = [% Fuera de USL] >= 0.10
+			VAR _CausaRaiz = [COPQ % del Total] >= 0.20
+			RETURN
+			    SWITCH ( TRUE (),
+			        _Contener && _CausaRaiz, "Contención (ISO 8.7) + causa raíz (ISO 10.2)",
+			        _Contener,               "Contención: segregar e inspeccionar al 100 % (ISO 8.7)",
+			        _CausaRaiz,              "Análisis de causa raíz y acción correctiva (ISO 10.2)",
+			        "Sin acción: dentro de umbrales" )
+		lineageTag: 43406b42-26d8-4468-953c-487642646da9
+
+	measure 'Defectos Grandes' =
+			
+			CALCULATE ( [Defectos], Fact_Defecto[area_px2] >= 5000 )
+		formatString: 0
+		lineageTag: f33802dc-6dd4-47d8-842b-37f064b25cac
+
+	measure 'Texto ISO 10.2' =
+			
+			VAR _Top =
+			    TOPN ( 1, ALLSELECTED ( Dim_TipoDefecto ), [COPQ MXN], DESC )
+			VAR _Nombre = MAXX ( _Top, Dim_TipoDefecto[tipo_defecto] )
+			RETURN
+			    "ISO 9001:2015 · 10.2 No conformidad y acción correctiva. Prioridad de análisis de causa raíz: "
+			        & _Nombre & " (" & FORMAT ( DIVIDE ( MAXX ( _Top, [COPQ MXN] ), CALCULATE ( [COPQ MXN], ALLSELECTED ( Dim_TipoDefecto ) ) ), "0%" ) & " del COPQ)."
+		lineageTag: 22375dbc-5ea5-4c90-8ce4-639e835dd2f1
+
+	column Value
+		formatString: 0
+		lineageTag: edbc7ac9-4d58-4065-bbbd-fce12c50c1bb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Medidas = calculated
+		mode: import
+		source = {0}
+
+	annotation PBI_Id = 1e18f416c7c7414583b1896c407f9830
+
