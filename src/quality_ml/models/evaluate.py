@@ -74,6 +74,7 @@ def evaluate_model_cv(
     fold_per_class: list[dict[str, dict[str, float | int]]] = []
     warning_messages: list[str] = []
     fit_times: list[float] = []
+    predict_times: list[float] = []
     for fold_number, (train_idx, valid_idx) in enumerate(cv_splits, start=1):
         estimator = clone(model)
         with warnings.catch_warnings(record=True) as caught:
@@ -85,8 +86,10 @@ def evaluate_model_cv(
 
         X_valid = X_train.iloc[list(valid_idx)]
         y_valid = y_train.iloc[list(valid_idx)]
+        prediction_started = time.perf_counter()
         y_pred = estimator.predict(X_valid)
         probabilities = estimator.predict_proba(X_valid) if hasattr(estimator, "predict_proba") else None
+        predict_times.append(time.perf_counter() - prediction_started)
         if probabilities is not None and not np.allclose(probabilities.sum(axis=1), 1.0, atol=1e-6):
             raise AssertionError("Predicted probabilities must sum to one")
         probability_labels = list(getattr(estimator, "classes_", TARGET_COLUMNS))
@@ -122,8 +125,25 @@ def evaluate_model_cv(
         "per_class_by_fold": fold_per_class,
         "warnings": warning_messages,
         "fit_time_seconds_mean": float(np.mean(fit_times)),
+        "fit_time_seconds_std": float(np.std(fit_times, ddof=1)),
+        "predict_time_seconds_mean": float(np.mean(predict_times)),
+        "predict_time_seconds_std": float(np.std(predict_times, ddof=1)),
         "n_folds": len(cv_splits),
         "holdout_accessed": False,
+    }
+
+
+def evaluate_models_cv(
+    models: dict[str, object],
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    cv_splits: tuple[tuple[tuple[int, ...], tuple[int, ...]], ...],
+) -> dict[str, dict[str, Any]]:
+    """Evaluate a fixed model dictionary using only training data and CV folds."""
+
+    return {
+        name: evaluate_model_cv(name, model, X_train, y_train, cv_splits)
+        for name, model in models.items()
     }
 
 
@@ -135,7 +155,4 @@ def evaluate_baselines(
 ) -> dict[str, dict[str, Any]]:
     """Evaluate registered baselines using only X_train, y_train and CV folds."""
 
-    return {
-        name: evaluate_model_cv(name, model, X_train, y_train, cv_splits)
-        for name, model in build_baselines(random_state=random_state).items()
-    }
+    return evaluate_models_cv(build_baselines(random_state=random_state), X_train, y_train, cv_splits)
