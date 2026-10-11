@@ -1,0 +1,28 @@
+{
+  "status": "CONSUMED_FINAL_EVALUATION",
+  "holdout_accessed": true,
+  "holdout_invalidated": false,
+  "preflight": {
+    "branch": "feat/quality-mlops-platform",
+    "head": "0e9722aaf78e65ae1613dca155eaab5e3388de27",
+    "phase_7_checkpoint": "52132ddd052e3fde4a8dd846c5268abaf742fa69",
+    "phase_7_state_checkpoint": "0e9722aaf78e65ae1613dca155eaab5e3388de27",
+    "frozen_tracked_files_unchanged": true,
+    "git_diff_check": "PASS",
+    "permitted_untracked_phase_8_files": [
+      "?? docs/ml/07_final_holdout_evaluation.md",
+      "?? src/quality_ml/models/final_holdout.py",
+      "?? tests/test_final_holdout.py"
+    ]
+  },
+  "fit_rows": 1552,
+  "fit_calls": 1,
+  "prediction_calls": 1,
+  "completed": true,
+  "artifacts_sha256": {
+    "predictions.csv": "f365dba807442658aded2e86b58bfd72b9625240a9504bdeb8e071dcbc946d50",
+    "metrics.json": "18d4fbd6d41e845eb2f975bc3ded28dc1bdc9851f49db81a80a28fe5a5e603f3",
+    "confusion_matrix.csv": "d5ee3bc12d0ba22ec3658605711de60f09d88e84ef13fe2bede2c031b6c88826",
+    "probabilities_snapshot.csv": "cbebd26329164c387bffd6fbd265cdb1f4ce04696512c2331829754582035b44"
+  }
+}
