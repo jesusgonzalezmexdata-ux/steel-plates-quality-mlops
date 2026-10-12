@@ -1,1 +1,11 @@
 *.pbix filter=lfs diff=lfs merge=lfs -text
+# Preserve the original byte-level scientific evidence on every platform.
+data/raw/steel_plates_faults.csv text eol=crlf
+reports/ml/final_holdout/*.csv text eol=crlf
+reports/ml/final_holdout/*.json text eol=lf
+*.joblib binary
+artifacts/*.json text eol=lf
+powerbi/data/*.csv text eol=lf
+powerbi/project/steel-plates-quality-bi.Report/definition/pages/pages.json text eol=lf
+powerbi/project/steel-plates-quality-bi.Report/definition/pages/ml_performance_review/** text eol=lf
+powerbi/project/steel-plates-quality-bi.SemanticModel/definition/tables/ML_Holdout.tmdl text eol=lf

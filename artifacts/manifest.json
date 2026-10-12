@@ -1,0 +1,128 @@
+{
+  "project": "steel-plates-quality-mlops",
+  "model_name": "tuned_random_forest",
+  "model_version": "rf-phase8-v1",
+  "model_config": {
+    "n_estimators": 300,
+    "min_samples_leaf": 2,
+    "max_features": "sqrt",
+    "max_depth": 20,
+    "class_weight": "balanced",
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "classes": [
+    "Pastry",
+    "Z_Scratch",
+    "K_Scatch",
+    "Stains",
+    "Dirtiness",
+    "Bumps",
+    "Other_Faults"
+  ],
+  "estimator_classes": [
+    "Bumps",
+    "Dirtiness",
+    "K_Scatch",
+    "Other_Faults",
+    "Pastry",
+    "Stains",
+    "Z_Scratch"
+  ],
+  "feature_names": [
+    "X_Minimum",
+    "X_Maximum",
+    "Y_Minimum",
+    "Y_Maximum",
+    "Pixels_Areas",
+    "X_Perimeter",
+    "Y_Perimeter",
+    "Sum_of_Luminosity",
+    "Minimum_of_Luminosity",
+    "Maximum_of_Luminosity",
+    "Length_of_Conveyer",
+    "TypeOfSteel_A300",
+    "TypeOfSteel_A400",
+    "Steel_Plate_Thickness",
+    "Edges_Index",
+    "Empty_Index",
+    "Square_Index",
+    "Outside_X_Index",
+    "Edges_X_Index",
+    "Edges_Y_Index",
+    "Outside_Global_Index",
+    "LogOfAreas",
+    "Log_X_Index",
+    "Log_Y_Index",
+    "Orientation_Index",
+    "Luminosity_Index",
+    "SigmoidOfAreas"
+  ],
+  "feature_count": 27,
+  "builder_fingerprint": "d44d450d66baacd3deabb21d2066fda26348f9e617e8cea5234d41553e4ebf14",
+  "dataset_fingerprint": "cb07fc4284cb1bea5b308ef1822f4440e83e16d53703b5d3254a0b5def76f408",
+  "training_data_fingerprint": "bc1b6278bb65256c930ddf2b1739d1c3c82fa53527fa1922ff714b302f5bfc0b",
+  "training_split_fingerprint": "7316e8c587e3ce45ec46201a5da9261b58105b59eddcb7808c34a7b4a99e36b6",
+  "feature_policy_fingerprint": "b72f3558fc5aa91badcf9374700da532312a6794b1b65aea35973e11ab86f0b3",
+  "model_config_fingerprint": "fd3a6d4234befdf156869fd6614d8464aa8b2430edb19efea46e27da3823f045",
+  "review_policy": {
+    "status": "DEVELOPMENT_ONLY",
+    "high_threshold": 0.8,
+    "low_threshold": 0.5,
+    "group_order": [
+      "LOW_CONFIDENCE",
+      "REVIEW_REQUIRED",
+      "HIGH_CONFIDENCE"
+    ],
+    "group_n": [
+      387,
+      687,
+      478
+    ],
+    "group_error_rate": [
+      0.5193798449612403,
+      0.21251819505094613,
+      0.01882845188284519
+    ],
+    "evidence": "DEVELOPMENT_OOF_ONLY"
+  },
+  "review_policy_fingerprint": "aee5900caf9da9f2f5cf5c66f46ece843154b0afc7c36af30b148582a870cd17",
+  "model_artifact": "artifacts/model/final_random_forest.joblib",
+  "model_artifact_sha256": "6f363b2c788789494d09e4f7a773c93a5fb283cda502bb73b7637fa6fc0c44e6",
+  "git_sha": "ba76e9f3734c84eb420b155e74d2f338b591d7e7",
+  "git_sha_role": "Scientific baseline before Phase 10; builder identified by builder_fingerprint",
+  "random_state": 42,
+  "train_size": 1552,
+  "holdout_size": 389,
+  "development_cv_macro_f1": 0.8008,
+  "development_cv_macro_f1_std": 0.0282,
+  "final_holdout_macro_f1": 0.8146728101764369,
+  "final_balanced_accuracy": 0.8048726799979933,
+  "final_log_loss": 0.6893136714244926,
+  "validity_scope": "FULL_OBSERVATION_CLASSIFICATION_ONLY",
+  "early_prediction_supported": false,
+  "created_from_phase": 10,
+  "scientific_selection_phase": 7,
+  "final_evaluation_phase": 8,
+  "training_membership_source": "reports/ml/final_holdout/metrics.json#split.train_positions",
+  "holdout_status": "CONSUMED_FINAL_EVALUATION",
+  "post_holdout_tuning": false,
+  "serialization": {
+    "compression": 3,
+    "protocol": 5
+  },
+  "environment": {
+    "python": "3.13.7",
+    "scikit-learn": "1.7.1",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "joblib": "1.5.1"
+  },
+  "verification": {
+    "save_load_prediction_match": true,
+    "save_load_probability_atol": 1e-12,
+    "smoke_rows": 32,
+    "smoke_source": "TRAINING_ONLY",
+    "new_holdout_inference": false
+  }
+}

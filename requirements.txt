@@ -1,4 +1,8 @@
-pandas>=2.0
-numpy>=1.26
+pandas==2.3.3
+numpy==2.2.6
+scikit-learn==1.7.1
+scipy==1.16.1
+joblib==1.5.1
+matplotlib==3.10.5
 streamlit>=1.40
 plotly>=5.20
