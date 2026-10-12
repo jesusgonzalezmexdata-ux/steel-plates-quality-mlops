@@ -1,0 +1,36 @@
+{
+  "oof": {
+    "evidence": "DEVELOPMENT_OOF",
+    "n": 1552,
+    "multiclass_log_loss": 0.6319366388430238,
+    "multiclass_brier_score": 0.3255692037260848,
+    "top_label_ece": 0.09097041247914943,
+    "mean_confidence": 0.6796481442218816,
+    "observed_accuracy": 0.770618556701031,
+    "calibration_model_fitted": false
+  },
+  "holdout": {
+    "evidence": "POST_HOC_CALIBRATION_DIAGNOSTIC",
+    "n": 389,
+    "multiclass_log_loss": 0.6893136714244926,
+    "multiclass_brier_score": 0.31366109025211697,
+    "top_label_ece": 0.10049027720837303,
+    "mean_confidence": 0.688712807624532,
+    "observed_accuracy": 0.7892030848329049,
+    "calibration_model_fitted": false
+  },
+  "probability_behavior": "UNCERTAIN",
+  "comparison_reason": "Same direction of top-label underconfidence is descriptive; aggregate differences do not establish equivalence or distribution shift",
+  "multiclass_brier_definition": "mean_i sum_k (p_ik - 1[y_i=k])^2; unnormalized, range [0,2]",
+  "ece_definition": "sum_b n_b/N * abs(accuracy_b - mean_top1_b); fixed confidence bins",
+  "confidence_edges": [
+    0.0,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0
+  ],
+  "calibrated_model_validated": false
+}

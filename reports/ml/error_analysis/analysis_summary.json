@@ -1,0 +1,123 @@
+{
+  "final_model_frozen": true,
+  "post_holdout_tuning": false,
+  "alternative_model_evaluation": false,
+  "feature_selection_after_holdout": false,
+  "holdout_invalidated": false,
+  "total_holdout_rows": 389,
+  "total_correct": 307,
+  "total_holdout_errors": 82,
+  "holdout_error_rate": 0.21079691516709512,
+  "oof_rows": 1552,
+  "oof_duplicates": 0,
+  "oof_missing": 0,
+  "oof_metrics": {
+    "accuracy": 0.770618556701031,
+    "balanced_accuracy": 0.7931890745150418,
+    "macro_precision": 0.8095993667545013,
+    "macro_recall": 0.7931890745150418,
+    "macro_f1": 0.8007785609234065,
+    "weighted_f1": 0.7718179803983861,
+    "log_loss": 0.6319366388430238
+  },
+  "fold_metrics": [
+    {
+      "accuracy": 0.7459807073954984,
+      "balanced_accuracy": 0.7617825296396724,
+      "macro_precision": 0.7747781353510472,
+      "macro_recall": 0.7617825296396724,
+      "macro_f1": 0.7671974833576375,
+      "weighted_f1": 0.7489973973334167,
+      "log_loss": 0.6309126209258205
+    },
+    {
+      "accuracy": 0.7331189710610932,
+      "balanced_accuracy": 0.7567271505376345,
+      "macro_precision": 0.8024212223322346,
+      "macro_recall": 0.7567271505376345,
+      "macro_f1": 0.7759759594704392,
+      "weighted_f1": 0.7352369908572999,
+      "log_loss": 0.6762525113808543
+    },
+    {
+      "accuracy": 0.7774193548387097,
+      "balanced_accuracy": 0.7985456056103478,
+      "macro_precision": 0.8310305555319921,
+      "macro_recall": 0.7985456056103478,
+      "macro_f1": 0.8085566256249237,
+      "weighted_f1": 0.7779805035205012,
+      "log_loss": 0.6087658278470406
+    },
+    {
+      "accuracy": 0.7870967741935484,
+      "balanced_accuracy": 0.8144294549835271,
+      "macro_precision": 0.8285179300122797,
+      "macro_recall": 0.8144294549835271,
+      "macro_f1": 0.8193959797084024,
+      "weighted_f1": 0.7859704824320711,
+      "log_loss": 0.5783562242304148
+    },
+    {
+      "accuracy": 0.8096774193548387,
+      "balanced_accuracy": 0.8342918985776129,
+      "macro_precision": 0.8354927731349983,
+      "macro_recall": 0.8342918985776129,
+      "macro_f1": 0.8329583090641594,
+      "weighted_f1": 0.8107014082285938,
+      "log_loss": 0.6652563586870518
+    }
+  ],
+  "phase_7_fold_metrics_match": true,
+  "review_policy_candidate": {
+    "status": "DEVELOPMENT_ONLY",
+    "high_threshold": 0.8,
+    "low_threshold": 0.5,
+    "group_order": [
+      "LOW_CONFIDENCE",
+      "REVIEW_REQUIRED",
+      "HIGH_CONFIDENCE"
+    ],
+    "group_n": [
+      387,
+      687,
+      478
+    ],
+    "group_error_rate": [
+      0.5193798449612403,
+      0.21251819505094613,
+      0.01882845188284519
+    ],
+    "evidence": "DEVELOPMENT_OOF_ONLY"
+  },
+  "holdout_policy_application": {
+    "evidence": "POST_HOC_ONLY",
+    "policy_status": "DEVELOPMENT_ONLY",
+    "accepted_rows": 128,
+    "review_rows": 261,
+    "coverage": 0.32904884318766064,
+    "review_rate": 0.6709511568123393,
+    "accepted_error_rate": 0.0078125,
+    "errors_sent_to_review": 81,
+    "errors_not_captured": 1
+  },
+  "high_confidence_errors_oof": 9,
+  "high_confidence_errors_holdout": 1,
+  "insufficient_data_segments": 2,
+  "insufficient_data_class_segments": 597,
+  "importance_stability": {
+    "STABLE_IMPORTANCE": 11,
+    "VARIABLE_IMPORTANCE": 11,
+    "LOW_IMPORTANCE": 5
+  },
+  "shap_status": "NOT_REQUIRED",
+  "association_not_causation": true,
+  "verdict": "PASS_WITH_LIMITATION",
+  "validity_scope": "FULL_OBSERVATION_CLASSIFICATION_ONLY",
+  "early_prediction_supported": false,
+  "environment": {
+    "python": "3.13.7",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "sklearn": "1.7.1"
+  }
+}

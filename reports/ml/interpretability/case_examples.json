@@ -1,0 +1,74 @@
+[
+  {
+    "case_type": "HIGH_CONFIDENCE_CORRECT",
+    "evidence": "FINAL_HOLDOUT_POST_HOC",
+    "row_id": 412,
+    "actual": "K_Scatch",
+    "predicted": "K_Scatch",
+    "confidence": 1.0,
+    "margin": 1.0,
+    "review_policy_status": "HIGH_CONFIDENCE",
+    "globally_associated_feature_values": {
+      "Length_of_Conveyer": 1404.0,
+      "Orientation_Index": -0.0374,
+      "Edges_Y_Index": 0.355,
+      "Steel_Plate_Thickness": 40.0,
+      "Empty_Index": 0.4386
+    },
+    "attribution_scope": "Global ranking context only; no local or causal explanation"
+  },
+  {
+    "case_type": "LOW_CONFIDENCE_CORRECT",
+    "evidence": "FINAL_HOLDOUT_POST_HOC",
+    "row_id": 1567,
+    "actual": "Other_Faults",
+    "predicted": "Other_Faults",
+    "confidence": 0.3020340045216277,
+    "margin": 0.057109195026211645,
+    "review_policy_status": "LOW_CONFIDENCE",
+    "globally_associated_feature_values": {
+      "Length_of_Conveyer": 1360.0,
+      "Orientation_Index": 0.84,
+      "Edges_Y_Index": 0.9901,
+      "Steel_Plate_Thickness": 150.0,
+      "Empty_Index": 0.4775
+    },
+    "attribution_scope": "Global ranking context only; no local or causal explanation"
+  },
+  {
+    "case_type": "HIGH_CONFIDENCE_ERROR",
+    "evidence": "FINAL_HOLDOUT_POST_HOC",
+    "row_id": 1277,
+    "actual": "Other_Faults",
+    "predicted": "K_Scatch",
+    "confidence": 1.0,
+    "margin": 1.0,
+    "review_policy_status": "HIGH_CONFIDENCE",
+    "globally_associated_feature_values": {
+      "Length_of_Conveyer": 1356.0,
+      "Orientation_Index": -0.614,
+      "Edges_Y_Index": 0.4853,
+      "Steel_Plate_Thickness": 40.0,
+      "Empty_Index": 0.4727
+    },
+    "attribution_scope": "Global ranking context only; no local or causal explanation"
+  },
+  {
+    "case_type": "LOW_CONFIDENCE_ERROR",
+    "evidence": "FINAL_HOLDOUT_POST_HOC",
+    "row_id": 968,
+    "actual": "Bumps",
+    "predicted": "Other_Faults",
+    "confidence": 0.274936181546335,
+    "margin": 0.022813443904947883,
+    "review_policy_status": "LOW_CONFIDENCE",
+    "globally_associated_feature_values": {
+      "Length_of_Conveyer": 1358.0,
+      "Orientation_Index": 0.7619,
+      "Edges_Y_Index": 1.0,
+      "Steel_Plate_Thickness": 40.0,
+      "Empty_Index": 0.2762
+    },
+    "attribution_scope": "Global ranking context only; no local or causal explanation"
+  }
+]

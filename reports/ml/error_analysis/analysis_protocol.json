@@ -1,0 +1,382 @@
+{
+  "final_model": "tuned_random_forest",
+  "final_model_config": {
+    "n_estimators": 300,
+    "min_samples_leaf": 2,
+    "max_features": "sqrt",
+    "max_depth": 20,
+    "class_weight": "balanced",
+    "random_state": 42,
+    "n_jobs": 1
+  },
+  "feature_set": "FULL_OBSERVATION_FEATURES",
+  "features": [
+    "X_Minimum",
+    "X_Maximum",
+    "Y_Minimum",
+    "Y_Maximum",
+    "Pixels_Areas",
+    "X_Perimeter",
+    "Y_Perimeter",
+    "Sum_of_Luminosity",
+    "Minimum_of_Luminosity",
+    "Maximum_of_Luminosity",
+    "Length_of_Conveyer",
+    "TypeOfSteel_A300",
+    "TypeOfSteel_A400",
+    "Steel_Plate_Thickness",
+    "Edges_Index",
+    "Empty_Index",
+    "Square_Index",
+    "Outside_X_Index",
+    "Edges_X_Index",
+    "Edges_Y_Index",
+    "Outside_Global_Index",
+    "LogOfAreas",
+    "Log_X_Index",
+    "Log_Y_Index",
+    "Orientation_Index",
+    "Luminosity_Index",
+    "SigmoidOfAreas"
+  ],
+  "class_order": [
+    "Pastry",
+    "Z_Scratch",
+    "K_Scatch",
+    "Stains",
+    "Dirtiness",
+    "Bumps",
+    "Other_Faults"
+  ],
+  "estimator_class_order": [
+    "Bumps",
+    "Dirtiness",
+    "K_Scatch",
+    "Other_Faults",
+    "Pastry",
+    "Stains",
+    "Z_Scratch"
+  ],
+  "final_model_config_hash": "fd3a6d4234befdf156869fd6614d8464aa8b2430edb19efea46e27da3823f045",
+  "contract_hash": "b72f3558fc5aa91badcf9374700da532312a6794b1b65aea35973e11ab86f0b3",
+  "phase_8_checkpoint": "269b38cdced47f8c392a59b0bf9b6bbd298a363a",
+  "phase_8_state_checkpoint": "dfe5185b26da3133ed0a6c4b26b7bc906eae177b",
+  "final_model_frozen": true,
+  "post_holdout_tuning": false,
+  "alternative_model_evaluation": false,
+  "feature_selection_after_holdout": false,
+  "phase_8_artifact_sha256": {
+    "predictions.csv": "f365dba807442658aded2e86b58bfd72b9625240a9504bdeb8e071dcbc946d50",
+    "metrics.json": "18d4fbd6d41e845eb2f975bc3ded28dc1bdc9851f49db81a80a28fe5a5e603f3",
+    "confusion_matrix.csv": "d5ee3bc12d0ba22ec3658605711de60f09d88e84ef13fe2bede2c031b6c88826",
+    "probabilities_snapshot.csv": "cbebd26329164c387bffd6fbd265cdb1f4ce04696512c2331829754582035b44"
+  },
+  "raw_sha256": "cb07fc4284cb1bea5b308ef1822f4440e83e16d53703b5d3254a0b5def76f408",
+  "min_sample": 30,
+  "confidence_edges": [
+    0.0,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0
+  ],
+  "margin_edges": [
+    0.0,
+    0.1,
+    0.2,
+    0.4,
+    0.6,
+    0.8,
+    1.0
+  ],
+  "fixed_thresholds": [
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "candidate_threshold": 0.8,
+  "low_threshold": 0.5,
+  "policy_support_rule": "n>=30 in low/middle/high; error(low)>error(middle)>error(high)",
+  "segment_rule": "Training quartiles, unique interior cuts, right-closed; binary steel values",
+  "class_rule": "n<30 INSUFFICIENT_SUPPORT; otherwise F1>=0.85 STRONGER, F1<0.70 WEAKER, else INTERMEDIATE",
+  "permutation": {
+    "scoring": "f1_macro",
+    "repeats": 5,
+    "random_state": 42,
+    "n_jobs": 1,
+    "std_ddof": 1,
+    "stability_rule": "mean<=0 LOW; positive in all 5 and std<=mean STABLE; else VARIABLE"
+  },
+  "case_rule": "Holdout post-hoc: high>=0.80, low<0.50; high descending confidence, low ascending; row_id ascending tie break",
+  "brier_definition": "mean_i sum_k (p_ik - 1[y_i=k])^2; unnormalized, range [0,2]",
+  "ece_definition": "sum_b n_b/N * abs(accuracy_b - mean_top1_b); fixed confidence bins",
+  "probability_comparison_rule": "UNCERTAIN: descriptive comparison only; no independent equivalence test",
+  "shap_status": "NOT_REQUIRED",
+  "association_not_causation": true,
+  "reproducibility_absolute_tolerance": 1e-12,
+  "training_segment_cuts": {
+    "X_Minimum": {
+      "kind": "continuous",
+      "cuts": [
+        52.75,
+        405.5,
+        1038.75
+      ],
+      "closure": "right"
+    },
+    "X_Maximum": {
+      "kind": "continuous",
+      "cuts": [
+        192.75,
+        445.0,
+        1061.5
+      ],
+      "closure": "right"
+    },
+    "Y_Minimum": {
+      "kind": "continuous",
+      "cuts": [
+        462923.5,
+        1188619.0,
+        2182183.5
+      ],
+      "closure": "right"
+    },
+    "Y_Maximum": {
+      "kind": "continuous",
+      "cuts": [
+        462947.25,
+        1188705.5,
+        2182200.25
+      ],
+      "closure": "right"
+    },
+    "Pixels_Areas": {
+      "kind": "continuous",
+      "cuts": [
+        85.0,
+        170.5,
+        822.5
+      ],
+      "closure": "right"
+    },
+    "X_Perimeter": {
+      "kind": "continuous",
+      "cuts": [
+        15.0,
+        26.5,
+        83.25
+      ],
+      "closure": "right"
+    },
+    "Y_Perimeter": {
+      "kind": "continuous",
+      "cuts": [
+        13.0,
+        25.0,
+        80.0
+      ],
+      "closure": "right"
+    },
+    "Sum_of_Luminosity": {
+      "kind": "continuous",
+      "cuts": [
+        9548.75,
+        19125.0,
+        83647.25
+      ],
+      "closure": "right"
+    },
+    "Minimum_of_Luminosity": {
+      "kind": "continuous",
+      "cuts": [
+        62.0,
+        90.0,
+        106.0
+      ],
+      "closure": "right"
+    },
+    "Maximum_of_Luminosity": {
+      "kind": "continuous",
+      "cuts": [
+        124.0,
+        127.0,
+        140.0
+      ],
+      "closure": "right"
+    },
+    "Length_of_Conveyer": {
+      "kind": "continuous",
+      "cuts": [
+        1358.0,
+        1364.0,
+        1650.0
+      ],
+      "closure": "right"
+    },
+    "TypeOfSteel_A300": {
+      "kind": "binary",
+      "values": [
+        0,
+        1
+      ]
+    },
+    "TypeOfSteel_A400": {
+      "kind": "binary",
+      "values": [
+        0,
+        1
+      ]
+    },
+    "Steel_Plate_Thickness": {
+      "kind": "continuous",
+      "cuts": [
+        40.0,
+        69.0,
+        80.0
+      ],
+      "closure": "right"
+    },
+    "Edges_Index": {
+      "kind": "continuous",
+      "cuts": [
+        0.0604,
+        0.23225,
+        0.584625
+      ],
+      "closure": "right"
+    },
+    "Empty_Index": {
+      "kind": "continuous",
+      "cuts": [
+        0.320375,
+        0.41385,
+        0.5019750000000001
+      ],
+      "closure": "right"
+    },
+    "Square_Index": {
+      "kind": "continuous",
+      "cuts": [
+        0.3636,
+        0.5594,
+        0.8182
+      ],
+      "closure": "right"
+    },
+    "Outside_X_Index": {
+      "kind": "continuous",
+      "cuts": [
+        0.0066,
+        0.01,
+        0.0236
+      ],
+      "closure": "right"
+    },
+    "Edges_X_Index": {
+      "kind": "continuous",
+      "cuts": [
+        0.4118,
+        0.6364,
+        0.8
+      ],
+      "closure": "right"
+    },
+    "Edges_Y_Index": {
+      "kind": "continuous",
+      "cuts": [
+        0.5882,
+        0.9469000000000001,
+        1.0
+      ],
+      "closure": "right"
+    },
+    "Outside_Global_Index": {
+      "kind": "continuous",
+      "cuts": [
+        0.0,
+        1.0
+      ],
+      "closure": "right"
+    },
+    "LogOfAreas": {
+      "kind": "continuous",
+      "cuts": [
+        1.9294,
+        2.2317,
+        2.9151499999999997
+      ],
+      "closure": "right"
+    },
+    "Log_X_Index": {
+      "kind": "continuous",
+      "cuts": [
+        1.0,
+        1.1761,
+        1.52175
+      ],
+      "closure": "right"
+    },
+    "Log_Y_Index": {
+      "kind": "continuous",
+      "cuts": [
+        1.0792,
+        1.3222,
+        1.7243
+      ],
+      "closure": "right"
+    },
+    "Orientation_Index": {
+      "kind": "continuous",
+      "cuts": [
+        -0.3333,
+        0.09965,
+        0.5
+      ],
+      "closure": "right"
+    },
+    "Luminosity_Index": {
+      "kind": "continuous",
+      "cuts": [
+        -0.193825,
+        -0.1333,
+        -0.065175
+      ],
+      "closure": "right"
+    },
+    "SigmoidOfAreas": {
+      "kind": "continuous",
+      "cuts": [
+        0.2482,
+        0.5063,
+        0.9998
+      ],
+      "closure": "right"
+    }
+  },
+  "review_policy_candidate": {
+    "status": "DEVELOPMENT_ONLY",
+    "high_threshold": 0.8,
+    "low_threshold": 0.5,
+    "group_order": [
+      "LOW_CONFIDENCE",
+      "REVIEW_REQUIRED",
+      "HIGH_CONFIDENCE"
+    ],
+    "group_n": [
+      387,
+      687,
+      478
+    ],
+    "group_error_rate": [
+      0.5193798449612403,
+      0.21251819505094613,
+      0.01882845188284519
+    ],
+    "evidence": "DEVELOPMENT_OOF_ONLY"
+  },
+  "review_policy_hash": "aee5900caf9da9f2f5cf5c66f46ece843154b0afc7c36af30b148582a870cd17"
+}
