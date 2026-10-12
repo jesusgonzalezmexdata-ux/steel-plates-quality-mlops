@@ -142,3 +142,14 @@ Phase 10 code/export validation is complete only to the extent recorded in
 The phase remains IN_PROGRESS_PENDING_POWER_BI_RUNTIME.
 Phase 11 is not started. No readiness certificate, production validation, early
 prediction, causal importance, financial impact or good-plate classification is claimed.
+
+## Closeout schema completion
+
+The final checklist found that the Phase 9 high-confidence-error CSV omitted
+review_status, although its cases, confidence and frozen policy were present.
+The closeout adds that column using the existing policy_labels function, both
+in the reproducible analysis and in the saved CSV. All ten cases are correctly
+labeled HIGH_CONFIDENCE (nine OOF, one holdout post-hoc). Every pre-existing row,
+feature value, probability, margin and classification was checked exactly unchanged.
+No threshold, model, metric or Phase 8 artifact changed. The complete numeric
+replay test also checks this added field; no previous assertion was removed.

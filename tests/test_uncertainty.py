@@ -133,6 +133,9 @@ def test_multiclass_brier_and_ece_known_probabilities():
 
 def test_complete_numeric_replay_matches_persisted_artifacts(phase9_run):
     frames, docs, _ = phase9_run
+    high = frames["error_analysis/high_confidence_errors.csv"]
+    assert high.review_status.eq("HIGH_CONFIDENCE").all()
+    assert len(high) == 10
     for name, frame in frames.items():
         saved = pd.read_csv(ROOT / "reports/ml" / name, float_precision="round_trip")
         pd.testing.assert_frame_equal(frame, saved, check_dtype=False, check_exact=False,

@@ -73,6 +73,7 @@ def analyze(root):
         errors.high_confidence_errors(oof, train_context, policy["high_threshold"], "DEVELOPMENT_OOF"),
         errors.high_confidence_errors(holdout, holdout_context, policy["high_threshold"], "FINAL_HOLDOUT_POST_HOC"),
     ], ignore_index=True)
+    high_errors["review_status"] = uncertainty.policy_labels(high_errors, policy)
     application = uncertainty.apply_policy(holdout, policy)
     if digest(policy) != policy_hash:
         raise ValueError("Candidate policy mutated after holdout")
