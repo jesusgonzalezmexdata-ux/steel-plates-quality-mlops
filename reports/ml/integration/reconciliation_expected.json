@@ -1,0 +1,74 @@
+{
+  "dataset_role": "FINAL_HOLDOUT_EVALUATION",
+  "runtime_status": "PENDING_DESKTOP",
+  "rows": 389,
+  "correct": 307,
+  "errors": 82,
+  "review_rows": 261,
+  "accepted_rows": 128,
+  "errors_sent_to_review": 81,
+  "errors_not_captured": 1,
+  "review_rate": 0.6709511568123393,
+  "macro_f1": 0.8146728101764369,
+  "balanced_accuracy": 0.8048726799979933,
+  "actual_counts": {
+    "Pastry": 32,
+    "Z_Scratch": 38,
+    "K_Scatch": 78,
+    "Stains": 14,
+    "Dirtiness": 11,
+    "Bumps": 81,
+    "Other_Faults": 135
+  },
+  "prediction_counts": {
+    "Pastry": 35,
+    "Z_Scratch": 34,
+    "K_Scatch": 73,
+    "Stains": 13,
+    "Dirtiness": 11,
+    "Bumps": 77,
+    "Other_Faults": 146
+  },
+  "review_counts": {
+    "HIGH_CONFIDENCE": 128,
+    "REVIEW_REQUIRED": 173,
+    "LOW_CONFIDENCE": 88
+  },
+  "class_counts": [
+    {
+      "actual_class": "Pastry",
+      "support": 32,
+      "errors": 12
+    },
+    {
+      "actual_class": "Z_Scratch",
+      "support": 38,
+      "errors": 5
+    },
+    {
+      "actual_class": "K_Scatch",
+      "support": 78,
+      "errors": 7
+    },
+    {
+      "actual_class": "Stains",
+      "support": 14,
+      "errors": 2
+    },
+    {
+      "actual_class": "Dirtiness",
+      "support": 11,
+      "errors": 1
+    },
+    {
+      "actual_class": "Bumps",
+      "support": 81,
+      "errors": 26
+    },
+    {
+      "actual_class": "Other_Faults",
+      "support": 135,
+      "errors": 29
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "959d3d8818f13287914c",
+  "position": {
+    "x": 640,
+    "y": 115,
+    "width": 290,
+    "height": 110,
+    "z": 3,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "Candidate Review Rate"
+                }
+              },
+              "queryRef": "ML_Holdout.Candidate Review Rate",
+              "nativeQueryRef": "Candidate Review Rate"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

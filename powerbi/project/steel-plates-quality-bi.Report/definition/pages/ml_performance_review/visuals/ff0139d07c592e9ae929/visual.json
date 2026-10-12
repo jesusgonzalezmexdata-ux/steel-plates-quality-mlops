@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "ff0139d07c592e9ae929",
+  "position": {
+    "x": 20,
+    "y": 700,
+    "width": 600,
+    "height": 300,
+    "z": 10,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "confidence_bin"
+                }
+              },
+              "queryRef": "ML_Holdout.confidence_bin",
+              "nativeQueryRef": "confidence_bin"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "ML Rows"
+                }
+              },
+              "queryRef": "ML_Holdout.ML Rows",
+              "nativeQueryRef": "ML Rows"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "Mean Confidence"
+                }
+              },
+              "queryRef": "ML_Holdout.Mean Confidence",
+              "nativeQueryRef": "Mean Confidence"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "Observed Accuracy"
+                }
+              },
+              "queryRef": "ML_Holdout.Observed Accuracy",
+              "nativeQueryRef": "Observed Accuracy"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "Segment Support"
+                }
+              },
+              "queryRef": "ML_Holdout.Segment Support",
+              "nativeQueryRef": "Segment Support"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

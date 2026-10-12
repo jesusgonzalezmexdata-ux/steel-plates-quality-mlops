@@ -1,0 +1,63 @@
+{
+  "phase": 10,
+  "status": "IN_PROGRESS_PENDING_POWER_BI_RUNTIME",
+  "full_suite": {
+    "command": "python -B -m pytest -q",
+    "passed": 122,
+    "failed": 0,
+    "seconds": 641.53
+  },
+  "focused_bi_recheck": {
+    "passed": 5,
+    "seconds": 0.67,
+    "reason": "Final newline-portability preservation assertion"
+  },
+  "checks": {
+    "data_validation": "PASS",
+    "syntax_lint": "PASS (46 Python files; AST, not Ruff)",
+    "train_smoke": "PASS (128 fit / 32 disjoint training validation rows)",
+    "artifact_validation": "PASS",
+    "batch_inference": "PASS",
+    "python_bi_export": "PASS",
+    "git_diff_check": "PASS",
+    "new_file_secret_indicator_scan": "NO_MATCHES (scoped; not full Phase 11 export audit)"
+  },
+  "final_model_frozen": true,
+  "post_holdout_tuning": false,
+  "alternative_model_evaluation": false,
+  "feature_selection_after_holdout": false,
+  "new_holdout_inference": false,
+  "historical_test_scope": "Existing development regression searches and OOF replay; no new selection or persisted evaluation",
+  "holdout_artifacts_unchanged": true,
+  "holdout_invalidated": false,
+  "powerbi": {
+    "preexisting_files": 70,
+    "preexisting_files_changed": 3,
+    "changed_scope": [
+      "page index: appended ML page",
+      "model: appended table reference",
+      "expressions: appended RutaMLCSV"
+    ],
+    "original_pages_preserved": 4,
+    "new_page_visuals": 12,
+    "pbix_unchanged": true,
+    "python_export_rows": 389,
+    "python_export_correct": 307,
+    "python_export_errors": 82,
+    "candidate_review_rows": 261,
+    "policy_status": "DEVELOPMENT_ONLY",
+    "policy_application": "POST_HOC_ONLY",
+    "structural_check": "PASS (local checks; no official schema/compiler validation)",
+    "runtime_validation": "NOT_EXECUTED",
+    "reconciliation": "PYTHON_EXPORT_PASS_DESKTOP_PENDING",
+    "post_ml_pbix_sha256": null,
+    "post_ml_pbip_status": "TEXT_DRAFT_PENDING_DESKTOP_SAVE"
+  },
+  "ci": "UPDATED; local components pass; remote run not executed",
+  "clean_clone_reproduction": "NOT_STARTED_PHASE_11_GATED",
+  "phase_11": "NOT_STARTED",
+  "installation_performed": false,
+  "network_access_performed": false,
+  "push_performed": false,
+  "required_gate": "HUMAN_GATE_POWER_BI_RUNTIME_VALIDATION"
+}

@@ -1,0 +1,130 @@
+table ML_Holdout
+
+	measure 'Final Macro-F1 (389)' = 0.8146728101764369
+		formatString: 0.0000
+
+	measure 'Final Balanced Accuracy (389)' = 0.8048726799979933
+		formatString: 0.0000
+
+	measure 'ML Rows' = COUNTROWS ( ML_Holdout )
+		formatString: 0
+
+	measure 'ML Correct' = SUM ( ML_Holdout[correct_prediction] )
+		formatString: 0
+
+	measure 'ML Errors' = [ML Rows] - [ML Correct]
+		formatString: 0
+
+	measure 'ML Confusion Errors' = IF ( [ML Errors] > 0, [ML Errors], BLANK () )
+		formatString: 0
+
+	measure 'ML Review Rows' = SUM ( ML_Holdout[review_required] )
+		formatString: 0
+
+	measure 'Candidate Review Rate' = DIVIDE ( [ML Review Rows], [ML Rows] )
+		formatString: 0.00%
+
+	measure 'Observed Accuracy' = DIVIDE ( [ML Correct], [ML Rows] )
+		formatString: 0.00%
+
+	measure 'Observed Error Rate' = DIVIDE ( [ML Errors], [ML Rows] )
+		formatString: 0.00%
+
+	measure 'Mean Confidence' = AVERAGE ( ML_Holdout[confidence] )
+		formatString: 0.00%
+
+	measure 'Segment Support' = IF ( [ML Rows] < 30, "INSUFFICIENT_DATA", "DESCRIPTIVE" )
+
+	column row_id
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: row_id
+
+	column source_id
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: source_id
+
+	column actual_defect
+		dataType: string
+		summarizeBy: none
+		sourceColumn: actual_defect
+
+	column predicted_defect
+		dataType: string
+		summarizeBy: none
+		sourceColumn: predicted_defect
+
+	column correct_prediction
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: correct_prediction
+
+	column confidence
+		dataType: double
+		summarizeBy: none
+		sourceColumn: confidence
+
+	column review_status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: review_status
+
+	column review_required
+		dataType: int64
+		summarizeBy: none
+		sourceColumn: review_required
+
+	column steel_type
+		dataType: string
+		summarizeBy: none
+		sourceColumn: steel_type
+
+	column steel_plate_thickness
+		dataType: double
+		summarizeBy: none
+		sourceColumn: steel_plate_thickness
+
+	column pixels_area
+		dataType: double
+		summarizeBy: none
+		sourceColumn: pixels_area
+
+	column confidence_bin
+		dataType: string
+		summarizeBy: none
+		sourceColumn: confidence_bin
+
+	column dataset_role
+		dataType: string
+		summarizeBy: none
+		sourceColumn: dataset_role
+
+	column policy_status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: policy_status
+
+	column policy_application
+		dataType: string
+		summarizeBy: none
+		sourceColumn: policy_application
+
+	column model_version
+		dataType: string
+		summarizeBy: none
+		sourceColumn: model_version
+
+	partition ML_Holdout = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaMLCSV), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Cabecera = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Esperadas = {"row_id", "source_id", "actual_defect", "predicted_defect", "correct_prediction", "confidence", "review_status", "review_required", "steel_type", "steel_plate_thickness", "pixels_area", "confidence_bin", "dataset_role", "policy_status", "policy_application", "model_version"},
+				    Schema = if List.Sort(Table.ColumnNames(Cabecera)) = List.Sort(Esperadas) then Cabecera else error "ML schema mismatch",
+				    Tipos = Table.TransformColumnTypes(Schema, {{"row_id", Int64.Type}, {"source_id", Int64.Type}, {"actual_defect", type text}, {"predicted_defect", type text}, {"correct_prediction", Int64.Type}, {"confidence", type number}, {"review_status", type text}, {"review_required", Int64.Type}, {"steel_type", type text}, {"steel_plate_thickness", type number}, {"pixels_area", type number}, {"confidence_bin", type text}, {"dataset_role", type text}, {"policy_status", type text}, {"policy_application", type text}, {"model_version", type text}}, "en-US"),
+				    Validado = if Table.RowCount(Tipos) = 389 and List.Distinct(Tipos[dataset_role]) = {"FINAL_HOLDOUT_EVALUATION"}
+				        then Tipos else error "Expected 389 final holdout evaluation rows"
+				in
+				    Validado

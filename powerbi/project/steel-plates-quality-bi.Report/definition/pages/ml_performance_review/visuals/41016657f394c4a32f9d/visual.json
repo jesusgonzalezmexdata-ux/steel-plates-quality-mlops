@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "41016657f394c4a32f9d",
+  "position": {
+    "x": 20,
+    "y": 115,
+    "width": 290,
+    "height": 110,
+    "z": 1,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "Final Macro-F1 (389)"
+                }
+              },
+              "queryRef": "ML_Holdout.Final Macro-F1 (389)",
+              "nativeQueryRef": "Final Macro-F1 (389)"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

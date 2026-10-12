@@ -1,5 +1,15 @@
 # Inteligencia de manufactura: defectos en placas de acero
 
+> **Closeout status — Phase 10:** the frozen Random Forest and batch inference are available.
+> Final holdout macro-F1: **0.8146728102**; balanced accuracy: **0.8048726800**.
+> This is FULL_OBSERVATION classification of known defects, not early prediction.
+> The ML Power BI page is a text draft; Desktop refresh/render/save remain pending.
+> See [commands and lineage](docs/ml/09_model_lineage_and_batch_inference.md),
+> [reconciliation](docs/evidence/powerbi_ml_reconciliation.md) and the
+> [required Desktop handoff](docs/evidence/powerbi_runtime_handoff.md).
+> Phase 11 final presentation and clean-clone closeout have not started.
+
+
 **Un sistema de decisión para calidad: qué defectos contener, a cuáles buscarles causa raíz y qué tan confiable es cada conclusión.**
 
 Power BI (DAX, Power Query M) · Python (pandas) · SQL (DuckDB) · Streamlit · control estadístico · COPQ · ISO 9001
@@ -69,7 +79,7 @@ Detalle y código en [`docs/pruebas_de_estres.md`](docs/pruebas_de_estres.md).
 | Diccionario de datos y mapeo de terminología | `docs/diccionario_de_datos.md` |
 | Pruebas de estrés y errores corregidos | `docs/pruebas_de_estres.md` |
 | Guía para armar el .pbix en Windows | `docs/construir_en_power_bi.md` |
-| 16 pruebas automáticas | `tests/` |
+| Pruebas automáticas de calidad y ML | `tests/` |
 
 ## Método
 
@@ -82,13 +92,13 @@ Detalle y código en [`docs/pruebas_de_estres.md`](docs/pruebas_de_estres.md).
 ## Cómo ejecutarlo
 
 ```bash
-python -m venv .venv
+python -m venv .venv              # Python 3.13
 .venv\Scripts\activate            # Windows · en macOS/Linux: source .venv/bin/activate
 pip install -r requirements-dev.txt
 
 python -m etl.build_star_schema    # regenera data/model/
 python -m tools.stress_tests       # regenera docs/pruebas_de_estres.md
-pytest                             # 16 pruebas
+pytest                             # suite completa (calidad + ML)
 streamlit run streamlit_app.py
 ```
 

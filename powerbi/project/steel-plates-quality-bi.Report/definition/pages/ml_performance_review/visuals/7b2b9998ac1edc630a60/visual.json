@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "7b2b9998ac1edc630a60",
+  "position": {
+    "x": 850,
+    "y": 240,
+    "width": 395,
+    "height": 170,
+    "z": 7,
+    "tabOrder": 7
+  },
+  "visual": {
+    "visualType": "listSlicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "actual_defect"
+                }
+              },
+              "queryRef": "ML_Holdout.actual_defect",
+              "nativeQueryRef": "actual_defect"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "86aa80aa4ec94df84fcc",
+  "position": {
+    "x": 640,
+    "y": 430,
+    "width": 620,
+    "height": 250,
+    "z": 9,
+    "tabOrder": 9
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "actual_defect"
+                }
+              },
+              "queryRef": "ML_Holdout.actual_defect",
+              "nativeQueryRef": "actual_defect"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "ML Rows"
+                }
+              },
+              "queryRef": "ML_Holdout.ML Rows",
+              "nativeQueryRef": "ML Rows"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "ML Errors"
+                }
+              },
+              "queryRef": "ML_Holdout.ML Errors",
+              "nativeQueryRef": "ML Errors"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "Observed Error Rate"
+                }
+              },
+              "queryRef": "ML_Holdout.Observed Error Rate",
+              "nativeQueryRef": "Observed Error Rate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "Segment Support"
+                }
+              },
+              "queryRef": "ML_Holdout.Segment Support",
+              "nativeQueryRef": "Segment Support"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

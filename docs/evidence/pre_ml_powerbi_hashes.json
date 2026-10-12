@@ -1,0 +1,355 @@
+{
+  "source_head": "ba76e9f3734c84eb420b155e74d2f338b591d7e7",
+  "purpose": "PRE_ML_POWER_BI_HASHES",
+  "files": {
+    "powerbi/artifacts/steel-plates-quality-bi.pbix": {
+      "sha256": "0a87a4e33b78cf786d1a76250b39f154d19508480f256fa1898e8f818d9bdba5",
+      "bytes": 213709
+    },
+    "powerbi/dax/measures.dax": {
+      "sha256": "c8a3dd8feef2ee003ad0ef6db666ae1012e9daa9b25996b0e1a8213f7e4b3d0e",
+      "bytes": 5213,
+      "lf_sha256": "51984e2f28d37416d80e1154f7f279d6b42a054f4ca3ae4cb074ddaff9f53162"
+    },
+    "powerbi/powerquery/00_Parametros.pq": {
+      "sha256": "988f26e571baaacf7c675d0c48a40b6550fbba5a04da47f949b8b0c6962d6f61",
+      "bytes": 456,
+      "lf_sha256": "cc777260bd7b0a0dfa7cc122814eccd98727a45244ceacc14bcccc34fa282db2"
+    },
+    "powerbi/powerquery/01_Raw_SteelPlates.pq": {
+      "sha256": "a031a663607dbf489155f18c08d9c7b642523cf122a44e4e4f1a1f880eb6ea97",
+      "bytes": 710,
+      "lf_sha256": "4262e7105a2e91c2a5898aafde7151c0309fe05c2c7b26dba27b12dad656617e"
+    },
+    "powerbi/powerquery/02_Dim_TipoDefecto.pq": {
+      "sha256": "69335f467f5a5a73ed581cd429c4115a12a71b324472701d52f232665c4a1a82",
+      "bytes": 867,
+      "lf_sha256": "a6534187e06dd30a44814f1437bce8424b06e4c8be3c056cd2480a97fd8fa019"
+    },
+    "powerbi/powerquery/03_Dim_Acero.pq": {
+      "sha256": "1697708c2c34c8cf0309fb897bf69a6cf78eed093ec17028ddb2b238e450e875",
+      "bytes": 719,
+      "lf_sha256": "d2896edd2f9eb1ecaf69a95388696fc356db2a6387dafd1f2272b60f5511b894"
+    },
+    "powerbi/powerquery/04_Dim_BandaTamano.pq": {
+      "sha256": "1081ec5f2520710d629763994626bc2e9dcd2f4f77abdd65f339a0dcc97c5b1a",
+      "bytes": 421,
+      "lf_sha256": "e1b53f327bc44a74c0fc9111c335f6b40836a591f212325e43e4272fc4b8a147"
+    },
+    "powerbi/powerquery/05_Fact_Defecto.pq": {
+      "sha256": "d2f73929899211fa9c063efb39e4acaf95ac3a522d4dd8aa849d8f20552af607",
+      "bytes": 2242,
+      "lf_sha256": "9cd3f124e325945ed0033c28dbb51a37c4e5f5fc3dc1b6fdae6cb479b4c44e84"
+    },
+    "powerbi/powerquery/06_Param_Especificacion.pq": {
+      "sha256": "69715ffe8587465beaeb9590ee0c092d263b0aa8f84aa8953e0d62e683e2c1c1",
+      "bytes": 188,
+      "lf_sha256": "8f4c535e73b1b67251d89aba7412bb9d1b30911442a3637de4529b03374b8f25"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/.platform": {
+      "sha256": "3b0725678653073b63cd200f59885bc27b7ecb43faffaf12a9400a15e647b14e",
+      "bytes": 317,
+      "lf_sha256": "fe85bcb82c5ae82c5886505eb019cf7f8da97ba7e2592972b09f2394c49b14a0"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/StaticResources/SharedResources/BaseThemes/CY26SU07.json": {
+      "sha256": "cbd7ee57cd74dfd24cab269d2c8d0b0f52f05d4e1f4d465566647f8fdd095042",
+      "bytes": 20874,
+      "lf_sha256": "2d871c8bd3e64e816bdba193b6745e5d88d7e148d4d176475e0144512d1243c6"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition.pbir": {
+      "sha256": "22804bda8b64b34a20c72ff8afaafcb0f9c64fdd95f033c578e6d03e0e5400ac",
+      "bytes": 137,
+      "lf_sha256": "cc8873c86532db0d5e3e66cf7cd41ab88538eb5f0816ba3f0431e4a24bd1b49c"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/page.json": {
+      "sha256": "8dc48a8514c81ebfe9af5bb3a11c56ecabf53dd666b96b9ba8bd3a11c5f335e4",
+      "bytes": 1221,
+      "lf_sha256": "537a870390fe2df16016554f9c2294444b3fdbfe8da00185c94ede43f7a5f33a"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/10dded7886b093c43cd7/visual.json": {
+      "sha256": "9e1068b22ceef99107140b3f3ead2b9521619f8572bec4b1ca5c2fca2da173a7",
+      "bytes": 2397,
+      "lf_sha256": "b5f2c219610954b6107b7ba7d72275f8e3d4f275ff1cc88063e83788a7fd407f"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/1263481585d6f527c78e/visual.json": {
+      "sha256": "dd77557e39fe011ccf068b611ed5498a467c7aa21853458ad74caa4088f1d581",
+      "bytes": 1423,
+      "lf_sha256": "58aaed6c97595a4d7b5314da7f15ba5531ec0216e0b8dcf0f82d60f4ba9c9895"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/47a20baf23455a033537/visual.json": {
+      "sha256": "64208398901866ac6b91a8f94b8b6b742874b9d4057f0ce9cece9b7f2c53f7d5",
+      "bytes": 1237,
+      "lf_sha256": "25df90ccde90f53217da8f773253f11f2cefad9b60bf8c839e18b72f6d8defb2"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/51e2f5ca4b5c2b43a6db/visual.json": {
+      "sha256": "d476dc381bd88363d9663a47891d70f98935e3eaa517d6ca77830b8529746a94",
+      "bytes": 1403,
+      "lf_sha256": "49cc28149ea28ab91dd7c3d92a83ace1b2974c51375422af090db5d4c246ff72"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/5c4ce3f89eac79baadb4/visual.json": {
+      "sha256": "ff17df8b5b6d736ff80da99ebcf93544fc58029b777dc782fcd967569144bb66",
+      "bytes": 2424,
+      "lf_sha256": "e1c91368cffe0a84446de6facf916f433b0f3ff83c5b7a09ee33ba01e7dec46b"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/6f9c8bbfd53c549e021f/visual.json": {
+      "sha256": "09109e24eae62dfa4f8f023271e87b950b668357050b13cd4af7846ba8f4db82",
+      "bytes": 1012,
+      "lf_sha256": "0a5a305f82e665ee4d85409456561a21e657dd594a0ec71bd41abdc4e8b81b6d"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/a3a0702d79cc235356ad/visual.json": {
+      "sha256": "515ff26d60f56c155457e91e1ab88f99e3b20f136588a0c2af9152d0d472cf3f",
+      "bytes": 1024,
+      "lf_sha256": "409ebcca30815fd1d1fd9a6dcda8131ef3bca4ec7b057ba0b792f9949a43f8ff"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/a70b62aae9005134f140/visual.json": {
+      "sha256": "88b3c60de7bac279c2112d10a83cbf19b6eb2824db12b77c4eb9e6b6a17d136a",
+      "bytes": 997,
+      "lf_sha256": "c6d2fc58222985b8ab4766b089bd3548bd5eee3b854ce26d490f5467ca6ba5af"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/a8bf6c8687faaa409a83/visual.json": {
+      "sha256": "18f7f09d541c519dca439f15629c05a98b9e1f3484d302d9138756a745c60749",
+      "bytes": 1144,
+      "lf_sha256": "48def6f30e3d75a10e01b1fe25ea80f1cb7d4e11e4f8356cdfb4f19aeb421f31"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/b8db3c0b614b3b22017e/visual.json": {
+      "sha256": "3f1914d2d5645150c6750db5cc23224aa5bad3302b6fae0174315449ddcc1b99",
+      "bytes": 2858,
+      "lf_sha256": "f786432dd4518514d9bd0e7080d3ab99607539c9cce16792e9d198ae58a8f542"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/e3cd396434e6d0b9cfeb/visual.json": {
+      "sha256": "7ced4c0e559b433129e70af3856d4da2e3e3c1b5bd87d7cb0356682812ec7d5a",
+      "bytes": 1423,
+      "lf_sha256": "f202642451b93c3a21d358c149c271b3f3790c2624f647b41d3517626eed35de"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/ee52b22adeafb5ff782a/visual.json": {
+      "sha256": "fa82140dfd3efdabb432ecd9649590fc697c8f491616b6793014cfe339a3adb1",
+      "bytes": 2438,
+      "lf_sha256": "ef6eca37cac482195274a702c66028c576b17f6078b1ee323ed77d1510d1c618"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/1f75dde540a696f2b18f/visuals/ef62acc79fd7ff5b4300/visual.json": {
+      "sha256": "a54c6cdd32db6c2b5cd2f0f99b48b25b4775d0195135bbdac0acac0ae69ed60f",
+      "bytes": 3742,
+      "lf_sha256": "e1c7157101408fa74352fbcc9b21201a2686ab93bae0fd7993ef0ba827b2790c"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/page.json": {
+      "sha256": "96f010df099b585ab081c0e3ec1b03194c1c94acf08afed1c1cf7aefca43a20d",
+      "bytes": 371,
+      "lf_sha256": "2d61fbc84c2aba82e2df647474f90468fc12d2f4e859b4990fd0e0a408961c1c"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/083e0e977408b7b77e25/visual.json": {
+      "sha256": "2e1f13b98ce9da4f86250ac60eea3ab1b74d89558187bf0b068ad40686d6caa2",
+      "bytes": 1796,
+      "lf_sha256": "e6713bcccebb5f26d22478d3972e0e2e87cb30e47a549afebe14e3336d289af4"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/088f110a4410641b1bfe/visual.json": {
+      "sha256": "9a199fcf4331cf49151a0afc31e844bd74ff4e7ad2527b7afb549d8dbcadc084",
+      "bytes": 1235,
+      "lf_sha256": "8b89fb2f3ea10b09b81d63ecb46bb0ec709178ba7b19eb6780f4e129a9abf6b1"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/336a29971f332e9d13b5/visual.json": {
+      "sha256": "598fbe59fca272a5567b035dabe434a2f63ba324915e3f488104ec1c94b5b3b3",
+      "bytes": 5589,
+      "lf_sha256": "769b149bd2aee6277078bba8a726be90c282a788b87b575a69365380147a994f"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/4918a5438182182e7366/visual.json": {
+      "sha256": "3c776e306f813081d335803d07cc38e7fce217687f42f7059cb457b0c7a5c260",
+      "bytes": 1792,
+      "lf_sha256": "f3e5e8f29b242193ed005dd7c3949425680b13e565df318dfacb1065eb9b759b"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/6e99b63b683f7f32afc5/visual.json": {
+      "sha256": "3c071f69769146113639a467574810dd33a36455c7bafd003645933ef2dea15f",
+      "bytes": 1772,
+      "lf_sha256": "dc1ce7100c585059c9001c388e5cbf59ec3934d5c2ad4310d0f7f0efcb310f1a"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/95ecf72717c4513bb403/visual.json": {
+      "sha256": "5056ce3e1bdd06f6f46f26a174ffdd7f3e7ff84173ac713cf8e7c6ef4abbf0e2",
+      "bytes": 1837,
+      "lf_sha256": "89adae90600cf410801b627d1341590dfea44d05b5858917c3cc14401ad66266"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/cd5ebdf9a1788432a008/visual.json": {
+      "sha256": "d0619dec45d3380847e7de26ffce2ab83906eb634edebf706913f475c01a123a",
+      "bytes": 5724,
+      "lf_sha256": "c3c8f226a6838beacf91d51a91b0331643b31f78d3717f9fc5158455b55bca1b"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/d0c0fefbc13322e39715/visual.json": {
+      "sha256": "479943ac8e0504fc6fb422ae38b77a3b3a60d1a66b635593f55911cc46678b20",
+      "bytes": 4679,
+      "lf_sha256": "b1f222b8b3fdb9abaf38972dd0eb5872dac59110dc0cbe9484dbc396a705cff3"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/f424e0649cfa5a63e3e4/visual.json": {
+      "sha256": "ca68594541a512629e6c465ed551300aae6c901a9e854066d96cb5b065f4ad4f",
+      "bytes": 1780,
+      "lf_sha256": "6f40f8419b87808430c6a7f46170d4a0c5e1cb2c807661c807e5f0e2b5f2d072"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/5ee9939d0101076d3381/visuals/f8a724918a7b4078efb2/visual.json": {
+      "sha256": "d07acf220e64bf76d729cdc7e79233863d95bb6e4943b9c60176e7c734c1f581",
+      "bytes": 1827,
+      "lf_sha256": "c72cb97359c5fc9102092a9774c3f9b48135e7ad65aaff65cb9205fd3ea6686c"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/cb973d91eb46886907c2/page.json": {
+      "sha256": "339f0470183d8febbb0a1dcaae4387170d032e62180dbbbe56aa1a5801ac516e",
+      "bytes": 317,
+      "lf_sha256": "f0765d659d65013139e650c4ba1dc03a25a5230417cde99e18293150caaf86ea"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/cb973d91eb46886907c2/visuals/03951ab1962356ccac40/visual.json": {
+      "sha256": "105d159745a2d84a332ae58b8a2055d83c1fd30eea36a78c580264ba52bba07f",
+      "bytes": 1422,
+      "lf_sha256": "8a06895201fdb4a60d0c5fe896dfe3df7a8e0d5b7d7383af9395ace29f539aef"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/cb973d91eb46886907c2/visuals/1ef6592c790b6a70b47e/visual.json": {
+      "sha256": "ae7d3c7b8702d43eeb04f514d3f1058f24c94f857fe11efeeeebc73964cd5a69",
+      "bytes": 1967,
+      "lf_sha256": "bfc0de719ae6682c38bc44bbd53a467d543d4866d73937c0ee48b386c66a4a8f"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/cb973d91eb46886907c2/visuals/db044e4d0f622fcdb35e/visual.json": {
+      "sha256": "3a2274833172da5fb6f48da0e0f58f34ff6d5fe4a23b37a30057bbcbbcf24528",
+      "bytes": 1406,
+      "lf_sha256": "263c9d74e49b5553e0ea43354a19e38add4bdaf1545d95bcc67bd6c4f0b31acc"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/page.json": {
+      "sha256": "cd2e62c3a686267da251bc749c510e33a69471e6cb96312b7e3ddc7b7e7db6ca",
+      "bytes": 263,
+      "lf_sha256": "1cd7e2cc03ed923621f073d2c9956d29d99d933d8268785184ed7c34b8d50324"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/0da48ade3c8f1735058c/visual.json": {
+      "sha256": "1cea03427e0dccbef73ddd497382f9f32112a84906f0538e6545e19d4a6d977c",
+      "bytes": 3202,
+      "lf_sha256": "b9efb252a6f617ec5c924b1bd113784e0c0191b2b5227cd394c29c5e81484121"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/1c238d54b37d334dc3bb/visual.json": {
+      "sha256": "e6a5e825a7d69a4dfe752877fa24a1a593f51bb8ee8cbfd2ce28716b53c306ef",
+      "bytes": 1482,
+      "lf_sha256": "845fba58fc458456aabbccd25c65b0699727b236c38d8ed31a99c8212ed3883a"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/3088bd1ad4b64ad84a3b/visual.json": {
+      "sha256": "658ce168acd57f617a05a3ef359a4277b109e715d6837572ebe8e1d94c34cadb",
+      "bytes": 1445,
+      "lf_sha256": "8597c419d16b3d24856cacf3247657188094f535237272608834f7f632899704"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/3af756b17b6be98a9cb3/visual.json": {
+      "sha256": "38df779b6b0583633ba2ea760aea1bc88db18a89793d8aec68bc9f8ac3a2420a",
+      "bytes": 1778,
+      "lf_sha256": "00f0b1336966e38c5f7bb7007d60a587aa70f76a1fde7aabd13609429c10ab88"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/53f9fbf278a14f1de6b6/visual.json": {
+      "sha256": "8845d96ea6af6c13e32a149a5ebb8f49041c4b73bdebdcaa87db23debd497d7b",
+      "bytes": 9948,
+      "lf_sha256": "1760e3cd829451a0d480e6adbdbfdfe4b68643af8c0f19d9c70cb0fc3dee830a"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/81ee43977bb23d2c9a17/visual.json": {
+      "sha256": "d44fd3ff63d8d67dae8ba6830d53ce1a82eedaedf3714aed300b0af6d095a52a",
+      "bytes": 1402,
+      "lf_sha256": "8720279c524d742d4f775c79e9a5f38b24f186b3a0a865218d575eeb6a6c03e3"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/9813f84370458c85f853/visual.json": {
+      "sha256": "f87fc3b18aaf0f0e9fd3383b44304dedb0ccbf41f376270c1d428fa2d32961a9",
+      "bytes": 1013,
+      "lf_sha256": "cf75122647fbe9d5c0f54635141a9b4863444f4bcde5af2b544def120fff0bc4"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/f50491653678cb19a699/visuals/a9527e94aa26c9e7590f/visual.json": {
+      "sha256": "fa842b95987e4fb313cd76be543c271a6f48b62413ecf74d2f2072c50414a6b6",
+      "bytes": 1865,
+      "lf_sha256": "553aea2902ef49a1af10f207eb95ae0e6a49641e9116390f88ec169684b38535"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/pages/pages.json": {
+      "sha256": "1cb5417a41d2fd05f74eaee237bd7d72f988c7f47206e3f6db2b75d9caba62bb",
+      "bytes": 311,
+      "lf_sha256": "cf6b357c971061039c6460a8960215c7bdcb8030f867cdbc20e93010c7fa8abb"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/report.json": {
+      "sha256": "d3f75aa6355ed00f86ade6eeb19dda015021d31a08fc5a902988ac82b4ff11b9",
+      "bytes": 1411,
+      "lf_sha256": "3700d8dfdbd5af647e3a4bcb2d2b0cd0b9c4825766dab2a9d6f3dc0c879720b8"
+    },
+    "powerbi/project/steel-plates-quality-bi.Report/definition/version.json": {
+      "sha256": "c8bdd966a85f1eaab4312d2096b6d7b508243e4d7bc5a4d25af3cfcb1056a4e7",
+      "bytes": 152,
+      "lf_sha256": "32bc72b8e7996a054f96e655c8dd8fda82e5f502532610b45bc21a18cffe30b6"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/.pbi/editorSettings.json": {
+      "sha256": "393700c0f9b19178fa6d6bcf38d8f539c22cb11b957b8436432a1732cd8d9dfa",
+      "bytes": 251,
+      "lf_sha256": "56c3c16b12ce76484e44ec879f4a51bdfc13b3668419fdf19f4601132d3c6ffe"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/.platform": {
+      "sha256": "6f16b0ddbdf48d011872a7ef59e5c46ecb54f58f93c2bcbac1323151ae8ee311",
+      "bytes": 324,
+      "lf_sha256": "b654c065889b1e7cbefa519833e2a882bf90904130f86baf96a00673d24da93b"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition.pbism": {
+      "sha256": "ed99ec078efd2ff27fc1c65cc97902138d7d3c438acdb7770ae37dc71c7f06c8",
+      "bytes": 43,
+      "lf_sha256": "00dc543752fb328e18e9967a25d0b39f5aecef9179ae94e4ed15eb7e078c7944"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/cultures/es-ES.tmdl": {
+      "sha256": "b26fea5546a7edf8221c650e16333ffbc87c48c478770232196f0614b1c5aa03",
+      "bytes": 21,
+      "lf_sha256": "1f5b7407bbb3a60fd61710593e9f9f354f3009ffe1df1ab358ef1650b1756ef5"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/database.tmdl": {
+      "sha256": "822c914b643bca32bb20abd8a762df8204a1b9ef02acc2bc7348727f6699cb96",
+      "bytes": 39,
+      "lf_sha256": "05e6e4d3963c40921d429c883e83714a9dd42aeadbb8470e671a6b38dbb34872"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/expressions.tmdl": {
+      "sha256": "345b889b90d13bb9e6944d2ebae26a94cd2fe7b36d8eb0c4b01850780c07dffb",
+      "bytes": 1003,
+      "lf_sha256": "49fed648fa88b4ad1ee46c7cef654432471a117c02dc85d9e8903c45a77277d0"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/model.tmdl": {
+      "sha256": "1f8e67f9afe3a83f24f11415838116e1a8bede96528cd85b38637f21769ee636",
+      "bytes": 623,
+      "lf_sha256": "5b510b301d8ef3a26c7287e65cc54406b2b960d685f8fdeb4e9b8f45fe1b7f59"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/relationships.tmdl": {
+      "sha256": "1a08c0b43e7db967543890475b789362c26958330f2b455dd43c3ba0b1f95274",
+      "bytes": 439,
+      "lf_sha256": "df316433fc6cd184d6ddd22011918ac69546275661a62e3883c8bf3e72af66f2"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/tables/Dim_Acero.tmdl": {
+      "sha256": "81525f3b0749ce8662668cea485b4a16cf815adeabaf6c4c1d1a95206188ea91",
+      "bytes": 1540,
+      "lf_sha256": "509d79d9b54c462b286b94c3245d9a0c49895c8a78ffbf09768e25bf232a1e66"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/tables/Dim_BandaTamano.tmdl": {
+      "sha256": "ff63ab9f2634dcbf5e3cc3e0ac4f9678f9c9dc7016d94b76a7f95f01f0812359",
+      "bytes": 1375,
+      "lf_sha256": "f6062c21fd825a9dfb632382f88a3d2529a5252e3122d4c7a2d293f5e0e79395"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/tables/Dim_TipoDefecto.tmdl": {
+      "sha256": "46f97a3d89dce73da344c7a6b67b1a170f7e370c1823ecd82ac30c3ecc9718c4",
+      "bytes": 2110,
+      "lf_sha256": "1389e79fadfa16bd2a46d1bfa6c282d30299283ef18bd37aa96e0d5eea0c8f7a"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/tables/Fact_Defecto.tmdl": {
+      "sha256": "9d6acd9e3f80876fd542253e67815f0f4782ed3c96f7c822ac871f22299dac50",
+      "bytes": 6211,
+      "lf_sha256": "031b3a179fe0bed6ff2d92daaf6774f3c599b92fbe54858563141f7dd9da08de"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/tables/Param_Especificacion.tmdl": {
+      "sha256": "e6a5ea7a7c8830103368709dd605e00c4a1b4211be670bbd9862af9d8428ff73",
+      "bytes": 577,
+      "lf_sha256": "3ad124598056072ddfe32a2353fa15b8d413cdd2a910aa11d0a7b8c40d877669"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/definition/tables/_Medidas.tmdl": {
+      "sha256": "8482dc2fe58c3c29686588b2850708d626a885a152ffd3a4e5f15cb4dbe07d9b",
+      "bytes": 5984,
+      "lf_sha256": "87a9562427164abebdb8fa911f841444c7df1bac8567e2fc11d43e77c0405f59"
+    },
+    "powerbi/project/steel-plates-quality-bi.SemanticModel/diagramLayout.json": {
+      "sha256": "fb34ee8136732dce5f536e47514d4421b8cfb43dea2febec7531b4697bcc8d8a",
+      "bytes": 2588,
+      "lf_sha256": "2ce441a01634b0c0e0b64818a27ee1b1d46afd4bc53002ef640423e228e81798"
+    },
+    "powerbi/project/steel-plates-quality-bi.pbip": {
+      "sha256": "343a455fa0dd01f26d6196f213808b13b90ed333e001ee468c6afed782ee77f7",
+      "bytes": 195,
+      "lf_sha256": "edef13b31f0e4ad4d7d69e6e49480a2ce999d9c12d94b5a3d81e18092ab530ff"
+    },
+    "powerbi/theme.json": {
+      "sha256": "4e8cf132c12ce5ddcc4f197fe04ca2ef5f045869233050b26c3fe504652e7399",
+      "bytes": 549,
+      "lf_sha256": "89165eeec3981c6813a7d53ed27286ecbe288ca14809303a68163caada8648d0"
+    }
+  }
+}

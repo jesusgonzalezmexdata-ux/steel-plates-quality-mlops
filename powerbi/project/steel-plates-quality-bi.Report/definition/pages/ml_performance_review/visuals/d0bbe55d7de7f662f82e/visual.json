@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "d0bbe55d7de7f662f82e",
+  "position": {
+    "x": 20,
+    "y": 430,
+    "width": 600,
+    "height": 250,
+    "z": 8,
+    "tabOrder": 8
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "actual_defect"
+                }
+              },
+              "queryRef": "ML_Holdout.actual_defect",
+              "nativeQueryRef": "actual_defect"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "predicted_defect"
+                }
+              },
+              "queryRef": "ML_Holdout.predicted_defect",
+              "nativeQueryRef": "predicted_defect"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "ML Confusion Errors"
+                }
+              },
+              "queryRef": "ML_Holdout.ML Confusion Errors",
+              "nativeQueryRef": "ML Confusion Errors"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

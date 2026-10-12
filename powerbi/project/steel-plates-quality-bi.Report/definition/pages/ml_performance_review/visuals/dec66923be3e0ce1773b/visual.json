@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "dec66923be3e0ce1773b",
+  "position": {
+    "x": 20,
+    "y": 10,
+    "width": 1240,
+    "height": 95,
+    "z": 0,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "FINAL HOLDOUT: 389 known-defect observations. Full-observation classification. Review is a development-only candidate, applied post-hoc: confidence >=0.80 high; 0.50-0.80 review; <0.50 low (also review). Final scores always refer to all 389 rows; other visuals follow ML filters. Small segments are descriptive; no prospective validation.",
+                    "textStyle": {
+                      "fontFamily": "Verdana",
+                      "fontStyle": "normal",
+                      "fontSize": "14px",
+                      "color": "#d8d8d8"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

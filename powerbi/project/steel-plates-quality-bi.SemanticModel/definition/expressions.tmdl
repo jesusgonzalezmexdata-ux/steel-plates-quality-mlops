@@ -22,3 +22,12 @@ expression RutaCSV = "C:\\Users\\Lowo\\Downloads\\steel-plates-quality-bi-main\\
 
 	annotation PBI_ResultType = Text
 
+
+expression RutaMLCSV =
+		let
+		    Normalized = Text.Replace(Text.Trim(RutaCSV), "\", "/"),
+		    Root = if Text.Contains(Normalized, "/data/raw/") then Text.BeforeDelimiter(Normalized, "/data/raw/")
+		        else error "Set RutaCSV to this repository data/raw/steel_plates_faults.csv",
+		    Result = Root & "/powerbi/data/ml_holdout_evaluation.csv"
+		in
+		    Result

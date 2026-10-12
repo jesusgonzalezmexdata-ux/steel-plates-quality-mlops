@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.11.0/schema.json",
+  "name": "9a92b3499d88046e9e2d",
+  "position": {
+    "x": 20,
+    "y": 240,
+    "width": 395,
+    "height": 170,
+    "z": 5,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "listSlicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "ML_Holdout"
+                    }
+                  },
+                  "Property": "steel_type"
+                }
+              },
+              "queryRef": "ML_Holdout.steel_type",
+              "nativeQueryRef": "steel_type"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
