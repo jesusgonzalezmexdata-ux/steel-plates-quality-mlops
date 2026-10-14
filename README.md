@@ -62,8 +62,8 @@ Hallazgos descriptivos (con **costos ilustrativos**, no ahorros demostrados): tr
 Requiere Python 3.13 (entorno registrado: 3.13.7) y Git LFS.
 
 ```bash
-git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops.git
-cd steel-plates-quality-mlops
+git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-.git
+cd steel-plates-quality-mlops-
 git lfs pull
 python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate
@@ -76,6 +76,16 @@ python -B -m tools.project_checks validate-evidence   # exportación Power BI vs
 python -B -m pytest -q                                # suite completa (~10 min: incluye replays)
 streamlit run streamlit_app.py                        # tablero equivalente en Streamlit
 ```
+
+Contrato de datos en SQL (dbt + DuckDB), conciliado contra la auditoría de Python:
+
+```bash
+pip install -r requirements-dbt.txt
+python -B -m tools.data_contract        # dbt build (56 checks) + conciliación fila a fila con pandas
+python -B -m pytest -q tests/test_data_contract.py   # incluye 5 corrupciones que deben fallar
+```
+
+El contrato fija nombres y tipos de las 35 columnas (`contract: enforced`), unicidad de `id`, nulos, one-hot exclusivo de clase y de acero, distribución exacta por clase, filas = 1,941, coherencia geométrica y rangos de los índices normalizados ([`dbt/`](dbt/)).
 
 Con Docker (mismo sistema operativo y dependencias en cualquier equipo; no requiere Python local):
 

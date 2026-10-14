@@ -29,6 +29,7 @@ Files are linked, not duplicated.
 | Power BI export and reconciliation | [powerbi_ml_reconciliation](powerbi_ml_reconciliation.md), [ml_holdout_evaluation.csv](../../powerbi/data/ml_holdout_evaluation.csv) | [test_bi_integration](../../tests/test_bi_integration.py); `validate-evidence` |
 | Power BI Desktop runtime | [powerbi_runtime_handoff](powerbi_runtime_handoff.md) | Manual: `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED` |
 | Power BI preservation baseline | [pre_ml_powerbi_hashes.json](pre_ml_powerbi_hashes.json) | [test_bi_integration](../../tests/test_bi_integration.py) |
+| SQL data contract (dbt + DuckDB) | [dbt/](../../dbt/), [data_contract.py](../../tools/data_contract.py) | [test_data_contract](../../tests/test_data_contract.py); `data-contract` job in [CI](../../.github/workflows/ci.yml) |
 | Containerized reproduction | [Dockerfile](../../Dockerfile), [.dockerignore](../../.dockerignore) | `docker` job in [CI](../../.github/workflows/ci.yml) |
 | Reproducibility (clean clone) | [PROJECT_EXECUTION_STATE](../PROJECT_EXECUTION_STATE.md) §Phase 11 | [CI](../../.github/workflows/ci.yml) |
 | Execution ledger and checkpoints | [PROJECT_EXECUTION_STATE](../PROJECT_EXECUTION_STATE.md) | — |

@@ -1,0 +1,7 @@
+steel_quality:
+  target: contract
+  outputs:
+    contract:
+      type: duckdb
+      path: "{{ env_var('STEEL_DUCKDB_PATH', 'target/contract.duckdb') }}"
+      threads: 1

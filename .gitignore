@@ -5,3 +5,8 @@ __pycache__/
 # Power BI: configuracion local y cache, conservadas en disco
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
+
+# dbt local outputs
+dbt/target/
+dbt/logs/
+dbt/.user.yml

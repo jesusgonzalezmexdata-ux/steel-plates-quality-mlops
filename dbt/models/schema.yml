@@ -1,0 +1,207 @@
+version: 2
+
+models:
+  - name: stg_steel_plates
+    description: Raw Steel Plates Faults CSV (UCI), 1,941 defective plates, 35 columns.
+
+  - name: plate_defects
+    description: Data contract for the modelling table; column names and types are enforced.
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: id
+        data_type: bigint
+        data_tests:
+          - not_null
+          - unique
+      - name: X_Minimum
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: X_Maximum
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Y_Minimum
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Y_Maximum
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Pixels_Areas
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: X_Perimeter
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Y_Perimeter
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Sum_of_Luminosity
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Minimum_of_Luminosity
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Maximum_of_Luminosity
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Length_of_Conveyer
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: TypeOfSteel_A300
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: TypeOfSteel_A400
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: Steel_Plate_Thickness
+        data_type: bigint
+        data_tests:
+          - not_null
+      - name: Edges_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Empty_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Square_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Outside_X_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Edges_X_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Edges_Y_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Outside_Global_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: LogOfAreas
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Log_X_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Log_Y_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Orientation_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Luminosity_Index
+        data_type: double
+        data_tests:
+          - not_null
+      - name: SigmoidOfAreas
+        data_type: double
+        data_tests:
+          - not_null
+      - name: Pastry
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: Z_Scratch
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: K_Scatch
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: Stains
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: Dirtiness
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: Bumps
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: Other_Faults
+        data_type: bigint
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [0, 1]
+                quote: false
+      - name: target_sum
+        data_type: bigint
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1]
+                quote: false
+      - name: defect_class
+        data_type: varchar
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [Pastry, Z_Scratch, K_Scatch, Stains, Dirtiness, Bumps, Other_Faults]
+
+seeds:
+  - name: expected_class_counts
+    description: Known class distribution of the source dataset (UCI documentation).
