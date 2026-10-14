@@ -58,6 +58,8 @@ def test_cases_follow_extremes_and_deterministic_row_id_tie_break(phase9_run):
 
 def test_figures_reproduce_byte_for_byte(phase9_run, tmp_path):
     from pathlib import Path
+    import sys
+    from matplotlib.image import imread
     from quality_ml.evaluation.__main__ import render_figures
     from quality_ml.evaluation.protocol import file_hash
     root = Path(__file__).resolve().parents[1]
@@ -66,4 +68,9 @@ def test_figures_reproduce_byte_for_byte(phase9_run, tmp_path):
     render_figures(tmp_path, phase9_run[0], phase9_run[2])
     for name in ("error_analysis/confusion_matrix.png", "uncertainty/reliability.png",
                  "interpretability/feature_importance.png"):
-        assert file_hash(tmp_path / name) == file_hash(root / "reports/ml" / name)
+        # PNG zlib bytes depend on the encoding platform; decoded pixels must be
+        # identical everywhere and bytes identical on the recording platform.
+        rendered, stored = imread(tmp_path / name), imread(root / "reports/ml" / name)
+        assert rendered.shape == stored.shape and np.array_equal(rendered, stored)
+        if sys.platform == "win32":
+            assert file_hash(tmp_path / name) == file_hash(root / "reports/ml" / name)

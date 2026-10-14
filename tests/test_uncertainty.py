@@ -131,6 +131,22 @@ def test_multiclass_brier_and_ece_known_probabilities():
     assert uncertainty.calibration_metrics(wrong, "SYNTHETIC")["multiclass_brier_score"] == 2
 
 
+def assert_json_close(actual, expected):
+    """Exact structure and non-float values; floats within the frozen ATOL (libm ULPs)."""
+    if isinstance(expected, float) and isinstance(actual, (int, float)):
+        assert abs(actual - expected) <= protocol.ATOL
+    elif isinstance(expected, dict):
+        assert isinstance(actual, dict) and actual.keys() == expected.keys()
+        for key in expected:
+            assert_json_close(actual[key], expected[key])
+    elif isinstance(expected, list):
+        assert isinstance(actual, list) and len(actual) == len(expected)
+        for a, e in zip(actual, expected):
+            assert_json_close(a, e)
+    else:
+        assert actual == expected and type(actual) is type(expected)
+
+
 def test_complete_numeric_replay_matches_persisted_artifacts(phase9_run):
     frames, docs, _ = phase9_run
     high = frames["error_analysis/high_confidence_errors.csv"]
@@ -142,4 +158,4 @@ def test_complete_numeric_replay_matches_persisted_artifacts(phase9_run):
                                       rtol=0, atol=protocol.ATOL)
     for name, value in docs.items():
         saved = json.loads((ROOT / "reports/ml" / name).read_text(encoding="utf-8"))
-        assert json.loads(json.dumps(value)) == saved
+        assert_json_close(json.loads(json.dumps(value)), saved)

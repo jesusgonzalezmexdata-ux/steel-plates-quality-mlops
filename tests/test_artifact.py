@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import sys
 
+import joblib
 import numpy as np
 import pandas as pd
 import pytest
@@ -60,10 +61,25 @@ def test_training_only_reconstruction_and_determinism(isolated, monkeypatch):
     monkeypatch.setattr(RandomForestClassifier, "fit", fit)
     monkeypatch.setattr(RandomForestClassifier, "predict_proba", predict)
     first = artifact.build_artifact(isolated, git_sha=expected["git_sha"])
+    rebuilt = joblib.load(isolated / artifact.MODEL_PATH)
     second = artifact.build_artifact(isolated, git_sha=expected["git_sha"])
-    assert first == second == expected
+    assert first == second
     assert fits == [1552, 1552] and predictions
-    assert file_hash(isolated / artifact.MODEL_PATH) == expected["model_artifact_sha256"]
+    # Pickle stream bytes depend on the serializing platform; the frozen artifact
+    # was serialized on Windows. Everywhere, the rebuilt forest must be identical
+    # to the committed one; byte identity is asserted on the recording platform.
+    sha = "model_artifact_sha256"
+    assert {k: v for k, v in first.items() if k != sha} == {
+        k: v for k, v in expected.items() if k != sha}
+    committed, _ = artifact.load_artifact(ROOT)
+    assert len(committed.estimators_) == len(rebuilt.estimators_) == 300
+    for a, b in zip(committed.estimators_, rebuilt.estimators_):
+        for field in ("children_left", "children_right", "feature", "threshold",
+                      "value", "n_node_samples", "weighted_n_node_samples"):
+            assert np.array_equal(getattr(a.tree_, field), getattr(b.tree_, field))
+    if sys.platform == "win32":
+        assert first[sha] == expected[sha]
+        assert file_hash(isolated / artifact.MODEL_PATH) == expected[sha]
 
 
 def test_artifact_lineage_and_native_reconstruction():
