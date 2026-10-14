@@ -1,0 +1,15 @@
+steel-plates-quality-mlops
+Copyright 2026 Jesus R. L. Gonzalez
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This repository redistributes, unmodified, the Steel Plates Faults dataset
+(data/raw/steel_plates_faults.csv) from the UCI Machine Learning Repository:
+
+  Buscema, M., Terzi, S., & Tastle, W. (2010). Steel Plates Faults [Dataset].
+  UCI Machine Learning Repository. https://doi.org/10.24432/C5J88N
+
+The dataset is licensed under the Creative Commons Attribution 4.0
+International license (CC BY 4.0), https://creativecommons.org/licenses/by/4.0/.
+The Apache License does not apply to the dataset. Files derived from it
+(data/model/, reports/, powerbi/data/) remain subject to its attribution terms.

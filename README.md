@@ -134,4 +134,8 @@ Carga el modelo solo desde un checkout de confianza: joblib/pickle ejecuta códi
 
 **Jesús R. L. González** · Analista y Científico de Datos · Operaciones y Calidad en manufactura · [LinkedIn](https://www.linkedin.com/in/jesus-r-l-gonzalez)
 
-*Datos: Steel Plates Faults, UCI Machine Learning Repository (Semeion). Revisa su licencia y cita en la página del dataset.*
+## Licencia y cita
+
+- **Código y documentación:** [Apache License 2.0](LICENSE). Ver [NOTICE](NOTICE).
+- **Dataset:** Buscema, M., Terzi, S., & Tastle, W. (2010). *Steel Plates Faults* [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5J88N — licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); la licencia Apache no se aplica a los datos.
+- **Citar este repositorio:** usa el botón *Cite this repository* de GitHub ([CITATION.cff](CITATION.cff)). Historial de versiones en [CHANGELOG](CHANGELOG.md).

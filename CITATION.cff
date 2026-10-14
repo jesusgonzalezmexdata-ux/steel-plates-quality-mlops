@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software or its evidence, please cite it as below."
+title: "steel-plates-quality-mlops: reproducible quality-intelligence case for steel-plate defect classification"
+type: software
+authors:
+  - family-names: "Gonzalez"
+    given-names: "Jesus R. L."
+license: Apache-2.0
+version: "1.2.1"
+date-released: "2026-10-14"
+repository-code: "https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-"
+keywords:
+  - quality intelligence
+  - multiclass classification
+  - model validation
+  - reproducibility
+  - data contract
+  - power bi
+references:
+  - type: data
+    title: "Steel Plates Faults"
+    authors:
+      - family-names: "Buscema"
+        given-names: "M."
+      - family-names: "Terzi"
+        given-names: "S."
+      - family-names: "Tastle"
+        given-names: "W."
+    year: 2010
+    publisher:
+      name: "UCI Machine Learning Repository"
+    doi: "10.24432/C5J88N"
+    license: CC-BY-4.0

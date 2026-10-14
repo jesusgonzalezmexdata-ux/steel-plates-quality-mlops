@@ -1,12 +1,16 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "steel-plates-quality-mlops"
-version = "0.1.0"
+version = "1.2.1"
 description = "Full-observation steel defect classification and reproducible evidence"
 requires-python = ">=3.13,<3.14"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Jesus R. L. Gonzalez" }]
+readme = "README.md"
 dynamic = ["dependencies"]
 
 [tool.setuptools.dynamic]
