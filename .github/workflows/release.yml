@@ -1,0 +1,46 @@
+name: Release assets
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing release tag to (re)attach assets to"
+        required: true
+permissions:
+  contents: write
+jobs:
+  assets:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13.7"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - name: Check that this release has the ONNX tooling
+        id: tooling
+        run: |
+          if [ -f tools/export_onnx.py ]; then echo "onnx=true" >> "$GITHUB_OUTPUT"; else echo "onnx=false" >> "$GITHUB_OUTPUT"; fi
+      - name: Export and verify ONNX (byte-identical to the recorded SHA256)
+        if: steps.tooling.outputs.onnx == 'true'
+        run: |
+          pip install -r requirements-onnx.txt
+          python -B -m tools.export_onnx --check
+      - name: Collect assets and checksums
+        run: |
+          mkdir dist
+          cp artifacts/manifest.json MODEL_CARD.md dist/
+          if [ "${{ steps.tooling.outputs.onnx }}" = "true" ]; then
+            cp artifacts/onnx/final_random_forest.onnx reports/onnx/verification.json dist/
+          fi
+          (cd dist && sha256sum * > SHA256SUMS)
+          cat dist/SHA256SUMS
+      - name: Upload to the release
+        run: gh release upload "$TAG" dist/* --clobber

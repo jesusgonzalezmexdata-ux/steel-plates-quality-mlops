@@ -1,0 +1,7 @@
+# Every change is reviewed by the maintainer; frozen scientific evidence is listed explicitly.
+*                                @jesusgonzalezmexdata-ux
+/artifacts/                      @jesusgonzalezmexdata-ux
+/reports/ml/final_holdout/       @jesusgonzalezmexdata-ux
+/data/raw/                       @jesusgonzalezmexdata-ux
+/src/quality_ml/models/          @jesusgonzalezmexdata-ux
+/.github/workflows/              @jesusgonzalezmexdata-ux

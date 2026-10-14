@@ -10,9 +10,13 @@ the consumed holdout have not changed since v1.0.0.
 - `steel-predict` command installable with `pip install .`.
 - English README as the main entry point; Spanish version in `README.es.md`.
 - Packaging tests (entry point, version consistency, license metadata, pinned dependencies).
+- Community and governance: `CONTRIBUTING.md` with scientific-integrity rules, `CODE_OF_CONDUCT.md` (Contributor Covenant 2.1), `SECURITY.md` (pickle risk and private reporting), `CODEOWNERS`.
+- Issue forms for bugs, data-quality findings and pre-registered experiment proposals; pull-request checklist that protects the frozen model and the consumed holdout.
+- Automation: Dependabot (frozen scientific packages excluded), CodeQL code scanning, label sync, and a release workflow that attaches the verified ONNX model, manifest, Model Card and SHA256SUMS to every published release.
 
 ### Changed
 - `streamlit` and `plotly` pinned to the versions validated in CI.
+- CI runs on pull requests, on `main`, weekly and on demand, with concurrency control and read-only permissions.
 
 ## [1.2.1] - 2026-10-14
 

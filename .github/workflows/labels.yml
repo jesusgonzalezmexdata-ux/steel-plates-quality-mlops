@@ -1,0 +1,24 @@
+name: Labels
+on:
+  push:
+    branches: [main]
+    paths: [".github/labels.yml"]
+  workflow_dispatch:
+permissions:
+  issues: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create or update labels from .github/labels.yml
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          pip install --quiet pyyaml
+          python3 - <<'PY'
+          import subprocess, yaml
+          for label in yaml.safe_load(open(".github/labels.yml")):
+              subprocess.run(["gh", "label", "create", label["name"], "--color", label["color"],
+                              "--description", label["description"], "--force"], check=True)
+          PY
