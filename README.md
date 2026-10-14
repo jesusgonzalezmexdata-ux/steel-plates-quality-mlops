@@ -1,132 +1,107 @@
-# Inteligencia de manufactura: defectos en placas de acero
+# Inteligencia de calidad: clasificación de defectos en placas de acero
 
-> **Closeout status — Phase 10:** the frozen Random Forest and batch inference are available.
-> Final holdout macro-F1: **0.8146728102**; balanced accuracy: **0.8048726800**.
-> This is FULL_OBSERVATION classification of known defects, not early prediction.
-> The ML Power BI page is a text draft; Desktop refresh/render/save remain pending.
-> See [commands and lineage](docs/ml/09_model_lineage_and_batch_inference.md),
-> [reconciliation](docs/evidence/powerbi_ml_reconciliation.md) and the
-> [required Desktop handoff](docs/evidence/powerbi_runtime_handoff.md).
-> Phase 11 final presentation and clean-clone closeout have not started.
+**Un problema industrial de calidad convertido en evidencia medible: contrato de datos, validación científica, un modelo evaluado una sola vez sobre un holdout independiente, análisis de errores y apoyo a la decisión en Power BI, todo reproducible desde este repositorio.**
 
+## En un minuto
 
-**Un sistema de decisión para calidad: qué defectos contener, a cuáles buscarles causa raíz y qué tan confiable es cada conclusión.**
+| | |
+|---|---|
+| **Problema** | Un área de calidad necesita saber qué tipo de defecto tiene cada placa ya inspeccionada, dónde se equivoca la clasificación y qué casos merecen revisión humana. |
+| **Datos** | *Steel Plates Faults* (UCI): 1,941 placas, **todas con defecto**, 27 medidas por placa y 7 tipos de defecto. Sin fechas, máquinas, turnos ni proveedores. |
+| **Qué predice el modelo** | Dadas las medidas de una placa **ya caracterizada como defectuosa**, el tipo de defecto entre 7 clases (`FULL_OBSERVATION_CLASSIFICATION_ONLY`). |
+| **Qué NO predice** | Si una placa tendrá defecto, el defecto antes de que ocurra, ni sus causas. No es mantenimiento predictivo ni un sistema en producción (`EARLY_PREDICTION_SUPPORTED = FALSE`). |
+| **Modelo final** | Random Forest congelado (300 árboles, `class_weight="balanced"`, `random_state=42`), elegido solo con validación cruzada. |
+| **Resultado en holdout** | 389 placas nunca usadas para decidir: **macro-F1 0.815**, balanced accuracy 0.805, log-loss 0.689. CV de desarrollo: macro-F1 0.801 ± 0.028. |
+| **Rol de Power BI** | Capa de *quality intelligence*: distribución de defectos, COPQ con costos supuestos, carta por grupos, Cpk de referencia y una página de desempeño del modelo y revisión. |
+| **Evidencia** | [Model Card](MODEL_CARD.md) · [Evidence pack](docs/evidence/README.md) · [manifest del modelo](artifacts/manifest.json) |
 
-Power BI (DAX, Power Query M) · Python (pandas) · SQL (DuckDB) · Streamlit · control estadístico · COPQ · ISO 9001
+## Del problema a la evidencia
 
-> **Datos reales, con límites claros.** Usa *Steel Plates Faults* de UCI: 1,941 placas **con defecto**. No trae placas buenas, fechas, máquinas, turnos ni costos. Por eso: el COPQ usa costos **supuestos** editables, la carta compara **grupos** (no es una carta en el tiempo) y el límite de especificación del tamaño de defecto es **supuesto**. Nada de eso se inventó sobre el dato: está rotulado donde aparece.
+1. **Formulación medible.** Contrato del problema y política de features: 27 medidas, sin `id` ni columnas objetivo ([contrato](docs/ml/02_problem_contract.md), [auditoría de fuga](docs/ml/03_leakage_audit.md)).
+2. **Validación científica.** Split estratificado 1,552 / 389; `StratifiedKFold(5, shuffle=True, random_state=42)` solo sobre entrenamiento; baseline → candidatos → ajuste controlado → selección ([04](docs/ml/04_baseline_evaluation.md)–[06](docs/ml/06_tuning_and_selection.md)).
+3. **Evaluación independiente.** El modelo congelado se evaluó **una vez** en el holdout. Sin ajuste posterior, sin comparar alternativas en holdout, sin calibrar ([07](docs/ml/07_final_holdout_evaluation.md)).
+4. **Errores e incertidumbre.** 82 errores de 389; la confusión Abolladuras ↔ Otros defectos explica 36. Pastry es la clase más débil (F1 0.60). Las probabilidades no están calibradas ([08](docs/ml/08_error_uncertainty_interpretability.md)).
+5. **Apoyo a la decisión.** Política candidata de revisión (solo desarrollo): confianza ≥ 0.80 se acepta, el resto va a revisión. Aplicada *post hoc* al holdout envía 261 casos a revisión, que contienen 81 de los 82 errores. No es un umbral validado para operación.
+6. **Reproducibilidad.** Artefacto del modelo con huellas SHA256 de datos, split, features y configuración; inferencia por lotes con validación estricta de esquema; CI ([09](docs/ml/09_model_lineage_and_batch_inference.md)).
 
-## La decisión que habilita
+### Desempeño por clase (holdout)
 
-Un gerente de calidad con presupuesto limitado necesita saber dónde actuar primero. El tablero convierte los datos en una regla con umbrales y cita la cláusula de ISO 9001:2015 que respalda cada acción:
+| Clase | Precisión | Recall | F1 | n |
+|---|---:|---:|---:|---:|
+| Pastry | 0.571 | 0.625 | 0.597 | 32 |
+| Z_Scratch | 0.971 | 0.868 | 0.917 | 38 |
+| K_Scatch | 0.973 | 0.910 | 0.940 | 78 |
+| Stains | 0.923 | 0.857 | 0.889 | 14 |
+| Dirtiness | 0.909 | 0.909 | 0.909 | 11 |
+| Bumps | 0.714 | 0.679 | 0.696 | 81 |
+| Other_Faults | 0.726 | 0.785 | 0.754 | 135 |
+
+Stains y Dirtiness tienen muy poco soporte: no permiten conclusiones estables.
+
+## Capa de quality intelligence (Power BI y Streamlit)
+
+El tablero responde dónde actuar primero con un presupuesto limitado, con umbrales de gestión **supuestos** y la cláusula ISO 9001:2015 que respalda cada acción:
 
 | Señal | Umbral (supuesto de gestión) | Acción | ISO 9001:2015 |
 |---|---|---|---|
-| ≥ 10 % de las placas con defecto mayor a 500 px² | `UMBRAL_FUERA_USL_PCT` | Contener: segregar e inspeccionar al 100 % | 8.7 Control de salidas no conformes |
-| Un tipo pesa ≥ 20 % del COPQ | `UMBRAL_COPQ_PCT` | Análisis de causa raíz y acción correctiva | 10.2 No conformidad y acción correctiva |
-| Cpk < 1.00 sin otra señal | Referencia, no criterio único | Vigilar y evaluar | 9.1.3 Análisis y evaluación |
+| ≥ 10 % de las placas con defecto mayor a 500 px² | `UMBRAL_FUERA_USL_PCT` | Contener: segregar e inspeccionar al 100 % | 8.7 |
+| Un tipo pesa ≥ 20 % del COPQ | `UMBRAL_COPQ_PCT` | Análisis de causa raíz y acción correctiva | 10.2 |
+| Cpk < 1.00 sin otra señal | Referencia, no criterio único | Vigilar y evaluar | 9.1.3 |
 
-Los umbrales viven en `qbi/config.py` y en `powerbi/dax/measures.dax` (`Accion Recomendada`).
+Hallazgos descriptivos (con **costos ilustrativos**, no ahorros demostrados): tres tipos concentran el 77.7 % del COPQ supuesto; el rayón en K es 267 de los 289 defectos ≥ 5,000 px² y está casi confinado al acero A400 y al espesor 40 (710 de 1,941 placas). Cada conclusión se sometió a [pruebas de estrés](docs/pruebas_de_estres.md): el trío de mayor costo resiste en 99 % de 2,000 simulaciones, pero el primer lugar no.
 
 ![Tablero: decisiones por tipo de defecto](reports/figures/decisiones.png)
 
-## Resumen ejecutivo
+- Proyecto PBIP en [`powerbi/project/`](powerbi/project/) y PBIX en [`powerbi/artifacts/`](powerbi/artifacts/) (Git LFS: ejecuta `git lfs pull` tras clonar).
+- La página *MODEL PERFORMANCE & REVIEW* y la tabla `ML_Holdout` se reconciliaron contra Python (389 filas, 307 aciertos, 82 errores, 261 a revisión) solo a nivel de exportación: [reconciliación](docs/evidence/powerbi_ml_reconciliation.md).
+- **La validación en Power BI Desktop está pendiente** (abrir, refrescar, renderizar y guardar): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Pasos exactos en el [handoff](docs/evidence/powerbi_runtime_handoff.md). El PBIX publicado aún no contiene la página ML.
+- El parámetro `RutaCSV` del PBIP guarda la ruta del equipo original; ajústalo en Desktop a `data/raw/steel_plates_faults.csv` de tu clon.
 
-**Con costos ilustrativos, los defectos suman 2.24 millones de MXN. Tres tipos concentran el 78 % del costo, y el rayón en K es el que más daña: 20 % de las placas, pero 267 de los 289 defectos grandes (≥ 5,000 px²).**
+## Cómo reproducir
 
-| Hallazgo | Evidencia |
-|---|---|
-| El costo se concentra en pocos tipos | Otros defectos, rayón en K y abolladuras suman 77.7 % del COPQ supuesto |
-| El rayón en K es el defecto grande | Área mediana 6,281 px² frente a 16–209 px² de los demás; es el 92 % de los defectos ≥ 5,000 px² |
-| Está confinado a un acero y un espesor | 99.7 % en acero A400 y 99 % en espesor 40 |
-| El espesor 40 pesa 42 % del COPQ | 710 de 1,941 placas |
-| Solo las manchas están dentro de umbrales | 0 % de las placas supera 500 px²; las demás activan contención, causa raíz o ambas |
-
-![Tablero: carta de medias](reports/figures/tablero.png)
-
-## Qué tan confiable es cada conclusión
-
-Detalle y código en [`docs/pruebas_de_estres.md`](docs/pruebas_de_estres.md).
-
-| Conclusión | Prueba | Resultado |
-|---|---|---|
-| Tres tipos concentran el costo | Costos variados ±30 % al azar, 2,000 veces | El mismo trío queda arriba en 99 % de los casos |
-| El rayón en K es el número uno en costo | Misma simulación | **No resiste**: encabeza en 27 %. Se afirma el trío, no el primer lugar |
-| El proceso no es capaz | Límite de especificación de 200 a 5,000 px² | Cpk global entre −0.08 y 0.51: siempre bajo 1.00 |
-| El Cpk es válido | Shapiro-Wilk por tipo | **No**: ninguna distribución es normal. La decisión usa la fracción empírica sobre el límite |
-| El espesor explica los grupos fuera de límites | Misma carta sin rayón en K y solo en abolladuras | De 7 de 19 baja a 4 de 19 y a 1 de 9: gran parte es el tipo de defecto |
-
-## Trazabilidad entre dato, medida y norma
-
-| Dato / medida | Medida DAX | Cláusula |
-|---|---|---|
-| Placas con defecto mayor al límite | `% Fuera de USL` | 8.7 |
-| Costo por tipo y Pareto | `COPQ MXN`, `COPQ Acumulado %` | 10.2, 9.1.3 |
-| Límites de control por grupo | `UCL`, `LCL`, `Fuera de Limites` | 9.1.1 Seguimiento y medición |
-| Capacidad | `Cpk`, `Semaforo Cpk Color` | 9.1.1 (referencia) |
-| Regla de decisión | `Accion Recomendada`, `Texto ISO 10.2` | 8.7, 10.2 |
-
-## Qué contiene
-
-| Entregable | Dónde |
-|---|---|
-| Esquema estrella (1 hecho, 3 dimensiones) | `data/model/`, diagrama en `docs/diccionario_de_datos.md` |
-| ETL reproducible | `etl/build_star_schema.py` |
-| Consultas Power Query M (unpivot, uniones, columnas condicionales) | `powerbi/powerquery/` |
-| Medidas DAX | `powerbi/dax/measures.dax` |
-| Tema de Power BI | `powerbi/theme.json` |
-| Tablero equivalente en Streamlit | `streamlit_app.py` |
-| Diccionario de datos y mapeo de terminología | `docs/diccionario_de_datos.md` |
-| Pruebas de estrés y errores corregidos | `docs/pruebas_de_estres.md` |
-| Guía para armar el .pbix en Windows | `docs/construir_en_power_bi.md` |
-| Pruebas automáticas de calidad y ML | `tests/` |
-
-## Método
-
-1. **Datos.** El CSV público se convierte en un esquema estrella. Cada placa tiene un solo tipo de defecto (se verifica); las siete columnas indicadoras se pasan a una dimensión.
-2. **COPQ.** Costo por placa afectada según el tipo de defecto, tomado de una tabla editable. Pareto por costo, con porcentaje acumulado.
-3. **Carta de medias por espesor.** Media del log10 del área con límites **μ ± 3·s/√n**. Es una comparación entre grupos. El archivo viene ordenado por tipo de defecto, así que `id` no es una secuencia y una carta en el tiempo sería un artefacto.
-4. **Capacidad.** Cpk unilateral superior del tamaño del defecto (en log10), con semáforo: verde ≥ 1.33, amarillo ≥ 1.00, rojo debajo. Es referencia: no se cumple la normalidad.
-5. **Validación cruzada.** Cada medida existe en tres formas: DAX, Python y SQL en DuckDB. Las pruebas exigen que Python y SQL den el mismo resultado.
-
-## Cómo ejecutarlo
+Requiere Python 3.13 (entorno registrado: 3.13.7) y Git LFS.
 
 ```bash
-python -m venv .venv              # Python 3.13
-.venv\Scripts\activate            # Windows · en macOS/Linux: source .venv/bin/activate
+git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops.git
+cd steel-plates-quality-mlops
+git lfs pull
+python -m venv .venv
+source .venv/bin/activate            # Windows: .venv\Scripts\activate
 pip install -r requirements-dev.txt
 
-python -m etl.build_star_schema    # regenera data/model/
-python -m tools.stress_tests       # regenera docs/pruebas_de_estres.md
-pytest                             # suite completa (calidad + ML)
-streamlit run streamlit_app.py
+python -B -m tools.project_checks validate-data       # auditoría del dataset (1,941 filas)
+python -B -m tools.project_checks validate-artifact   # linaje y SHA256 del modelo congelado
+python -B -m tools.project_checks batch-smoke         # inferencia por lotes (filas de entrenamiento)
+python -B -m tools.project_checks validate-evidence   # exportación Power BI vs. evidencia Python
+python -B -m pytest -q                                # suite completa (~10 min: incluye replays)
+streamlit run streamlit_app.py                        # tablero equivalente en Streamlit
 ```
 
-Para el tablero en Power BI, sigue `docs/construir_en_power_bi.md`.
+Inferencia sobre un CSV propio con las 27 columnas (opcional `row_id`):
 
-## Power BI
-
-- Proyecto PBIP versionado en [`powerbi/project/`](powerbi/project/).
-- Artefacto ejecutable PBIX en [`powerbi/artifacts/`](powerbi/artifacts/): [`steel-plates-quality-bi.pbix`](powerbi/artifacts/steel-plates-quality-bi.pbix).
-- El PBIX se gestiona con Git LFS. Para descargar sus bytes después de clonar: `git lfs pull`.
-
-```text
-POWER BI ARTIFACTS: AVAILABLE
-POWER BI VALIDATION: PENDING
+```bash
+PYTHONPATH=src python -B -m quality_ml.inference.predict --root . --input input.csv --output predictions.csv
 ```
 
-El parámetro `RutaCSV` del PBIP conserva la ruta absoluta local del equipo donde se guardó. Antes de actualizar los datos en otro equipo, ajusta ese parámetro en Power BI Desktop para apuntar a `data/raw/steel_plates_faults.csv`.
+Carga el modelo solo desde un checkout de confianza: joblib/pickle ejecuta código al cargar.
+
+## Evidencia
+
+- [Model Card](MODEL_CARD.md): uso previsto, fuera de alcance, validación, fallos conocidos y límites.
+- [Evidence pack](docs/evidence/README.md): índice navegable y trazabilidad de cada afirmación.
+- [Estado de ejecución](docs/PROJECT_EXECUTION_STATE.md): fases, checkpoints e invariantes del holdout.
 
 ## Limitaciones
 
-- **Validación en Power BI Desktop pendiente.** Los artefactos PBIP y PBIX están disponibles. La ejecución y comprobación de los gates G1–G5 de [`docs/construir_en_power_bi.md`](docs/construir_en_power_bi.md) sigue pendiente de evidencia; disponer de los archivos no acredita la validación analítica.
-- **Sin tiempo, máquina ni turno.** No hay carta de control temporal ni % de scrap. En `measures.dax` queda comentado el patrón de rango móvil para cuando existan fechas.
-- **Confusión entre espesor y tipo de defecto.** El 99 % del rayón en K cae en espesor 40.
-- **Costos, límite de especificación y umbrales de acción supuestos.** Cámbialos con los de tu planta; el orden del Pareto depende de ellos.
-- **Familias de defecto** (Superficie, Forma, Otros): agrupación del analista.
+- **Solo clasificación con observación completa.** No hay placas buenas ni variables temporales; la disponibilidad temporal de las 27 medidas no está demostrada.
+- **Holdout consumido.** Ya no es un test virgen; cualquier modelo nuevo necesitaría datos nuevos.
+- **Clases pequeñas y política de revisión sin validación prospectiva.** La importancia de variables es asociativa, no causal; las probabilidades no están calibradas.
+- **Power BI Desktop sin validar en ejecución**; la reconciliación cubre la exportación de Python.
+- **Costos, límite de especificación y umbrales de acción supuestos.** No se reclama impacto financiero ni despliegue en producción.
+- **Confusión entre espesor y tipo de defecto**: el 99 % del rayón en K cae en espesor 40.
 
 ---
 
-**Jesús R. L. González**: Analista y Científico de Datos · Operaciones y Calidad en manufactura · [LinkedIn](https://www.linkedin.com/in/jesus-r-l-gonzalez)
+**Jesús R. L. González** · Analista y Científico de Datos · Operaciones y Calidad en manufactura · [LinkedIn](https://www.linkedin.com/in/jesus-r-l-gonzalez)
 
 *Datos: Steel Plates Faults, UCI Machine Learning Repository (Semeion). Revisa su licencia y cita en la página del dataset.*

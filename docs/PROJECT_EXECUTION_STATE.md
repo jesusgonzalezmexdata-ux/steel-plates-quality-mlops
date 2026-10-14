@@ -1,6 +1,6 @@
 # Project execution state
 
-LAST_COMPLETED_PHASE = 9
+LAST_COMPLETED_PHASE = 10
 G5_BASELINE = PASS_WITH_LIMITATION
 G6_CANDIDATES = PASS_WITH_LIMITATION
 G7_TUNING_SELECTION = PASS_WITH_LIMITATION
@@ -9,12 +9,12 @@ G9_ERROR_UNCERTAINTY_INTERPRETABILITY = PASS_WITH_LIMITATION
 PHASE_9_VERDICT = PASS_WITH_LIMITATION
 PRIMARY_METRIC = macro_f1
 BASELINE_SIGNAL_DETECTED = TRUE
-NEXT_PHASE = 10_POWER_BI_RUNTIME_VALIDATION
-CURRENT_PHASE = 10
-PHASE_10_STATUS = IN_PROGRESS_PENDING_RUNTIME
-PHASE_11_STATUS = NOT_STARTED
-PROJECT_CLOSEOUT_STATUS = PARTIALLY_COMPLETE
-STOP_GATE = HUMAN_GATE_POWER_BI_RUNTIME_VALIDATION
+NEXT_PHASE = 11_PUBLICATION
+CURRENT_PHASE = 11
+PHASE_10_STATUS = PASS_WITH_LIMITATION (Power BI Desktop runtime: MANUAL_VALIDATION_REQUIRED)
+PHASE_11_STATUS = IN_PROGRESS_READY_FOR_FIRST_PUSH
+PROJECT_CLOSEOUT_STATUS = READY_FOR_FIRST_PUSH
+STOP_GATE = HUMAN_GATE_FIRST_PUSH
 
 VALIDITY_SCOPE = FULL_OBSERVATION_CLASSIFICATION_ONLY
 EARLY_PREDICTION_SUPPORTED = FALSE
@@ -72,10 +72,10 @@ POST_ML_PBIP_STATUS = TEXT_DRAFT_PENDING_DESKTOP_SAVE
 G10_MODEL_LINEAGE = PASS
 G11_BATCH_REPRODUCIBILITY = PASS
 G12_POWER_BI_INTEGRATION = PASS_WITH_LIMITATION
-G13_POWER_BI_RUNTIME = BLOCKED
+G13_POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED
 G14_TESTS = PASS
-CLEAN_CLONE_REPRODUCTION = NOT_STARTED_PHASE_11_GATED
-EXPORT_READINESS = NOT_EVALUATED_PHASE_11_GATED
+CLEAN_CLONE_REPRODUCTION = LOCAL_PASS_REMOTE_PENDING
+EXPORT_READINESS = READY_FOR_FIRST_PUSH
 
 The frozen Phase 7 model was evaluated once on the 389-row final holdout in
 Phase 8 after one fit on all 1,552 training rows. Its final macro-F1 remains
@@ -175,3 +175,42 @@ and every previous value exactly. The deterministic generator and existing full
 numeric-replay assertion now cover the field. The entire 122-test suite was rerun
 and passed in 626.96 seconds after this final code change. No model, threshold,
 probability, metric or Phase 8 artifact changed. The Desktop gate remains OPEN.
+
+## Phase 11 — closeout, reproducibility and publication readiness
+
+The Phase 10 Desktop gate is closed as a documented limitation, not as a pass:
+POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED. The Python layer does not depend on
+Power BI Desktop. No model, feature, threshold, metric, holdout file or Power BI
+file changed in Phase 11. The earlier rule that LAST_COMPLETED_PHASE stays 9
+until Desktop passes is superseded by the closeout instruction that accepts the
+Desktop runtime as MANUAL_VALIDATION_REQUIRED; no runtime PASS is claimed.
+
+PHASE_11_PORTABILITY_CHECKPOINT = 7b6f9c2e42ddfc0bb5efd1a69f177ede17bc6e12
+LOCAL_CLEAN_CLONE = PASS
+LOCAL_CLEAN_CLONE_ENVIRONMENT = Linux x86_64, new venv, Python 3.13.7, only requirements-dev.txt
+LOCAL_CLEAN_CLONE_TESTS = 122 passed in 425.73 seconds
+LOCAL_CLEAN_CLONE_CHECKS = lint, validate-data, validate-artifact, batch-smoke, validate-evidence: PASS
+OUTSIDE_WORKING_DIRECTORY_EXECUTION = PASS
+GIT_LFS = PASS (PBIX pointer oid 0a87a4e3...bdba5 matches object; lfs fsck OK)
+SECRET_SCAN = PASS (tracked files; no credentials, keys or tokens)
+AUTHORSHIP = PASS (all commits: Jesus R. L. Gonzalez <285482007+jesusgonzalezmexdata-ux@users.noreply.github.com>; no AI trailers)
+README = FINAL
+MODEL_CARD = MODEL_CARD.md
+EVIDENCE_PACK = docs/evidence/README.md
+REMOTE_REPRODUCIBILITY = PENDING_FIRST_PUSH
+
+The first Linux clean-clone run exposed three replay assertions that compared
+platform-dependent bytes. Diagnosis showed identical science: the rebuilt forest
+matched the committed artifact tree by tree with probability difference 0.0; the
+three figures matched pixel for pixel; OOF log-loss differed by one ULP (1.1e-16).
+The tests now assert structural/pixel identity on every platform, apply the frozen
+ATOL 1e-12 to JSON floats as already done for CSV replay, and keep byte identity on
+win32, where the evidence was recorded. Checkpoint 7b6f9c2 contains this change.
+
+A first cold-start Streamlit AppTest run in one fresh environment exceeded its 60 s
+timeout; immediate reruns passed in under 3 s and the full clean-clone suite passed.
+It is recorded as an environment warm-up sensitivity, not a functional failure.
+
+Remaining limitations: the Power BI parameter RutaCSV keeps the original absolute
+path and must be set in Desktop; the PBIX does not yet contain the ML page;
+streamlit and plotly are lower-bound, not pinned, dependencies.

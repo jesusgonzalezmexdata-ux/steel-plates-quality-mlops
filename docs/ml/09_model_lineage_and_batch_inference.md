@@ -1,4 +1,4 @@
-# Frozen model lineage and batch inference â€” Phase 10
+# Frozen model lineage and batch inference — Phase 10
 
 ## Purpose and scientific boundary
 
