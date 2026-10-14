@@ -31,6 +31,12 @@ def test_export_reconciles_frozen_predictions_and_role():
     assert frame.loc[frame.row_id.eq(1277), "review_required"].item() == 0
 
 
+RUTA_CSV_BASELINE = (b'expression RutaCSV = "C:\\\\Users\\\\Lowo\\\\Downloads\\\\'
+                     b'steel-plates-quality-bi-main\\\\data\\\\raw\\\\steel_plates_faults.csv"')
+RUTA_CSV_PLACEHOLDER = (b'expression RutaCSV = "C:\\\\path\\\\to\\\\steel-plates-quality-mlops-'
+                        b'\\\\data\\\\raw\\\\steel_plates_faults.csv"')
+
+
 def test_previous_powerbi_preserved():
     baseline = json.loads((ROOT / BASELINE_PATH).read_text())
     exceptions = {f"{REPORT}/pages.json", f"{SEMANTIC}/model.tmdl",
@@ -50,6 +56,11 @@ def test_previous_powerbi_preserved():
             assert hashlib.sha256(original.replace(b"\r\n", b"\n")).hexdigest() == identity["lf_sha256"]
         elif name.endswith("expressions.tmdl"):
             original = data.replace(b"\r\n", b"\n").split(b"\nexpression RutaMLCSV =")[0]
+            # Only documented change: the RutaCSV default no longer carries the
+            # original author's local path (portability and privacy). Every other
+            # byte of the pre-ML definition must still match the baseline.
+            assert original.count(RUTA_CSV_PLACEHOLDER) == 1
+            original = original.replace(RUTA_CSV_PLACEHOLDER, RUTA_CSV_BASELINE)
             assert hashlib.sha256(original.replace(b"\r\n", b"\n")).hexdigest() == identity["lf_sha256"]
     index = json.loads((ROOT / REPORT / "pages.json").read_text())
     assert index["pageOrder"] == ["5ee9939d0101076d3381", "f50491653678cb19a699",

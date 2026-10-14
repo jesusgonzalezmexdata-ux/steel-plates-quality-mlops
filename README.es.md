@@ -57,7 +57,7 @@ Hallazgos descriptivos (con **costos ilustrativos**, no ahorros demostrados): tr
 - Proyecto PBIP en [`powerbi/project/`](powerbi/project/) y PBIX en [`powerbi/artifacts/`](powerbi/artifacts/) (Git LFS: ejecuta `git lfs pull` tras clonar).
 - La página *MODEL PERFORMANCE & REVIEW* y la tabla `ML_Holdout` se reconciliaron contra Python (389 filas, 307 aciertos, 82 errores, 261 a revisión) solo a nivel de exportación: [reconciliación](docs/evidence/powerbi_ml_reconciliation.md).
 - **La validación en Power BI Desktop está pendiente** (abrir, refrescar, renderizar y guardar): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Pasos exactos en el [handoff](docs/evidence/powerbi_runtime_handoff.md). El PBIX publicado aún no contiene la página ML.
-- El parámetro `RutaCSV` del PBIP guarda la ruta del equipo original; ajústalo en Desktop a `data/raw/steel_plates_faults.csv` de tu clon.
+- El parámetro `RutaCSV` del PBIP trae una ruta de ejemplo (`C:\path\to\...`); ajústalo en Desktop a `data/raw/steel_plates_faults.csv` de tu clon.
 
 ## Cómo reproducir
 

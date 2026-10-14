@@ -18,6 +18,9 @@ the consumed holdout have not changed since v1.0.0.
 - `streamlit` and `plotly` pinned to the versions validated in CI.
 - CI runs on pull requests, on `main`, weekly and on demand, with concurrency control and read-only permissions.
 
+### Fixed
+- The PBIP `RutaCSV` default no longer contains the author's local path; it ships with a placeholder, and the Power BI preservation test allows only that documented change.
+
 ## [1.2.1] - 2026-10-14
 
 ### Added

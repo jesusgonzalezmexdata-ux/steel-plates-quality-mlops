@@ -30,7 +30,7 @@ POST_ML_PBIP_STATUS = TEXT_DRAFT_PENDING_DESKTOP_SAVE
    and any opening errors. Do not start from the old PBIX, which has no ML page.
 2. In Transform data / Power Query, select the existing RutaCSV query and change
    its text value to the actual checkout's `data/raw/steel_plates_faults.csv`.
-   The saved legacy parameter still refers to the former local checkout.
+   The saved parameter is a placeholder (`C:\path\to\...`); the PBIX may still hold the former local path until it is re-saved.
    RutaMLCSV derives the repository root from `/data/raw/` and locates
    `powerbi/data/ml_holdout_evaluation.csv`; inspect its resolved value.
    This is a local-file source; no cloud service or network is required.

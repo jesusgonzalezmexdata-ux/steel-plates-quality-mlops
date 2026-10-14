@@ -28,7 +28,7 @@ RandomForestClassifier(
 )
 ```
 
-The exception `git -c safe.directory=C:/Users/Lowo/Downloads/steel-plates-quality-mlops`
+The exception `git -c safe.directory=<local checkout path>`
 is scoped to individual commands. No persistent Git configuration, Windows
 ownership, directory permission, or global setting is changed.
 
