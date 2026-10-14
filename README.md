@@ -1,32 +1,39 @@
-# Inteligencia de calidad: clasificación de defectos en placas de acero
+# Quality intelligence: steel-plate defect classification
 
-**Un problema industrial de calidad convertido en evidencia medible: contrato de datos, validación científica, un modelo evaluado una sola vez sobre un holdout independiente, análisis de errores y apoyo a la decisión en Power BI, todo reproducible desde este repositorio.**
+[![CI](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/actions/workflows/ci.yml/badge.svg)](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-)](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/releases)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+[![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey)](NOTICE)
 
-## En un minuto
+**English** · [Español](README.es.md)
+
+**An industrial quality problem turned into measurable evidence: a data contract, scientific validation, a model evaluated once on an independent holdout, error analysis and Power BI decision support, all reproducible from this repository.**
+
+## In one minute
 
 | | |
 |---|---|
-| **Problema** | Un área de calidad necesita saber qué tipo de defecto tiene cada placa ya inspeccionada, dónde se equivoca la clasificación y qué casos merecen revisión humana. |
-| **Datos** | *Steel Plates Faults* (UCI): 1,941 placas, **todas con defecto**, 27 medidas por placa y 7 tipos de defecto. Sin fechas, máquinas, turnos ni proveedores. |
-| **Qué predice el modelo** | Dadas las medidas de una placa **ya caracterizada como defectuosa**, el tipo de defecto entre 7 clases (`FULL_OBSERVATION_CLASSIFICATION_ONLY`). |
-| **Qué NO predice** | Si una placa tendrá defecto, el defecto antes de que ocurra, ni sus causas. No es mantenimiento predictivo ni un sistema en producción (`EARLY_PREDICTION_SUPPORTED = FALSE`). |
-| **Modelo final** | Random Forest congelado (300 árboles, `class_weight="balanced"`, `random_state=42`), elegido solo con validación cruzada. |
-| **Resultado en holdout** | 389 placas nunca usadas para decidir: **macro-F1 0.815**, balanced accuracy 0.805, log-loss 0.689. CV de desarrollo: macro-F1 0.801 ± 0.028. |
-| **Rol de Power BI** | Capa de *quality intelligence*: distribución de defectos, COPQ con costos supuestos, carta por grupos, Cpk de referencia y una página de desempeño del modelo y revisión. |
-| **Evidencia** | [Model Card](MODEL_CARD.md) · [Evidence pack](docs/evidence/README.md) · [manifest del modelo](artifacts/manifest.json) |
+| **Problem** | A quality team needs to know which defect type each inspected plate has, where the classification fails and which cases deserve human review. |
+| **Data** | *Steel Plates Faults* (UCI): 1,941 plates, **all defective**, 27 measurements per plate, 7 defect types. No timestamps, machines, shifts or suppliers. |
+| **What the model predicts** | Given the measurements of a plate **already characterized as defective**, its defect type among 7 classes (`FULL_OBSERVATION_CLASSIFICATION_ONLY`). |
+| **What it does NOT predict** | Whether a plate will be defective, a defect before it happens, or its causes. It is not predictive maintenance or a production system (`EARLY_PREDICTION_SUPPORTED = FALSE`). |
+| **Final model** | Frozen Random Forest (300 trees, `class_weight="balanced"`, `random_state=42`), selected with cross-validation only. |
+| **Holdout result** | 389 plates never used for any decision: **macro-F1 0.815**, balanced accuracy 0.805, log-loss 0.689. Development CV: macro-F1 0.801 ± 0.028. |
+| **Power BI role** | Quality-intelligence layer: defect distribution, COPQ with assumed costs, group control chart, reference Cpk and a model performance and review page. |
+| **Evidence** | [Model Card](MODEL_CARD.md) · [Evidence pack](docs/evidence/README.md) · [model manifest](artifacts/manifest.json) |
 
-## Del problema a la evidencia
+## From problem to evidence
 
-1. **Formulación medible.** Contrato del problema y política de features: 27 medidas, sin `id` ni columnas objetivo ([contrato](docs/ml/02_problem_contract.md), [auditoría de fuga](docs/ml/03_leakage_audit.md)).
-2. **Validación científica.** Split estratificado 1,552 / 389; `StratifiedKFold(5, shuffle=True, random_state=42)` solo sobre entrenamiento; baseline → candidatos → ajuste controlado → selección ([04](docs/ml/04_baseline_evaluation.md)–[06](docs/ml/06_tuning_and_selection.md)).
-3. **Evaluación independiente.** El modelo congelado se evaluó **una vez** en el holdout. Sin ajuste posterior, sin comparar alternativas en holdout, sin calibrar ([07](docs/ml/07_final_holdout_evaluation.md)).
-4. **Errores e incertidumbre.** 82 errores de 389; la confusión Abolladuras ↔ Otros defectos explica 36. Pastry es la clase más débil (F1 0.60). Las probabilidades no están calibradas ([08](docs/ml/08_error_uncertainty_interpretability.md)).
-5. **Apoyo a la decisión.** Política candidata de revisión (solo desarrollo): confianza ≥ 0.80 se acepta, el resto va a revisión. Aplicada *post hoc* al holdout envía 261 casos a revisión, que contienen 81 de los 82 errores. No es un umbral validado para operación.
-6. **Reproducibilidad.** Artefacto del modelo con huellas SHA256 de datos, split, features y configuración; inferencia por lotes con validación estricta de esquema; CI ([09](docs/ml/09_model_lineage_and_batch_inference.md)).
+1. **Measurable formulation.** Problem contract and feature policy: 27 measurements, no `id` or target columns ([contract](docs/ml/02_problem_contract.md), [leakage audit](docs/ml/03_leakage_audit.md)).
+2. **Scientific validation.** Stratified 1,552 / 389 split; `StratifiedKFold(5, shuffle=True, random_state=42)` on training only; baseline → candidates → controlled tuning → selection ([04](docs/ml/04_baseline_evaluation.md)–[06](docs/ml/06_tuning_and_selection.md)).
+3. **Independent evaluation.** The frozen model was evaluated **once** on the holdout, with no later tuning, no alternative models on the holdout and no calibration ([07](docs/ml/07_final_holdout_evaluation.md)).
+4. **Errors and uncertainty.** 82 errors out of 389; the Bumps ↔ Other_Faults confusion explains 36. Pastry is the weakest class (F1 0.60). Probabilities are not calibrated ([08](docs/ml/08_error_uncertainty_interpretability.md)).
+5. **Decision support.** Development-only review policy: confidence ≥ 0.80 is accepted, everything else goes to review. Applied post hoc to the holdout, it sends 261 cases to review, which contain 81 of the 82 errors. It is not a validated operating threshold.
+6. **Reproducibility.** Model artifact with SHA256 fingerprints of data, split, features and configuration; strict-schema batch inference; SQL data contract; ONNX export; Docker; CI ([09](docs/ml/09_model_lineage_and_batch_inference.md)).
 
-### Desempeño por clase (holdout)
+### Per-class performance (holdout)
 
-| Clase | Precisión | Recall | F1 | n |
+| Class | Precision | Recall | F1 | n |
 |---|---:|---:|---:|---:|
 | Pastry | 0.571 | 0.625 | 0.597 | 32 |
 | Z_Scratch | 0.971 | 0.868 | 0.917 | 38 |
@@ -36,30 +43,30 @@
 | Bumps | 0.714 | 0.679 | 0.696 | 81 |
 | Other_Faults | 0.726 | 0.785 | 0.754 | 135 |
 
-Stains y Dirtiness tienen muy poco soporte: no permiten conclusiones estables.
+Stains and Dirtiness have too little support for stable conclusions.
 
-## Capa de quality intelligence (Power BI y Streamlit)
+## Quality-intelligence layer (Power BI and Streamlit)
 
-El tablero responde dónde actuar primero con un presupuesto limitado, con umbrales de gestión **supuestos** y la cláusula ISO 9001:2015 que respalda cada acción:
+The dashboard answers where to act first on a limited budget, using **assumed** management thresholds and the ISO 9001:2015 clause behind each action:
 
-| Señal | Umbral (supuesto de gestión) | Acción | ISO 9001:2015 |
+| Signal | Threshold (management assumption) | Action | ISO 9001:2015 |
 |---|---|---|---|
-| ≥ 10 % de las placas con defecto mayor a 500 px² | `UMBRAL_FUERA_USL_PCT` | Contener: segregar e inspeccionar al 100 % | 8.7 |
-| Un tipo pesa ≥ 20 % del COPQ | `UMBRAL_COPQ_PCT` | Análisis de causa raíz y acción correctiva | 10.2 |
-| Cpk < 1.00 sin otra señal | Referencia, no criterio único | Vigilar y evaluar | 9.1.3 |
+| ≥ 10 % of plates with a defect larger than 500 px² | `UMBRAL_FUERA_USL_PCT` | Contain: segregate and inspect 100 % | 8.7 |
+| One type weighs ≥ 20 % of COPQ | `UMBRAL_COPQ_PCT` | Root-cause analysis and corrective action | 10.2 |
+| Cpk < 1.00 with no other signal | Reference, not a sole criterion | Monitor and evaluate | 9.1.3 |
 
-Hallazgos descriptivos (con **costos ilustrativos**, no ahorros demostrados): tres tipos concentran el 77.7 % del COPQ supuesto; el rayón en K es 267 de los 289 defectos ≥ 5,000 px² y está casi confinado al acero A400 y al espesor 40 (710 de 1,941 placas). Cada conclusión se sometió a [pruebas de estrés](docs/pruebas_de_estres.md): el trío de mayor costo resiste en 99 % de 2,000 simulaciones, pero el primer lugar no.
+Descriptive findings (with **illustrative costs**, not demonstrated savings): three types concentrate 77.7 % of the assumed COPQ; K-scratches account for 267 of the 289 defects ≥ 5,000 px² and are almost confined to A400 steel and thickness 40 (710 of 1,941 plates). Every conclusion was [stress-tested](docs/pruebas_de_estres.md): the top-cost trio holds in 99 % of 2,000 simulations, but the first place does not.
 
-![Tablero: decisiones por tipo de defecto](reports/figures/decisiones.png)
+![Dashboard: decisions by defect type](reports/figures/decisiones.png)
 
-- Proyecto PBIP en [`powerbi/project/`](powerbi/project/) y PBIX en [`powerbi/artifacts/`](powerbi/artifacts/) (Git LFS: ejecuta `git lfs pull` tras clonar).
-- La página *MODEL PERFORMANCE & REVIEW* y la tabla `ML_Holdout` se reconciliaron contra Python (389 filas, 307 aciertos, 82 errores, 261 a revisión) solo a nivel de exportación: [reconciliación](docs/evidence/powerbi_ml_reconciliation.md).
-- **La validación en Power BI Desktop está pendiente** (abrir, refrescar, renderizar y guardar): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Pasos exactos en el [handoff](docs/evidence/powerbi_runtime_handoff.md). El PBIX publicado aún no contiene la página ML.
-- El parámetro `RutaCSV` del PBIP guarda la ruta del equipo original; ajústalo en Desktop a `data/raw/steel_plates_faults.csv` de tu clon.
+- PBIP project in [`powerbi/project/`](powerbi/project/) and PBIX in [`powerbi/artifacts/`](powerbi/artifacts/) (Git LFS: run `git lfs pull` after cloning).
+- The *MODEL PERFORMANCE & REVIEW* page and the `ML_Holdout` table were reconciled against Python (389 rows, 307 correct, 82 errors, 261 to review) at export level only: [reconciliation](docs/evidence/powerbi_ml_reconciliation.md).
+- **Power BI Desktop runtime validation is pending** (open, refresh, render, save): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Exact steps in the [handoff](docs/evidence/powerbi_runtime_handoff.md). The published PBIX does not yet contain the ML page.
+- Set the PBIP `RutaCSV` parameter in Desktop to `data/raw/steel_plates_faults.csv` in your clone.
 
-## Cómo reproducir
+## Reproduce
 
-Requiere Python 3.13 (entorno registrado: 3.13.7) y Git LFS.
+Requires Python 3.13 (recorded environment: 3.13.7) and Git LFS.
 
 ```bash
 git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-.git
@@ -69,73 +76,50 @@ python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate
 pip install -r requirements-dev.txt
 
-python -B -m tools.project_checks validate-data       # auditoría del dataset (1,941 filas)
-python -B -m tools.project_checks validate-artifact   # linaje y SHA256 del modelo congelado
-python -B -m tools.project_checks batch-smoke         # inferencia por lotes (filas de entrenamiento)
-python -B -m tools.project_checks validate-evidence   # exportación Power BI vs. evidencia Python
-python -B -m pytest -q                                # suite completa (~10 min: incluye replays)
-streamlit run streamlit_app.py                        # tablero equivalente en Streamlit
+python -B -m tools.project_checks validate-data       # dataset audit (1,941 rows)
+python -B -m tools.project_checks validate-artifact   # lineage and SHA256 of the frozen model
+python -B -m tools.project_checks batch-smoke         # batch inference (training rows)
+python -B -m tools.project_checks validate-evidence   # Power BI export vs. Python evidence
+python -B -m pytest -q                                # full suite (~10 min, includes replays)
+streamlit run streamlit_app.py                        # equivalent Streamlit dashboard
 ```
 
-Contrato de datos en SQL (dbt + DuckDB), conciliado contra la auditoría de Python:
+| Extra | Command | What it proves |
+|---|---|---|
+| SQL data contract (dbt + DuckDB) | `pip install -r requirements-dbt.txt` then `python -B -m tools.data_contract` | 56 checks on names, types, nulls, one-hot targets, class counts, geometry and index ranges, reconciled row by row with pandas ([`dbt/`](dbt/)) |
+| ONNX + Node.js | `pip install -r requirements-onnx.txt`, `python -B -m tools.export_onnx --check`, then `cd examples/onnx-node && npm ci && node predict.mjs` | Deterministic ONNX export equivalent to scikit-learn (max probability diff 8.3e-7, same class and review status) and usable from JavaScript ([report](reports/onnx/verification.json)) |
+| Docker | `docker build -t steel-plates-quality-mlops .` then `docker run --rm steel-plates-quality-mlops` | Same OS and dependencies on any machine; CI runs the checks and the full suite inside the image |
+
+### Predict on your own CSV
+
+The input needs the 27 feature columns (optionally a unique `row_id`); the schema is validated strictly and fails closed.
 
 ```bash
-pip install -r requirements-dbt.txt
-python -B -m tools.data_contract        # dbt build (56 checks) + conciliación fila a fila con pandas
-python -B -m pytest -q tests/test_data_contract.py   # incluye 5 corrupciones que deben fallar
+pip install .
+steel-predict --root . --input input.csv --output predictions.csv
 ```
 
-El contrato fija nombres y tipos de las 35 columnas (`contract: enforced`), unicidad de `id`, nulos, one-hot exclusivo de clase y de acero, distribución exacta por clase, filas = 1,941, coherencia geométrica y rangos de los índices normalizados ([`dbt/`](dbt/)).
+The output contains the predicted class, seven probabilities, top-2 margin and the development-only review status. Load the model only from a trusted checkout: joblib/pickle executes code on load (see [SECURITY.md](SECURITY.md)).
 
-Modelo exportado a ONNX e inferencia desde otro lenguaje (Node.js):
+## Limitations
 
-```bash
-pip install -r requirements-onnx.txt
-python -B -m tools.export_onnx --check      # exporta, exige el mismo SHA256 y la equivalencia con scikit-learn
-cd examples/onnx-node && npm ci && node predict.mjs   # inferencia con ONNX Runtime desde JavaScript
-```
+- **Full-observation classification only.** No good plates and no temporal variables; the temporal availability of the 27 measurements is not demonstrated.
+- **Consumed holdout.** It is no longer an untouched test set; any new model would need new data.
+- **Small classes and a review policy without prospective validation.** Feature importance is associative, not causal; probabilities are not calibrated.
+- **Power BI Desktop not validated at runtime**; reconciliation covers the Python export.
+- **Assumed costs, specification limit and action thresholds.** No financial impact or production deployment is claimed.
+- **Thickness and defect type are confounded**: 99 % of K-scratches fall at thickness 40.
 
-El ONNX es un artefacto derivado del modelo congelado, no lo reemplaza. Reproduce la semántica float32 de los árboles de scikit-learn: en 1,552 filas de entrenamiento y 2,000 sintéticas la diferencia máxima de probabilidad es 8.3e-7 (tolerancia 1e-6), con la misma clase y el mismo estado de revisión en todos los casos. No se hizo inferencia sobre el holdout ([informe](reports/onnx/verification.json)).
+## Contributing
 
-Con Docker (mismo sistema operativo y dependencias en cualquier equipo; no requiere Python local):
+Issues and pull requests are welcome; read [CONTRIBUTING.md](CONTRIBUTING.md) first. Changes to the frozen model, its evidence or the holdout policy are out of scope by design.
 
-```bash
-docker build -t steel-plates-quality-mlops .
-docker run --rm steel-plates-quality-mlops                                  # checks de evidencia y artefacto
-docker run --rm steel-plates-quality-mlops python -B -m pytest -q -p no:cacheprovider   # suite completa
-```
+## License and citation
 
-La CI construye esta imagen y ejecuta ambos comandos en cada push. Power BI Desktop queda fuera del contenedor.
-
-Inferencia sobre un CSV propio con las 27 columnas (opcional `row_id`):
-
-```bash
-PYTHONPATH=src python -B -m quality_ml.inference.predict --root . --input input.csv --output predictions.csv
-```
-
-Carga el modelo solo desde un checkout de confianza: joblib/pickle ejecuta código al cargar.
-
-## Evidencia
-
-- [Model Card](MODEL_CARD.md): uso previsto, fuera de alcance, validación, fallos conocidos y límites.
-- [Evidence pack](docs/evidence/README.md): índice navegable y trazabilidad de cada afirmación.
-- [Estado de ejecución](docs/PROJECT_EXECUTION_STATE.md): fases, checkpoints e invariantes del holdout.
-
-## Limitaciones
-
-- **Solo clasificación con observación completa.** No hay placas buenas ni variables temporales; la disponibilidad temporal de las 27 medidas no está demostrada.
-- **Holdout consumido.** Ya no es un test virgen; cualquier modelo nuevo necesitaría datos nuevos.
-- **Clases pequeñas y política de revisión sin validación prospectiva.** La importancia de variables es asociativa, no causal; las probabilidades no están calibradas.
-- **Power BI Desktop sin validar en ejecución**; la reconciliación cubre la exportación de Python.
-- **Costos, límite de especificación y umbrales de acción supuestos.** No se reclama impacto financiero ni despliegue en producción.
-- **Confusión entre espesor y tipo de defecto**: el 99 % del rayón en K cae en espesor 40.
+- **Code and documentation:** [Apache License 2.0](LICENSE). See [NOTICE](NOTICE).
+- **Dataset:** Buscema, M., Terzi, S., & Tastle, W. (2010). *Steel Plates Faults* [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5J88N, licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The Apache license does not apply to the data.
+- **Cite this repository:** use GitHub's *Cite this repository* button ([CITATION.cff](CITATION.cff)). Version history in the [CHANGELOG](CHANGELOG.md).
 
 ---
 
-**Jesús R. L. González** · Analista y Científico de Datos · Operaciones y Calidad en manufactura · [LinkedIn](https://www.linkedin.com/in/jesus-r-l-gonzalez)
-
-## Licencia y cita
-
-- **Código y documentación:** [Apache License 2.0](LICENSE). Ver [NOTICE](NOTICE).
-- **Dataset:** Buscema, M., Terzi, S., & Tastle, W. (2010). *Steel Plates Faults* [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5J88N — licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); la licencia Apache no se aplica a los datos.
-- **Citar este repositorio:** usa el botón *Cite this repository* de GitHub ([CITATION.cff](CITATION.cff)). Historial de versiones en [CHANGELOG](CHANGELOG.md).
+**Jesús R. L. González** · Data Analyst and Data Scientist · Manufacturing operations and quality · [LinkedIn](https://www.linkedin.com/in/jesus-r-l-gonzalez)
