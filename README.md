@@ -77,6 +77,16 @@ python -B -m pytest -q                                # suite completa (~10 min:
 streamlit run streamlit_app.py                        # tablero equivalente en Streamlit
 ```
 
+Con Docker (mismo sistema operativo y dependencias en cualquier equipo; no requiere Python local):
+
+```bash
+docker build -t steel-plates-quality-mlops .
+docker run --rm steel-plates-quality-mlops                                  # checks de evidencia y artefacto
+docker run --rm steel-plates-quality-mlops python -B -m pytest -q -p no:cacheprovider   # suite completa
+```
+
+La CI construye esta imagen y ejecuta ambos comandos en cada push. Power BI Desktop queda fuera del contenedor.
+
 Inferencia sobre un CSV propio con las 27 columnas (opcional `row_id`):
 
 ```bash

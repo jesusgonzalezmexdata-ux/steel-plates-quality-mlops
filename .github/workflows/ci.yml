@@ -22,3 +22,13 @@ jobs:
       - run: python -B -m tools.project_checks validate-artifact
       - run: python -B -m tools.project_checks batch-smoke
       - run: python -B -m tools.project_checks validate-evidence
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t steel-plates-quality-mlops .
+      - name: Evidence checks in container
+        run: docker run --rm steel-plates-quality-mlops
+      - name: Full tests in container
+        run: docker run --rm steel-plates-quality-mlops python -B -m pytest -q -p no:cacheprovider
