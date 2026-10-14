@@ -1,0 +1,84 @@
+{
+  "source_model": "artifacts/model/final_random_forest.joblib",
+  "source_model_sha256": "6f363b2c788789494d09e4f7a773c93a5fb283cda502bb73b7637fa6fc0c44e6",
+  "model_version": "rf-phase8-v1",
+  "onnx_artifact": "artifacts/onnx/final_random_forest.onnx",
+  "onnx_sha256": "96cd25e888034088797c1cc070d07b7f28affe1ea6b459a42016e32bcec56ecb",
+  "input": {
+    "name": "input",
+    "dtype": "float32",
+    "shape": [
+      null,
+      27
+    ],
+    "features": [
+      "X_Minimum",
+      "X_Maximum",
+      "Y_Minimum",
+      "Y_Maximum",
+      "Pixels_Areas",
+      "X_Perimeter",
+      "Y_Perimeter",
+      "Sum_of_Luminosity",
+      "Minimum_of_Luminosity",
+      "Maximum_of_Luminosity",
+      "Length_of_Conveyer",
+      "TypeOfSteel_A300",
+      "TypeOfSteel_A400",
+      "Steel_Plate_Thickness",
+      "Edges_Index",
+      "Empty_Index",
+      "Square_Index",
+      "Outside_X_Index",
+      "Edges_X_Index",
+      "Edges_Y_Index",
+      "Outside_Global_Index",
+      "LogOfAreas",
+      "Log_X_Index",
+      "Log_Y_Index",
+      "Orientation_Index",
+      "Luminosity_Index",
+      "SigmoidOfAreas"
+    ]
+  },
+  "outputs": {
+    "label": "predicted class",
+    "probabilities": "columns in classes order"
+  },
+  "classes": [
+    "Bumps",
+    "Dirtiness",
+    "K_Scatch",
+    "Other_Faults",
+    "Pastry",
+    "Stains",
+    "Z_Scratch"
+  ],
+  "target_opset": {
+    "": 17,
+    "ai.onnx.ml": 3
+  },
+  "tolerance": {
+    "max_abs_probability_diff": 1e-06
+  },
+  "verification": {
+    "training_rows": {
+      "n": 1552,
+      "max_abs_probability_diff": 8.319181794558261e-07,
+      "predicted_class_equal": true,
+      "review_status_equal": true
+    },
+    "synthetic_rows": {
+      "n": 2000,
+      "max_abs_probability_diff": 8.058605650562711e-07,
+      "predicted_class_equal": true,
+      "review_status_equal": true
+    }
+  },
+  "holdout_inference": false,
+  "versions": {
+    "skl2onnx": "1.20.0",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.31.0"
+  }
+}

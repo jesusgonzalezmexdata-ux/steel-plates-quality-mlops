@@ -1,0 +1,4 @@
+-r requirements-dev.txt
+skl2onnx==1.20.0
+onnx==1.23.2
+onnxruntime==1.31.0

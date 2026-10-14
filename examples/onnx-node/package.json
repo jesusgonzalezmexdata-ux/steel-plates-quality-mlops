@@ -1,0 +1,8 @@
+{
+  "name": "steel-plates-onnx-node",
+  "private": true,
+  "type": "module",
+  "description": "Node.js inference of the frozen steel-plates model through ONNX Runtime",
+  "scripts": { "predict": "node predict.mjs" },
+  "dependencies": { "onnxruntime-node": "1.30.0" }
+}

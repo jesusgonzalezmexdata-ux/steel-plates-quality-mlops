@@ -87,6 +87,16 @@ python -B -m pytest -q tests/test_data_contract.py   # incluye 5 corrupciones qu
 
 El contrato fija nombres y tipos de las 35 columnas (`contract: enforced`), unicidad de `id`, nulos, one-hot exclusivo de clase y de acero, distribución exacta por clase, filas = 1,941, coherencia geométrica y rangos de los índices normalizados ([`dbt/`](dbt/)).
 
+Modelo exportado a ONNX e inferencia desde otro lenguaje (Node.js):
+
+```bash
+pip install -r requirements-onnx.txt
+python -B -m tools.export_onnx --check      # exporta, exige el mismo SHA256 y la equivalencia con scikit-learn
+cd examples/onnx-node && npm ci && node predict.mjs   # inferencia con ONNX Runtime desde JavaScript
+```
+
+El ONNX es un artefacto derivado del modelo congelado, no lo reemplaza. Reproduce la semántica float32 de los árboles de scikit-learn: en 1,552 filas de entrenamiento y 2,000 sintéticas la diferencia máxima de probabilidad es 8.3e-7 (tolerancia 1e-6), con la misma clase y el mismo estado de revisión en todos los casos. No se hizo inferencia sobre el holdout ([informe](reports/onnx/verification.json)).
+
 Con Docker (mismo sistema operativo y dependencias en cualquier equipo; no requiere Python local):
 
 ```bash

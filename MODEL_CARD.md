@@ -11,6 +11,7 @@ Decision-support prototype; not a production system.
 | Manifest | [`artifacts/manifest.json`](artifacts/manifest.json) (fingerprints of data, split, feature policy, config, policy) |
 | Validity scope | `FULL_OBSERVATION_CLASSIFICATION_ONLY` |
 | Early prediction supported | `FALSE` |
+| Portable export | ONNX (float32, opset 17 / ai.onnx.ml 3), derived and verified: max probability diff 8.3e-7, identical class and review status ([report](reports/onnx/verification.json)) |
 | Recorded environment | Python 3.13.7, scikit-learn 1.7.1, numpy 2.2.6, pandas 2.3.3, joblib 1.5.1 |
 
 ## Intended use
