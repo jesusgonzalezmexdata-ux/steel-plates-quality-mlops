@@ -33,7 +33,7 @@ def test_export_reconciles_frozen_predictions_and_role():
 
 RUTA_CSV_BASELINE = (b'expression RutaCSV = "C:\\\\Users\\\\Lowo\\\\Downloads\\\\'
                      b'steel-plates-quality-bi-main\\\\data\\\\raw\\\\steel_plates_faults.csv"')
-RUTA_CSV_PLACEHOLDER = (b'expression RutaCSV = "C:\\\\path\\\\to\\\\steel-plates-quality-mlops-'
+RUTA_CSV_PLACEHOLDER = (b'expression RutaCSV = "C:\\\\path\\\\to\\\\steel-plates-quality-mlops'
                         b'\\\\data\\\\raw\\\\steel_plates_faults.csv"')
 
 

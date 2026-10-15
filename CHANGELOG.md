@@ -60,8 +60,8 @@ the consumed holdout have not changed since v1.0.0.
 - Frozen `tuned_random_forest`, evaluated once on the 389-row holdout: macro-F1 0.8147, balanced accuracy 0.8049, log-loss 0.6893.
 - Model Card, evidence pack and clean-clone reproducibility (122 tests).
 
-[1.3.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/compare/v1.2.1...v1.3.0
-[1.2.1]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/compare/v1.2.0...v1.2.1
-[1.2.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/releases/tag/v1.0.0
+[1.3.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/compare/v1.2.1...v1.3.0
+[1.2.1]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/releases/tag/v1.0.0

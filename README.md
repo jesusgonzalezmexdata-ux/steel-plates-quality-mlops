@@ -1,7 +1,7 @@
 # Quality intelligence: steel-plate defect classification
 
-[![CI](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/actions/workflows/ci.yml/badge.svg)](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-)](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/releases)
+[![CI](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/actions/workflows/ci.yml/badge.svg)](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/jesusgonzalezmexdata-ux/steel-plates-quality-mlops)](https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/releases)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey)](NOTICE)
 
@@ -69,8 +69,8 @@ Descriptive findings (with **illustrative costs**, not demonstrated savings): th
 Requires Python 3.13 (recorded environment: 3.13.7) and Git LFS.
 
 ```bash
-git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-.git
-cd steel-plates-quality-mlops-
+git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops.git
+cd steel-plates-quality-mlops
 git lfs pull
 python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate

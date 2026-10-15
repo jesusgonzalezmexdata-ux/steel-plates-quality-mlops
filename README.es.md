@@ -64,8 +64,8 @@ Hallazgos descriptivos (con **costos ilustrativos**, no ahorros demostrados): tr
 Requiere Python 3.13 (entorno registrado: 3.13.7) y Git LFS.
 
 ```bash
-git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-.git
-cd steel-plates-quality-mlops-
+git clone https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops.git
+cd steel-plates-quality-mlops
 git lfs pull
 python -m venv .venv
 source .venv/bin/activate            # Windows: .venv\Scripts\activate

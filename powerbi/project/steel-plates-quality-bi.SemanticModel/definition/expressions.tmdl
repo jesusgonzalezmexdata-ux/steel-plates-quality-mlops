@@ -15,7 +15,7 @@ expression Raw_SteelPlates =
 
 	annotation PBI_ResultType = Table
 
-expression RutaCSV = "C:\\path\\to\\steel-plates-quality-mlops-\\data\\raw\\steel_plates_faults.csv"
+expression RutaCSV = "C:\\path\\to\\steel-plates-quality-mlops\\data\\raw\\steel_plates_faults.csv"
 	lineageTag: 27ced829-7a4e-4eb9-8aa3-17d0f7a5a453
 
 	annotation PBI_NavigationStepName = Navegación

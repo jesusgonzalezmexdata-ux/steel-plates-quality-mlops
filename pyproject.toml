@@ -17,8 +17,8 @@ dynamic = ["dependencies"]
 steel-predict = "quality_ml.inference.predict:main"
 
 [project.urls]
-Repository = "https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-"
-Changelog = "https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops-/blob/main/CHANGELOG.md"
+Repository = "https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops"
+Changelog = "https://github.com/jesusgonzalezmexdata-ux/steel-plates-quality-mlops/blob/main/CHANGELOG.md"
 
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
