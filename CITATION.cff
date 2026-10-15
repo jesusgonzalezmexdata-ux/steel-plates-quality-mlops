@@ -3,8 +3,8 @@ message: "If you use this software or its evidence, please cite it as below."
 title: "steel-plates-quality-mlops: reproducible quality-intelligence case for steel-plate defect classification"
 type: software
 authors:
-  - family-names: "Gonzalez"
-    given-names: "Jesus R. L."
+  - family-names: "González"
+    given-names: "Jesús R. L."
 license: Apache-2.0
 version: "1.3.0"
 date-released: "2026-10-14"
