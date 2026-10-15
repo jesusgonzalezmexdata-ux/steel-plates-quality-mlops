@@ -4,6 +4,12 @@ All notable changes to this project are documented here. Versions follow
 [Semantic Versioning](https://semver.org/). The frozen model, its metrics and
 the consumed holdout have not changed since v1.0.0.
 
+## [Unreleased]
+
+### Added
+- Executive summary in English and Spanish (`docs/EXECUTIVE_SUMMARY.md`, `docs/RESUMEN_EJECUTIVO.md`).
+- Assumption-based cost sensitivity of the development-only review policy (`tools/review_cost.py`, `reports/ml/decision/review_cost.json`): break-even ranges of the miss-to-review cost ratio for perfect and imperfect reviewers, checked against brute force. No real costs, savings or new thresholds.
+
 ## [1.3.0] - 2026-10-14
 
 ### Added

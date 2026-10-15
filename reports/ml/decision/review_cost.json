@@ -1,0 +1,492 @@
+{
+  "purpose": "Assumption-based cost sensitivity; no real costs, savings or new thresholds",
+  "policy_status": "DEVELOPMENT_ONLY",
+  "threshold": 0.8,
+  "cost_model": "cost = c_review*reviewed + c_miss*uncaught_errors; reviewer catches an error with probability r",
+  "development_oof": {
+    "evidence": "DEVELOPMENT_OOF",
+    "counts": {
+      "n": 1552,
+      "n_review": 1074,
+      "n_accepted": 478,
+      "errors": 356,
+      "errors_in_review": 347,
+      "errors_accepted": 9
+    },
+    "break_even": {
+      "1.0": {
+        "frozen_policy_cheapest_if_ratio_above": 3.0951008645533142,
+        "frozen_policy_cheapest_if_ratio_below": 53.111111111111114
+      },
+      "0.9": {
+        "frozen_policy_cheapest_if_ratio_above": 3.4390009606147935,
+        "frozen_policy_cheapest_if_ratio_below": 59.01234567901235
+      },
+      "0.8": {
+        "frozen_policy_cheapest_if_ratio_above": 3.8688760806916425,
+        "frozen_policy_cheapest_if_ratio_below": 66.38888888888889
+      }
+    },
+    "grid": [
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 1,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 356,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1083.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 2,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 712,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1092.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 3,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 1068,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1101.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 5,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 1780,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1119.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 10,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 3560,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1164.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 20,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 7120,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1254.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 50,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 17800,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1524.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 100,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 35600,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 1974.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 200,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 71200,
+        "REVIEW_ALL": 1552.0,
+        "FROZEN_POLICY": 2874.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 1,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 356,
+        "REVIEW_ALL": 1587.6,
+        "FROZEN_POLICY": 1117.7
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 2,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 712,
+        "REVIEW_ALL": 1623.2,
+        "FROZEN_POLICY": 1161.4
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 3,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 1068,
+        "REVIEW_ALL": 1658.8,
+        "FROZEN_POLICY": 1205.1
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 5,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 1780,
+        "REVIEW_ALL": 1730.0,
+        "FROZEN_POLICY": 1292.5
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 10,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 3560,
+        "REVIEW_ALL": 1908.0,
+        "FROZEN_POLICY": 1511.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 20,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 7120,
+        "REVIEW_ALL": 2264.0,
+        "FROZEN_POLICY": 1948.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 50,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 17800,
+        "REVIEW_ALL": 3332.0,
+        "FROZEN_POLICY": 3259.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 100,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 35600,
+        "REVIEW_ALL": 5112.0,
+        "FROZEN_POLICY": 5444.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 200,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 71200,
+        "REVIEW_ALL": 8672.0,
+        "FROZEN_POLICY": 9814.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 1,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 356,
+        "REVIEW_ALL": 1623.2,
+        "FROZEN_POLICY": 1152.4
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 2,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 712,
+        "REVIEW_ALL": 1694.4,
+        "FROZEN_POLICY": 1230.8
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 3,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 1068,
+        "REVIEW_ALL": 1765.6,
+        "FROZEN_POLICY": 1309.2
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 5,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 1780,
+        "REVIEW_ALL": 1908.0,
+        "FROZEN_POLICY": 1466.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 10,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 3560,
+        "REVIEW_ALL": 2264.0,
+        "FROZEN_POLICY": 1858.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 20,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 7120,
+        "REVIEW_ALL": 2976.0,
+        "FROZEN_POLICY": 2642.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 50,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 17800,
+        "REVIEW_ALL": 5112.0,
+        "FROZEN_POLICY": 4994.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 100,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 35600,
+        "REVIEW_ALL": 8672.0,
+        "FROZEN_POLICY": 8914.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 200,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 71200,
+        "REVIEW_ALL": 15792.0,
+        "FROZEN_POLICY": 16754.0
+      }
+    ]
+  },
+  "holdout_post_hoc": {
+    "evidence": "POST_HOC_DESCRIPTION_ONLY",
+    "counts": {
+      "n": 389,
+      "n_review": 261,
+      "n_accepted": 128,
+      "errors": 82,
+      "errors_in_review": 81,
+      "errors_accepted": 1
+    },
+    "break_even": {
+      "1.0": {
+        "frozen_policy_cheapest_if_ratio_above": 3.2222222222222223,
+        "frozen_policy_cheapest_if_ratio_below": 128.0
+      },
+      "0.9": {
+        "frozen_policy_cheapest_if_ratio_above": 3.580246913580247,
+        "frozen_policy_cheapest_if_ratio_below": 142.22222222222223
+      },
+      "0.8": {
+        "frozen_policy_cheapest_if_ratio_above": 4.027777777777778,
+        "frozen_policy_cheapest_if_ratio_below": 160.0
+      }
+    },
+    "grid": [
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 1,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 82,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 262.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 2,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 164,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 263.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 3,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 246,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 264.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 5,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 410,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 266.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 10,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 820,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 271.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 20,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 1640,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 281.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 50,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 4100,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 311.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 100,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 8200,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 361.0
+      },
+      {
+        "reviewer_recall": 1.0,
+        "cost_ratio_miss_to_review": 200,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 16400,
+        "REVIEW_ALL": 389.0,
+        "FROZEN_POLICY": 461.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 1,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 82,
+        "REVIEW_ALL": 397.2,
+        "FROZEN_POLICY": 270.1
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 2,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 164,
+        "REVIEW_ALL": 405.4,
+        "FROZEN_POLICY": 279.2
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 3,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 246,
+        "REVIEW_ALL": 413.6,
+        "FROZEN_POLICY": 288.3
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 5,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 410,
+        "REVIEW_ALL": 430.0,
+        "FROZEN_POLICY": 306.5
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 10,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 820,
+        "REVIEW_ALL": 471.0,
+        "FROZEN_POLICY": 352.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 20,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 1640,
+        "REVIEW_ALL": 553.0,
+        "FROZEN_POLICY": 443.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 50,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 4100,
+        "REVIEW_ALL": 799.0,
+        "FROZEN_POLICY": 716.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 100,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 8200,
+        "REVIEW_ALL": 1209.0,
+        "FROZEN_POLICY": 1171.0
+      },
+      {
+        "reviewer_recall": 0.9,
+        "cost_ratio_miss_to_review": 200,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 16400,
+        "REVIEW_ALL": 2029.0,
+        "FROZEN_POLICY": 2081.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 1,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 82,
+        "REVIEW_ALL": 405.4,
+        "FROZEN_POLICY": 278.2
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 2,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 164,
+        "REVIEW_ALL": 421.8,
+        "FROZEN_POLICY": 295.4
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 3,
+        "cheapest": "NO_REVIEW",
+        "NO_REVIEW": 246,
+        "REVIEW_ALL": 438.2,
+        "FROZEN_POLICY": 312.6
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 5,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 410,
+        "REVIEW_ALL": 471.0,
+        "FROZEN_POLICY": 347.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 10,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 820,
+        "REVIEW_ALL": 553.0,
+        "FROZEN_POLICY": 433.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 20,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 1640,
+        "REVIEW_ALL": 717.0,
+        "FROZEN_POLICY": 605.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 50,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 4100,
+        "REVIEW_ALL": 1209.0,
+        "FROZEN_POLICY": 1121.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 100,
+        "cheapest": "FROZEN_POLICY",
+        "NO_REVIEW": 8200,
+        "REVIEW_ALL": 2029.0,
+        "FROZEN_POLICY": 1981.0
+      },
+      {
+        "reviewer_recall": 0.8,
+        "cost_ratio_miss_to_review": 200,
+        "cheapest": "REVIEW_ALL",
+        "NO_REVIEW": 16400,
+        "REVIEW_ALL": 3669.0,
+        "FROZEN_POLICY": 3701.0
+      }
+    ]
+  }
+}

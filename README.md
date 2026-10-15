@@ -20,7 +20,7 @@
 | **Final model** | Frozen Random Forest (300 trees, `class_weight="balanced"`, `random_state=42`), selected with cross-validation only. |
 | **Holdout result** | 389 plates never used for any decision: **macro-F1 0.815**, balanced accuracy 0.805, log-loss 0.689. Development CV: macro-F1 0.801 ± 0.028. |
 | **Power BI role** | Quality-intelligence layer: defect distribution, COPQ with assumed costs, group control chart, reference Cpk and a model performance and review page. |
-| **Evidence** | [Model Card](MODEL_CARD.md) · [Evidence pack](docs/evidence/README.md) · [model manifest](artifacts/manifest.json) |
+| **Evidence** | [Executive summary](docs/EXECUTIVE_SUMMARY.md) · [Model Card](MODEL_CARD.md) · [Evidence pack](docs/evidence/README.md) · [model manifest](artifacts/manifest.json) |
 
 ## From problem to evidence
 
