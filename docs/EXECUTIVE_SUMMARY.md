@@ -18,6 +18,16 @@
 
 Which policy is cheapest depends on one number: **how much more a missed error costs than one human review** (R). With development data and a perfect reviewer, the 0.80 review policy is the cheapest of the three when **3.1 < R < 53**. Below that range, reviewing does not pay. Above it, reviewing everything is cheaper. With an imperfect reviewer the range shifts to 3.4–59 (90 % recall) or 3.9–66 (80 % recall). The holdout description gives a consistent range (3.2–128). See [review_cost.json](../reports/ml/decision/review_cost.json) and `python -B -m tools.review_cost`.
 
+**What it is worth per 1,000 plates.** Cost in units of one human review, development data, perfect reviewer. R is your assumption, not a measured cost:
+
+| Policy | R = 10 | R = 20 |
+|---|---:|---:|
+| Accept every prediction | 2,294 | 4,588 |
+| Review everything | 1,000 | 1,000 |
+| **Review when confidence < 0.80** | **750** | **808** |
+
+At R = 10 the review policy costs 25 % less than reviewing everything and 67 % less than accepting every prediction. Reproduced by `python -B -m tools.review_cost` (`per_1000_plates_review_units`).
+
 **How to use it.** Estimate R for your plant (for example, the cost of a wrong defect disposition against a few minutes of an inspector's time). If R falls inside the range, the review policy is a reasonable starting point for a pilot.
 
 ## What it does not claim
@@ -32,5 +42,7 @@ Which policy is cheapest depends on one number: **how much more a missed error c
 - The model was chosen with cross-validation only, then evaluated **once** on an independent holdout. Nothing was tuned afterwards.
 - Every number in this summary is reproduced by tests in CI from a fresh clone, Docker, a SQL data contract and an ONNX export verified byte for byte.
 - Full detail: [Model Card](../MODEL_CARD.md) and [Evidence pack](evidence/README.md).
+
+**Monitoring.** `python -B -m tools.drift_check` compares a batch of plates with the training plates (PSI and out-of-range share per measurement). The holdout passes; a thickness unit change and a +15 % luminosity recalibration both raise an alert ([drift.json](../reports/ml/monitoring/drift.json)).
 
 **Next step for a real deployment:** a short pilot on new plates from the target plant, measuring reviewer accuracy and time, before fixing any threshold.

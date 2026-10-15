@@ -48,3 +48,11 @@ def test_break_even_matches_brute_force(result, part, recall):
 def test_committed_report_is_reproducible(result):
     committed = json.loads((ROOT / review_cost.OUTPUT).read_text(encoding="utf-8"))
     assert committed == json.loads(json.dumps(result))
+
+
+def test_per_1000_summary_matches_grid(result):
+    c = result["development_oof"]["counts"]
+    for ratio, row in result["development_oof"]["per_1000_plates_review_units"].items():
+        costs = review_cost.policy_costs(c, float(ratio), 1.0)
+        for policy, value in row.items():
+            assert value == round(1000 * costs[policy] / c["n"], 1)

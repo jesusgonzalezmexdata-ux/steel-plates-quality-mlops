@@ -244,7 +244,19 @@
         "REVIEW_ALL": 15792.0,
         "FROZEN_POLICY": 16754.0
       }
-    ]
+    ],
+    "per_1000_plates_review_units": {
+      "10": {
+        "NO_REVIEW": 2293.8,
+        "REVIEW_ALL": 1000.0,
+        "FROZEN_POLICY": 750.0
+      },
+      "20": {
+        "NO_REVIEW": 4587.6,
+        "REVIEW_ALL": 1000.0,
+        "FROZEN_POLICY": 808.0
+      }
+    }
   },
   "holdout_post_hoc": {
     "evidence": "POST_HOC_DESCRIPTION_ONLY",
@@ -487,6 +499,18 @@
         "REVIEW_ALL": 3669.0,
         "FROZEN_POLICY": 3701.0
       }
-    ]
+    ],
+    "per_1000_plates_review_units": {
+      "10": {
+        "NO_REVIEW": 2108.0,
+        "REVIEW_ALL": 1000.0,
+        "FROZEN_POLICY": 696.7
+      },
+      "20": {
+        "NO_REVIEW": 4215.9,
+        "REVIEW_ALL": 1000.0,
+        "FROZEN_POLICY": 722.4
+      }
+    }
   }
 }

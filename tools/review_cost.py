@@ -29,6 +29,7 @@ HOLDOUT = "powerbi/data/ml_holdout_evaluation.csv"
 OUTPUT = "reports/ml/decision/review_cost.json"
 RATIOS = [1, 2, 3, 5, 10, 20, 50, 100, 200]
 RECALLS = [1.0, 0.9, 0.8]
+EXAMPLE_RATIOS = [10, 20]  # illustrative R values for the per-1,000-plates summary
 
 
 def counts(correct, confidence, threshold):
@@ -65,7 +66,10 @@ def analyse(c):
             table.append(dict(reviewer_recall=recall, cost_ratio_miss_to_review=ratio,
                               cheapest=min(costs, key=costs.get),
                               **{k: round(v, 6) for k, v in costs.items()}))
-    return dict(counts=c, break_even={str(r): break_even(c, r) for r in RECALLS}, grid=table)
+    per_1000 = {str(r): {k: round(1000 * v / c["n"], 1) for k, v in policy_costs(c, r, 1.0).items()}
+                for r in EXAMPLE_RATIOS}
+    return dict(counts=c, break_even={str(r): break_even(c, r) for r in RECALLS}, grid=table,
+                per_1000_plates_review_units=per_1000)
 
 
 def run(root=ROOT) -> dict:
