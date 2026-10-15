@@ -19,6 +19,7 @@
 | **What it does NOT predict** | Whether a plate will be defective, a defect before it happens, or its causes. It is not predictive maintenance or a production system (`EARLY_PREDICTION_SUPPORTED = FALSE`). |
 | **Final model** | Frozen Random Forest (300 trees, `class_weight="balanced"`, `random_state=42`), selected with cross-validation only. |
 | **Holdout result** | 389 plates never used for any decision: **macro-F1 0.815**, balanced accuracy 0.805, log-loss 0.689. Development CV: macro-F1 0.801 ± 0.028. |
+| **Decision value** | Per 1,000 plates, reviewing only predictions with confidence < 0.80 costs 750 review units against 1,000 for reviewing everything, if a missed error costs 10 reviews (development data; [executive summary](docs/EXECUTIVE_SUMMARY.md)). |
 | **Power BI role** | Quality-intelligence layer: defect distribution, COPQ with assumed costs, group control chart, reference Cpk and a model performance and review page. |
 | **Evidence** | [Executive summary](docs/EXECUTIVE_SUMMARY.md) · [Model Card](MODEL_CARD.md) · [Evidence pack](docs/evidence/README.md) · [model manifest](artifacts/manifest.json) |
 
@@ -63,6 +64,10 @@ Descriptive findings (with **illustrative costs**, not demonstrated savings): th
 - The *MODEL PERFORMANCE & REVIEW* page and the `ML_Holdout` table were reconciled against Python (389 rows, 307 correct, 82 errors, 261 to review) at export level only: [reconciliation](docs/evidence/powerbi_ml_reconciliation.md).
 - **Power BI Desktop runtime validation is pending** (open, refresh, render, save): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Exact steps in the [handoff](docs/evidence/powerbi_runtime_handoff.md). The published PBIX does not yet contain the ML page.
 - The PBIP `RutaCSV` parameter ships with a placeholder (`C:\path\to\...`); set it in Desktop to `data/raw/steel_plates_faults.csv` in your clone.
+
+## Monitoring
+
+`python -B -m tools.drift_check` compares a batch of plates with the 1,552 training plates: PSI per measurement (≥ 0.25 = alert) and share of values outside the training range (> 5 % = alert). The holdout batch passes (max PSI 0.07); a thickness unit change (mm → cm) and a +15 % camera luminosity recalibration are both flagged. Output: [drift.json](reports/ml/monitoring/drift.json).
 
 ## Reproduce
 

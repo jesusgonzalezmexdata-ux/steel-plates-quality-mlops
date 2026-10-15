@@ -13,6 +13,8 @@ the consumed holdout have not changed since v1.0.0.
 - Dependabot configuration: dependency updates are reviewed and applied manually by the maintainer, so every commit has a single author.
 
 ### Added
+- Input-drift monitoring (`tools/drift_check.py`, `reports/ml/monitoring/drift.json`): PSI and out-of-range share per measurement against the training plates; the holdout passes, a unit change and a luminosity recalibration are flagged.
+- Per-1,000-plates cost of each review policy for illustrative ratios R = 10 and 20 in `review_cost.json`, shown in the README and executive summaries.
 - Executive summary in English and Spanish (`docs/EXECUTIVE_SUMMARY.md`, `docs/RESUMEN_EJECUTIVO.md`).
 - Assumption-based cost sensitivity of the development-only review policy (`tools/review_cost.py`, `reports/ml/decision/review_cost.json`): break-even ranges of the miss-to-review cost ratio for perfect and imperfect reviewers, checked against brute force. No real costs, savings or new thresholds.
 

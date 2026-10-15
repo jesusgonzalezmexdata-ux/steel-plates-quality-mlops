@@ -1,0 +1,41 @@
+{
+  "reference": "1,552 training plates",
+  "thresholds": {
+    "psi_moderate": 0.1,
+    "psi_major": 0.25,
+    "out_of_range": 0.05
+  },
+  "batches": {
+    "Holdout plates (same population)": {
+      "status": "OK",
+      "plates": 389,
+      "psi_major": [],
+      "psi_moderate": [],
+      "out_of_range": [],
+      "max_psi": 0.0741
+    },
+    "Unit change: thickness reported in cm instead of mm": {
+      "status": "ALERT",
+      "plates": 389,
+      "psi_major": [
+        "Steel_Plate_Thickness"
+      ],
+      "psi_moderate": [],
+      "out_of_range": [
+        "Steel_Plate_Thickness"
+      ],
+      "max_psi": 16.7171
+    },
+    "Camera recalibration: luminosity +15 %": {
+      "status": "ALERT",
+      "plates": 389,
+      "psi_major": [
+        "Maximum_of_Luminosity",
+        "Minimum_of_Luminosity"
+      ],
+      "psi_moderate": [],
+      "out_of_range": [],
+      "max_psi": 1.9364
+    }
+  }
+}

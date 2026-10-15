@@ -14,6 +14,7 @@
 | **Qué NO predice** | Si una placa tendrá defecto, el defecto antes de que ocurra, ni sus causas. No es mantenimiento predictivo ni un sistema en producción (`EARLY_PREDICTION_SUPPORTED = FALSE`). |
 | **Modelo final** | Random Forest congelado (300 árboles, `class_weight="balanced"`, `random_state=42`), elegido solo con validación cruzada. |
 | **Resultado en holdout** | 389 placas nunca usadas para decidir: **macro-F1 0.815**, balanced accuracy 0.805, log-loss 0.689. CV de desarrollo: macro-F1 0.801 ± 0.028. |
+| **Valor de la decisión** | Por cada 1,000 placas, revisar solo las predicciones con confianza < 0.80 cuesta 750 unidades de revisión frente a 1,000 de revisar todo, si un error no detectado cuesta 10 revisiones (datos de desarrollo; [resumen ejecutivo](docs/RESUMEN_EJECUTIVO.md)). |
 | **Rol de Power BI** | Capa de *quality intelligence*: distribución de defectos, COPQ con costos supuestos, carta por grupos, Cpk de referencia y una página de desempeño del modelo y revisión. |
 | **Evidencia** | [Resumen ejecutivo](docs/RESUMEN_EJECUTIVO.md) · [Model Card](MODEL_CARD.md) · [Evidence pack](docs/evidence/README.md) · [manifest del modelo](artifacts/manifest.json) |
 
@@ -58,6 +59,10 @@ Hallazgos descriptivos (con **costos ilustrativos**, no ahorros demostrados): tr
 - La página *MODEL PERFORMANCE & REVIEW* y la tabla `ML_Holdout` se reconciliaron contra Python (389 filas, 307 aciertos, 82 errores, 261 a revisión) solo a nivel de exportación: [reconciliación](docs/evidence/powerbi_ml_reconciliation.md).
 - **La validación en Power BI Desktop está pendiente** (abrir, refrescar, renderizar y guardar): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Pasos exactos en el [handoff](docs/evidence/powerbi_runtime_handoff.md). El PBIX publicado aún no contiene la página ML.
 - El parámetro `RutaCSV` del PBIP trae una ruta de ejemplo (`C:\path\to\...`); ajústalo en Desktop a `data/raw/steel_plates_faults.csv` de tu clon.
+
+## Monitoreo
+
+`python -B -m tools.drift_check` compara un lote de placas con las 1,552 de entrenamiento: PSI por medición (≥ 0.25 = alerta) y porcentaje de valores fuera del rango de entrenamiento (> 5 % = alerta). El lote del holdout pasa (PSI máximo 0.07); un cambio de unidad en el espesor (mm → cm) y una recalibración de luminosidad de la cámara de +15 % se detectan. Salida: [drift.json](reports/ml/monitoring/drift.json).
 
 ## Cómo reproducir
 
