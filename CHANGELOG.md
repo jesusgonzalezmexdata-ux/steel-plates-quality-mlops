@@ -6,6 +6,12 @@ the consumed holdout have not changed since v1.0.0.
 
 ## [Unreleased]
 
+### Changed
+- GitHub Actions updated by the maintainer: `actions/setup-python` v7, `actions/setup-node` v7, `github/codeql-action` v4; `pytest>=9.1.1`.
+
+### Removed
+- Dependabot configuration: dependency updates are reviewed and applied manually by the maintainer, so every commit has a single author.
+
 ### Added
 - Executive summary in English and Spanish (`docs/EXECUTIVE_SUMMARY.md`, `docs/RESUMEN_EJECUTIVO.md`).
 - Assumption-based cost sensitivity of the development-only review policy (`tools/review_cost.py`, `reports/ml/decision/review_cost.json`): break-even ranges of the miss-to-review cost ratio for perfect and imperfect reviewers, checked against brute force. No real costs, savings or new thresholds.
