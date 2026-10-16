@@ -2,6 +2,8 @@
 
 [English](README.md) · **Español**
 
+**[Demo en vivo](https://huggingface.co/spaces/JesusRLGonzalez/steel-plates-quality-mlops)** | **[Página del proyecto](https://jesusgonzalezmexdata-ux.github.io/steel-plates-quality-mlops/)**
+
 **Un problema industrial de calidad convertido en evidencia medible: contrato de datos, validación científica, un modelo evaluado una sola vez sobre un holdout independiente, análisis de errores y apoyo a la decisión en Power BI, todo reproducible desde este repositorio.**
 
 ## En un minuto
