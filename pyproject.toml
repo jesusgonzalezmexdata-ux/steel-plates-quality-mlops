@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "steel-plates-quality-mlops"
-version = "1.3.0"
+version = "1.4.0"
 description = "Full-observation steel defect classification and reproducible evidence"
 requires-python = ">=3.13,<3.14"
 license = "Apache-2.0"

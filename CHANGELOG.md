@@ -4,7 +4,7 @@ All notable changes to this project are documented here. Versions follow
 [Semantic Versioning](https://semver.org/). The frozen model, its metrics and
 the consumed holdout have not changed since v1.0.0.
 
-## [Unreleased]
+## [1.4.0] - 2026-10-16
 
 ### Changed
 - GitHub Actions updated by the maintainer: `actions/setup-python` v7, `actions/setup-node` v7, `github/codeql-action` v4; `pytest>=9.1.1`.
@@ -13,6 +13,7 @@ the consumed holdout have not changed since v1.0.0.
 - Dependabot configuration: dependency updates are reviewed and applied manually by the maintainer, so every commit has a single author.
 
 ### Added
+- Project page on GitHub Pages and a live demo on Hugging Face Spaces, published automatically from `main`.
 - Input-drift monitoring (`tools/drift_check.py`, `reports/ml/monitoring/drift.json`): PSI and out-of-range share per measurement against the training plates; the holdout passes, a unit change and a luminosity recalibration are flagged.
 - Per-1,000-plates cost of each review policy for illustrative ratios R = 10 and 20 in `review_cost.json`, shown in the README and executive summaries.
 - Executive summary in English and Spanish (`docs/EXECUTIVE_SUMMARY.md`, `docs/RESUMEN_EJECUTIVO.md`).
