@@ -1,0 +1,19 @@
+{
+  "title": "Steel-plate defect quality",
+  "emoji": "🏭",
+  "colorFrom": "blue",
+  "colorTo": "gray",
+  "entrypoint": "streamlit_app.py",
+  "requirements": [
+    "plotly"
+  ],
+  "include": [
+    "streamlit_app.py",
+    "qbi",
+    "data/model"
+  ],
+  "short_description": "Defect cost, capability and actions for steel plates",
+  "summary": "Explore defect cost, capability and the recommended action by defect type for the Steel Plates Faults data.",
+  "repo": "steel-plates-quality-mlops",
+  "license": "apache-2.0"
+}
