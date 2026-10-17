@@ -12,7 +12,8 @@ import streamlit as st
 from qbi import measures as M
 from qbi.config import UMBRAL_COPQ_PCT, UMBRAL_CPK, UMBRAL_FUERA_USL_PCT, USL_AREA_PX
 
-AZUL, GRIS, ROJO, VERDE, AMBAR = "#0B5394", "#8A94A3", "#C62828", "#2E7D32", "#F9A825"
+# Paleta «Señal de campo»: negro señal, línea, agotado, a favor y amarillo vial.
+AZUL, GRIS, ROJO, VERDE, AMBAR = "#0E0F11", "#C9CDD1", "#D7261E", "#1F7A3D", "#FFD21F"
 COLOR = {"verde": VERDE, "amarillo": AMBAR, "rojo": ROJO}
 
 st.set_page_config(page_title="Inteligencia de manufactura · Placas de acero", layout="wide")
@@ -63,7 +64,7 @@ c1.metric("Placas defectuosas", f"{len(df):,}")
 c2.metric("COPQ (supuesto)", f"{p.copq_mxn.sum() / 1e6:.2f} M MXN")
 c3.metric("Defectos ≥ 5,000 px²", f"{(df.area_px2 >= 5000).mean():.1%}")
 c4.metric("Cpk del tamaño de defecto", f"{cpk_global:.2f}", help=f"Verde ≥ {UMBRAL_CPK}; amarillo ≥ 1.00")
-st.markdown(f"<div style='border-left:6px solid {COLOR[M.semaforo(cpk_global)]};padding:6px 12px;background:#F1F4F8'>"
+st.markdown(f"<div style='border-left:6px solid {COLOR[M.semaforo(cpk_global)]};padding:6px 12px;background:#F6F7F5'>"
             f"<b>ISO 9001:2015 · 10.2</b> No conformidad y acción correctiva: prioridad de causa raíz → "
             f"<b>{p.tipo_defecto.iloc[0]}</b> ({p.copq_mxn.iloc[0] / p.copq_mxn.sum():.0%} del COPQ).</div>", unsafe_allow_html=True)
 
