@@ -154,6 +154,16 @@ Carga el modelo solo desde un checkout de confianza: joblib/pickle ejecuta códi
 
 **Jesús R. L. González** · Analista y Científico de Datos · Operaciones y Calidad en manufactura · [LinkedIn](https://www.linkedin.com/in/jesus-r-l-gonzalez)
 
+## Aptitudes demostradas
+
+| Aptitud | Evidencia |
+|---|---|
+| Process capability (Cpk) / Análisis de capacidad de procesos | `qbi/measures.py` |
+| Data modeling (star schema, dbt) / Modelado de datos | `etl/build_star_schema.py`, `dbt/` |
+| Quality control / Control de calidad | `src/quality_ml/review_intake.py`, `src/quality_ml/evaluation/protocol.py` |
+| Power BI, SQL | `powerbi/`, `dbt/models/` |
+| Data visualization, Git, CI, testing / Visualización de datos, Git, integración continua, pruebas | `streamlit_app.py`, `.github/workflows/`, `tests/` |
+
 ## Licencia y cita
 
 - **Código y documentación:** [Apache License 2.0](LICENSE). Ver [NOTICE](NOTICE).

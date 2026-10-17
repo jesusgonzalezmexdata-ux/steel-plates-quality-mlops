@@ -131,6 +131,16 @@ The output contains the predicted class, seven probabilities, top-2 margin and t
 
 Issues and pull requests are welcome; read [CONTRIBUTING.md](CONTRIBUTING.md) first. Changes to the frozen model, its evidence or the holdout policy are out of scope by design.
 
+## Skills demonstrated
+
+| Skill | Evidence |
+|---|---|
+| Process capability (Cpk) / Análisis de capacidad de procesos | `qbi/measures.py` |
+| Data modeling (star schema, dbt) / Modelado de datos | `etl/build_star_schema.py`, `dbt/` |
+| Quality control / Control de calidad | `src/quality_ml/review_intake.py`, `src/quality_ml/evaluation/protocol.py` |
+| Power BI, SQL | `powerbi/`, `dbt/models/` |
+| Data visualization, Git, CI, testing / Visualización de datos, Git, integración continua, pruebas | `streamlit_app.py`, `.github/workflows/`, `tests/` |
+
 ## License and citation
 
 - **Code and documentation:** [Apache License 2.0](LICENSE). See [NOTICE](NOTICE).
