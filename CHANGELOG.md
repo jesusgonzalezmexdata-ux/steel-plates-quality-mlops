@@ -4,6 +4,15 @@ All notable changes to this project are documented here. Versions follow
 [Semantic Versioning](https://semver.org/). The frozen model, its metrics and
 the consumed holdout have not changed since v1.0.0.
 
+## [1.5.0] - 2026-10-17
+
+### Added
+- MVP «Triaje de revisión humana» (demo mode «Triaje de revisión»): input template and row-level validation in Spanish; band weights for the reviewed sample; per-class confidence thresholds from a weighted logistic model of P(error); out-of-sample escape estimate with Jeffreys interval; audit sample and alarm; list of parts to review; Power BI export and DAX measures (`powerbi/dax/revision_humana.dax`). Example built from the real plates with out-of-sample predictions (`tools/build_review_example.py`). Pilot protocol in `docs/MVP_PILOTO.md`.
+- «Señal de campo» theme and copyright footer in the demo.
+
+### Changed
+- This repository absorbs `steel-plates-quality-bi` as its reporting layer; the former repository points here.
+
 ## [1.4.0] - 2026-10-16
 
 ### Changed

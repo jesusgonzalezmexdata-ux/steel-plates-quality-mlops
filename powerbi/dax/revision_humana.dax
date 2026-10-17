@@ -1,0 +1,40 @@
+// =====================================================================
+// Medidas DAX · Seguimiento de la política de revisión humana (MVP 6)
+// Fuente: seguimiento_revision.csv, descargado del modo «Triaje de revisión» (una fila por clase y corte).
+// Réplica en Python: src/quality_ml/review_policy.py (bi_export).  ISO 9001:2015 · 8.6, 8.7, 9.1.1
+// Pendiente: crear la página en Power BI Desktop (no se puede validar sin Desktop).
+// =====================================================================
+
+Piezas = SUM ( Seguimiento_Revision[piezas] )
+
+Piezas a Revision = SUM ( Seguimiento_Revision[a_revision] )
+
+% a Revision = DIVIDE ( [Piezas a Revision], [Piezas] )
+
+Errores en Aceptadas = SUM ( Seguimiento_Revision[errores_en_aceptadas] )
+
+Escapes por 1000 Aceptadas =
+DIVIDE ( [Errores en Aceptadas], SUM ( Seguimiento_Revision[aceptadas] ) ) * 1000
+
+Costo de Revision MXN =
+SUMX ( Seguimiento_Revision, Seguimiento_Revision[a_revision] * Seguimiento_Revision[costo_revision] )
+
+Costo de Escapes MXN =
+SUMX ( Seguimiento_Revision, Seguimiento_Revision[errores_en_aceptadas] * Seguimiento_Revision[costo_escape] )
+
+Costo Total MXN = [Costo de Revision MXN] + [Costo de Escapes MXN]
+
+Costo Revisar Todo MXN =
+SUMX ( Seguimiento_Revision, Seguimiento_Revision[piezas] * Seguimiento_Revision[costo_revision] )
+
+Ahorro vs Revisar Todo MXN = [Costo Revisar Todo MXN] - [Costo Total MXN]
+
+// Semáforo: rojo si los escapes por 1,000 aceptadas suben más de 50 % frente al corte anterior.
+Semaforo Escapes =
+VAR actual = [Escapes por 1000 Aceptadas]
+VAR previo =
+    CALCULATE (
+        [Escapes por 1000 Aceptadas],
+        OFFSET ( -1, ALLSELECTED ( Seguimiento_Revision[fecha_corte] ), ORDERBY ( Seguimiento_Revision[fecha_corte] ) )
+    )
+RETURN IF ( NOT ISBLANK ( previo ) && actual > 1.5 * previo, "rojo", "verde" )

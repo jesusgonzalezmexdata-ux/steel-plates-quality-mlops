@@ -5,15 +5,42 @@
   "colorTo": "gray",
   "entrypoint": "streamlit_app.py",
   "requirements": [
-    "plotly"
+    "plotly",
+    "scikit-learn",
+    "scipy",
+    "openpyxl"
   ],
   "include": [
     "streamlit_app.py",
+    "estilo.py",
+    "ui_revision.py",
     "qbi",
-    "data/model"
+    "data/model",
+    "src/quality_ml/__init__.py",
+    "src/quality_ml/review_intake.py",
+    "src/quality_ml/review_policy.py",
+    "src/quality_ml/review_report.py",
+    "examples/review_triage/inspeccion_placas.csv"
   ],
-  "short_description": "Defect cost, capability and actions for steel plates",
-  "summary": "Explore defect cost, capability and the recommended action by defect type for the Steel Plates Faults data.",
+  "short_description": "Which inspection results a person should review; try yours",
+  "summary": "Steel-plate defect cost and capability, or upload your inspection system's results with a human-reviewed sample: per-class confidence thresholds, review load and audit sample, computed in your browser.",
   "repo": "steel-plates-quality-mlops",
-  "license": "apache-2.0"
+  "license": "apache-2.0",
+  "streamlitConfig": {
+    "theme.base": "light",
+    "theme.primaryColor": "#0E0F11",
+    "theme.backgroundColor": "#FFFFFF",
+    "theme.secondaryBackgroundColor": "#F6F7F5",
+    "theme.textColor": "#0E0F11",
+    "theme.redColor": "#D7261E",
+    "theme.greenColor": "#1F7A3D",
+    "theme.yellowColor": "#FFD21F",
+    "theme.grayColor": "#4A4E54",
+    "theme.linkColor": "#0E0F11",
+    "theme.borderColor": "#C9CDD1",
+    "theme.showWidgetBorder": true,
+    "theme.baseRadius": "4px",
+    "theme.buttonRadius": "6px",
+    "theme.dataframeHeaderBackgroundColor": "#F6F7F5"
+  }
 }

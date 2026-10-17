@@ -1,4 +1,9 @@
-"""Inteligencia de manufactura sobre UCI Steel Plates. Misma lógica que las medidas DAX (qbi/measures.py)."""
+"""Inteligencia de manufactura sobre UCI Steel Plates. Misma lógica que las medidas DAX (qbi/measures.py).
+
+Modo «Triaje de revisión»: la política de revisión humana para los resultados de cualquier sistema de inspección."""
+import sys
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
@@ -11,6 +16,18 @@ AZUL, GRIS, ROJO, VERDE, AMBAR = "#0B5394", "#8A94A3", "#C62828", "#2E7D32", "#F
 COLOR = {"verde": VERDE, "amarillo": AMBAR, "rojo": ROJO}
 
 st.set_page_config(page_title="Inteligencia de manufactura · Placas de acero", layout="wide")
+if str(Path(__file__).resolve().parent / "src") not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent / "src"))
+from estilo import aplicar as aplicar_estilo  # noqa: E402
+
+aplicar_estilo()
+modo = st.segmented_control("Modo", ["Inteligencia de calidad", "Triaje de revisión"], default="Inteligencia de calidad",
+                            required=True, label_visibility="collapsed")
+if modo == "Triaje de revisión":
+    from ui_revision import render  # noqa: E402
+
+    render()
+    st.stop()
 
 
 @st.cache_data

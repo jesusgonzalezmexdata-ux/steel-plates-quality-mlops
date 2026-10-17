@@ -67,6 +67,16 @@ Descriptive findings (with **illustrative costs**, not demonstrated savings): th
 - **Power BI Desktop runtime validation is pending** (open, refresh, render, save): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Exact steps in the [handoff](docs/evidence/powerbi_runtime_handoff.md). The published PBIX does not yet contain the ML page.
 - The PBIP `RutaCSV` parameter ships with a placeholder (`C:\path\to\...`); set it in Desktop to `data/raw/steel_plates_faults.csv` in your clone.
 
+## Human-review triage for your own inspection system (MVP)
+
+Steel mills and electronics lines already classify defects with camera systems; the transferable decision is **which automatic results a person should review**. In the [live demo](https://huggingface.co/spaces/JesusRLGonzalez/steel-plates-quality-mlops), mode **«Triaje de revisión»** (Spanish):
+
+1. Upload the system's results (`.xlsx` or `.csv`): predicted class and confidence, plus the true class for a sample reviewed by people (random within each confidence band).
+2. Enter the cost of a review and of a misclassified part reaching the customer.
+3. Get a confidence threshold per class, the review load, the escapes it lets through with an out-of-sample interval, an audit sample for accepted parts, a list of parts to review and a table for the Power BI tracking page ([`powerbi/dax/revision_humana.dax`](powerbi/dax/revision_humana.dax)).
+
+Tested on the real plates with a hidden truth: every plate gets a prediction its own label never touched (cross-validation or the frozen model's single holdout run) and 30 % keep their class. At 40 MXN per review and 1,500 MXN per escape the policy reviews 79 % of plates and estimates 1.6 escapes (interval 0–8.2); the hidden truth shows 5. Pilot protocol: [`docs/MVP_PILOTO.md`](docs/MVP_PILOTO.md) (Spanish). This repository also absorbs the former `steel-plates-quality-bi` as its reporting layer.
+
 ## Monitoring
 
 `python -B -m tools.drift_check` compares a batch of plates with the 1,552 training plates: PSI per measurement (≥ 0.25 = alert) and share of values outside the training range (> 5 % = alert). The holdout batch passes (max PSI 0.07); a thickness unit change (mm → cm) and a +15 % camera luminosity recalibration are both flagged. Output: [drift.json](reports/ml/monitoring/drift.json).

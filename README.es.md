@@ -62,6 +62,16 @@ Hallazgos descriptivos (con **costos ilustrativos**, no ahorros demostrados): tr
 - **La validación en Power BI Desktop está pendiente** (abrir, refrescar, renderizar y guardar): `POWER_BI_RUNTIME = MANUAL_VALIDATION_REQUIRED`. Pasos exactos en el [handoff](docs/evidence/powerbi_runtime_handoff.md). El PBIX publicado aún no contiene la página ML.
 - El parámetro `RutaCSV` del PBIP trae una ruta de ejemplo (`C:\path\to\...`); ajústalo en Desktop a `data/raw/steel_plates_faults.csv` de tu clon.
 
+## Triaje de revisión humana para tu sistema de inspección (MVP)
+
+Las acerías y las líneas de electrónica ya clasifican defectos con cámaras; lo transferible es decidir **qué resultados del sistema automático revisa una persona**. En la [demo](https://huggingface.co/spaces/JesusRLGonzalez/steel-plates-quality-mlops), modo **«Triaje de revisión»**:
+
+1. Sube los resultados del sistema (`.xlsx` o `.csv`): clase y confianza, más la clase real de una muestra revisada por personas (al azar dentro de cada banda de confianza).
+2. Captura el costo de una revisión y el de una pieza mal clasificada que llega al cliente.
+3. Obtén el umbral de confianza por clase, la carga de revisión, los escapes con intervalo fuera de muestra, la muestra de auditoría de lo aceptado, la lista de piezas a revisar y la tabla para la página de seguimiento en Power BI ([`powerbi/dax/revision_humana.dax`](powerbi/dax/revision_humana.dax)).
+
+Probado con las placas reales y una verdad oculta: cada placa tiene una predicción hecha sin ver su etiqueta y el 30 % conserva su clase. Con revisión de 40 MXN y escape de 1,500 MXN la política revisa el 79 % y estima 1.6 escapes (intervalo 0 a 8.2); la verdad oculta da 5. Protocolo: [`docs/MVP_PILOTO.md`](docs/MVP_PILOTO.md). Este repositorio absorbe además al antiguo `steel-plates-quality-bi` como capa de reportes.
+
 ## Monitoreo
 
 `python -B -m tools.drift_check` compara un lote de placas con las 1,552 de entrenamiento: PSI por medición (≥ 0.25 = alerta) y porcentaje de valores fuera del rango de entrenamiento (> 5 % = alerta). El lote del holdout pasa (PSI máximo 0.07); un cambio de unidad en el espesor (mm → cm) y una recalibración de luminosidad de la cámara de +15 % se detectan. Salida: [drift.json](reports/ml/monitoring/drift.json).
